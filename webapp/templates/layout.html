@@ -34,19 +34,16 @@
           href="http://segmentfault.com/feeds/blogs">
     <link rel="alternate" type="application/atom+xml" title="订阅 SegmentFault 当前页" href="http://segmentfault.com/feeds">
 
-
-    <link rel="stylesheet" href="http://static.segmentfault.com/v-56a05f82/global/css/global.css"/>
-    <link rel="stylesheet" href="http://static.segmentfault.com/v-56a05f82/qa/css/qa_all.css"/>
-    <link rel="stylesheet" href="http://static.segmentfault.com/v-56a05f82/global/css/responsive.css"/>
-
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/global.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/qa_all.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/responsive.css') }}"/>
 
     <!--[if lt IE 9]>
-    <link rel="stylesheet" href="http://static.segmentfault.com/v-56a05f82/global/css/ie.css"/>
-    <script src="http://static.segmentfault.com/v-56a05f82/global/js/html5shiv.js"></script>
-    <script src="http://static.segmentfault.com/v-56a05f82/global/js/respond.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/ie.css') }}"/>
+    <script src="{{ url_for('static',filename='js/html5shiv.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/respond.js') }}"></script>
     <![endif]-->
-
-    <script src="http://static.segmentfault.com/v-56a05f82/global/js/debug.js"></script>
+    <script src="{{ url_for('static',filename='js/debug.js') }}"></script>
 
 </head>
 
@@ -58,6 +55,7 @@
 </div>
 <![endif]-->
 
+{% include '_header_nav.html' %}
 
 <div class="wrap">
     <div class="container">
@@ -79,7 +77,6 @@
 
             </div><!-- /.main -->
             <div class="col-xs-12 col-md-3 side mt30">
-
                 <div class="side-ask alert alert-warning">
                     <div class="side-system-notice">
                         <i class="fa fa-bullhorn pull-left"></i><a class="side-system-notice--title"
@@ -88,20 +85,20 @@
                     </div>
                 </div>
 
-                <div class="sfad-sidebar">
-                    <div class="sfad-item" data-adn="ad-981183" id="adid-981183">
-                        <button class="close" type="button" aria-hidden="true">&times;</button>
-                    </div>
-
-                    <div class="sfad-item" data-adn="ad-981184" id="adid-981184">
-                        <button class="close" type="button" aria-hidden="true">&times;</button>
-                    </div>
-
-                    <div class="sfad-item" data-adn="ad-981694" id="adid-981694">
-                        <button class="close" type="button" aria-hidden="true">&times;</button>
-                    </div>
-
-                </div>
+                {#                <div class="sfad-sidebar">#}
+                {#                    <div class="sfad-item" data-adn="ad-981183" id="adid-981183">#}
+                {#                        <button class="close" type="button" aria-hidden="true">&times;</button>#}
+                {#                    </div>#}
+                {##}
+                {#                    <div class="sfad-item" data-adn="ad-981184" id="adid-981184">#}
+                {#                        <button class="close" type="button" aria-hidden="true">&times;</button>#}
+                {#                    </div>#}
+                {##}
+                {#                    <div class="sfad-item" data-adn="ad-981694" id="adid-981694">#}
+                {#                        <button class="close" type="button" aria-hidden="true">&times;</button>#}
+                {#                    </div>#}
+                {##}
+                {#                </div>#}
                 {% include '_tags_nav.html' %}
                 {% include '_last_hot_nav.html' %}
 
@@ -168,31 +165,8 @@
     };
 </script>
 
-<script crossorigin src="http://static.segmentfault.com/v-56a05f82/3rd/assets.js"></script>
-<script crossorigin src="http://static.segmentfault.com/v-56a05f82/qa/js/index.js"></script>
+<script crossorigin src="{{ url_for('static',filename='js/assets.js') }}"></script>
+<script crossorigin src="{{ url_for('static',filename='js/index.js') }}"></script>
 
-
-<script>
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-918487-8']);
-    _gaq.push(['_trackPageview']);
-    (function (i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date();
-        a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-
-    ga('create', 'UA-918487-8', 'auto', {'userID': 0, 'createdTime': 0, 'now': 1453811635});
-    ga('set', 'dimension1', 'guest');
-    ga('send', 'pageview');
-
-</script>
 </body>
 </html>

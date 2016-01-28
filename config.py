@@ -24,6 +24,8 @@ class Config:
 
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
+    BOOTSTRAP_SERVE_LOCAL = True
+
     @staticmethod
     def init_app(app):
         pass

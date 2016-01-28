@@ -1,0 +1,58 @@
+<script id="loginModal" type="text/template">
+    <div class="row bg-white login-modal">
+        <div class="col-md-4 col-sm-12 col-md-push-7 login-wrap">
+            <h1 class="h4 text-muted login-title">用户登录</h1>
+            <form action="http://segmentfault.com/api/user/login" method="POST" role="form" class="mt30">
+                <div class="form-group">
+                    <label class="control-label">Email</label>
+                    <input type="email" class="form-control" name="mail" required placeholder="hello@segmentfault.com">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">密码</label>
+                    <input type="password" class="form-control" name="password" required placeholder="密码">
+                </div>
+                <div class="form-group clearfix">
+                    <div class="checkbox pull-left">
+                        <label><input name="remember" type="checkbox" value="1" checked> 记住登录状态</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary pull-right pl20 pr20">登录</button>
+                </div>
+            </form>
+        </div>
+        <div class="login-vline hidden-xs hidden-sm"></div>
+        <div class="col-md-4 col-md-pull-3 col-sm-12 login-wrap">
+            <h1 class="h4 text-muted login-title">创建新账号</h1>
+            <form action="http://segmentfault.com/api/user/register" method="POST" role="form" class="mt30">
+                <div class="form-group">
+                    <label for="name" class="control-label">用户名</label>
+                    <input type="text" class="form-control" name="name" required placeholder="字母、数字等，用户名唯一">
+                </div>
+                <div class="form-group">
+                    <label for="mail" class="control-label">Email</label>
+                    <input type="hidden" style="display:none" name="mail">
+                    <input type="email" autocomplete="off" class="form-control register-mail" name="mail" required
+                           placeholder="hello@segmentfault.com">
+                </div>
+                <div class="form-group">
+                    <label for="password" class="control-label">密码</label>
+                    <input type="password" class="form-control" name="password" required placeholder="不少于 6 位">
+                </div>
+                <div class="form-group" style="display:none;">
+                    <label class="required control-label">验证码</label>
+                    <input type="text" class="form-control" id="captcha" name="captcha" placeholder="请输入下方的验证码">
+                    <div class="mt10"><a id="loginReloadCaptcha" href="javascript:void(0)"><img
+                            data-src="/user/captcha?w=240&h=50" class="captcha" width="240" height="50"/></a></div>
+                </div>
+                <div class="form-group clearfix">
+                    <div class="checkbox pull-left">
+                        同意并接受<a href="http://segmentfault.com/tos" target="_blank">《服务条款》</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary pl20 pr20 pull-right">注册</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="text-center text-muted mt30">
+        <a href="http://segmentfault.com/user/forgot" class="ml5">找回密码</a>
+    </div>
+</script>

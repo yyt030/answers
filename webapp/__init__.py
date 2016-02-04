@@ -26,8 +26,9 @@ def create_app(config_name):
 
     # from .main import main as main_blueprint
     # app.register_blueprint(main_blueprint)
-    from .controllers import question, site
+    from .controllers import question, site, user
     app.register_blueprint(question.bp, url_prefix='/questions')
+    app.register_blueprint(user.bp, url_prefix='/user')
     app.register_blueprint(site.bp, url_prefix='')
 
     return app

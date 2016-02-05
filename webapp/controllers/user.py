@@ -1,8 +1,8 @@
 # coding: utf8
-from flask import Blueprint, render_template, request, redirect, url_for, jsonify, session
-from ..models import User
-from .. import db
+from flask import Blueprint, render_template, request, redirect, url_for, jsonify
 from flask.ext.login import login_user
+from .. import db
+from ..models import User
 
 bp = Blueprint('user', __name__)
 

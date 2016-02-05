@@ -2,6 +2,6 @@
 # coding: utf8
 __author__ = 'yueyt'
 
-from .question import *
 from .answer import *
+from .question import *
 from .user import *

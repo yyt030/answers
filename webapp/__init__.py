@@ -5,10 +5,15 @@ from flask.ext.moment import Moment
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.bootstrap import Bootstrap
 from config import config
+from flask.ext.login import LoginManager
 
 moment = Moment()
 db = SQLAlchemy()
 bootstrap = Bootstrap()
+
+login_manager = LoginManager()
+login_manager.session_protection = 'strong'
+login_manager.login_view = 'user.login'
 
 
 def create_app(config_name):

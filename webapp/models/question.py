@@ -15,7 +15,7 @@ class Question(db.Model):
     hate_num = db.Column(db.SmallInteger, nullable=False, default=0)
     view_num = db.Column(db.SmallInteger, nullable=False, default=0)
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
-    author_id = db.Column(db.ForeignKey('user.id'))
+    author_id = db.Column(db.Integer,db.ForeignKey('user.id'))
 
 
 # 问题 和 标签　的many to many 关系

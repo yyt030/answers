@@ -52,5 +52,11 @@ def deploy():
     User.add_self_follows()
 
 
+@manager.command
+def init_data():
+    from webapp.models.user import Role
+    Role.insert_roles()
+
+
 if __name__ == '__main__':
     manager.run()

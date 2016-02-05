@@ -11,12 +11,13 @@ class Answer(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     title = db.Column(db.String(100), index=True, nullable=False)
     body = db.Column(db.Text, nullable=False)
+    disabled = db.Column(db.Boolean, default=True)
 
     like_num = db.Column(db.SmallInteger, nullable=False, default=0)
     hate_num = db.Column(db.SmallInteger, nullable=False, default=0)
 
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
-    author_id = db.Column(db.ForeignKey('user.id'))
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    question_id = db.Column(db.ForeignKey('question.id'))
+    question_id = db.Column(db.Integer, db.ForeignKey('question.id'))

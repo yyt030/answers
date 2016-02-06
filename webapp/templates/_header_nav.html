@@ -7,24 +7,17 @@
                 <span class="mobile-menu__unreadpoint"></span>
             </a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                <li class="mobile-menu__item"><a href="http://segmentfault.com/questions/newest">问答</a></li>
-                <li class="mobile-menu__item"><a href="http://segmentfault.com/blogs">文章</a></li>
-                <li class="mobile-menu__item"><a href="http://segmentfault.com/notes">笔记</a></li>
-                <li class="mobile-menu__item"><a href="http://segmentfault.com/jobs">职位</a></li>
-                <li class="mobile-menu__item"><a href="http://segmentfault.com/events">活动</a></li>
-
-                <li class="mobile-menu__item"><a href="http://segmentfault.com/tags">标签</a></li>
-                <li class="mobile-menu__item"><a href="http://segmentfault.com/users">榜单</a></li>
-                <li class="mobile-menu__item"><a href="http://segmentfault.com/sites">子站</a></li>
+                <li class="mobile-menu__item"><a href="/questions/newest">问答</a></li>
+                <li class="mobile-menu__item"><a href="/tags">标签</a></li>
             </ul>
         </div>
 
-        <h1 class="logo"><a class="sf" href="index.html">SegmentFault</a></h1>
+        <h1 class="logo"><a class="sf" href="{{ url_for('.index') }}">Answers</a></h1>
 
         <a href="http://segmentfault.com/user/login" class="visible-xs-block pull-right m-ask m-toptools"><span
                 class="glyphicon glyphicon-log-in"></span></a>
 
-        <form action="http://segmentfault.com/search" class="header-search pull-left hidden-sm hidden-xs">
+        <form action="/search" class="header-search pull-left hidden-sm hidden-xs">
             <button class="btn btn-link">
                 <span class="sr-only">搜索</span>
                 <span class="glyphicon glyphicon-search"></span>
@@ -34,22 +27,15 @@
         </form>
 
         <ul class="menu list-inline pull-left hidden-xs">
-            <li class="menu__item"><a href="http://segmentfault.com/questions">问答</a></li>
-            <li class="menu__item"><a href="http://segmentfault.com/blogs">文章</a></li>
-            <li class="menu__item"><a href="http://segmentfault.com/notes">笔记</a></li>
-            <li class="menu__item"><a href="http://segmentfault.com/jobs">职位</a></li>
-
+            <li class="menu__item"><a href="/questions">问答</a></li>
+            <li class="menu__item"><a href="/tags">标签</a></li>
 
             <li class="menu__item dropdown hoverDropdown">
                 <a data-toggle="dropdown" href="http://segmentfault.com/sites" class="more dropdownBtn">
                     &middot;&middot;&middot;<span class="sr-only">更多</span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="http://segmentfault.com/events">活动</a></li>
-                    <li><a href="http://segmentfault.com/users">榜单</a></li>
-                    <li><a href="http://segmentfault.com/tags">标签</a></li>
-                    <li><a href="http://segmentfault.com/sites">子站</a></li>
-                    <li><a href="http://segmentfault.com/app">移动 App</a></li>
+                    <li><a href="/tags">标签</a></li>
                 </ul>
             </li>
         </ul>
@@ -57,7 +43,7 @@
         <ul class="opts pull-right list-inline hidden-xs">
             <!-- <li class="opts__item">赶快加入吧 <a id="sfLogin" href="/user/login" class="SFLogin em ml10" onClick="_gaq.push(['_trackEvent', 'Button', 'Click', 'Login']);">立即登录</a></li> -->
             <li class="opts__item message has-unread">
-                <a target="_blank" href="http://segmentfault.com/tour">
+                <a target="_blank" href="/tour">
                     <span class="sr-only">消息</span>
                     <span id="messageCount" class="glyphicon glyphicon-envelope"></span>
                 </a>

@@ -18,7 +18,7 @@
 
     <link rel="search" type="application/opensearchdescription+xml" href="http://segmentfault.com/opensearch.xml"
           title="SegmentFault"/>
-    <link rel="shortcut icon" href="http://static.segmentfault.com/v-56a05f82/global/img/favicon.ico"/>
+    <link rel="shortcut icon" href="/static/images/favicon.ico"/>
     <link rel="apple-touch-icon" href="http://static.segmentfault.com/v-56a05f82/global/img/touch-icon.png">
 
     <meta name="msapplication-TileColor" content="#009a61"/>
@@ -67,15 +67,13 @@
                 </p>
 
                 <ul class="nav nav-tabs nav-tabs-zen mb10">
-                    <li class="active"><a href="/questions">最新的</a></li>
-                    <li><a href="/questions/hottest">热门的</a></li>
-                    <li><a href="/questions/unanswered">未回答</a></li>
+                    <li {% if not act %}class="active"{% endif %}><a href="/questions">最新的</a></li>
+                    <li {% if act == 'hottest' %}class="active"{% endif %}><a href="/questions/hottest">热门的</a></li>
+                    <li {% if act == 'unanswered' %}class="active"{% endif %}><a href="/questions/unanswered">未回答</a>
+                    </li>
                 </ul>
-
                 {% include '_questions.html' %}
-
-
-            </div><!-- /.main -->
+            </div> <!-- /.main -->
             <div class="col-xs-12 col-md-3 side mt30">
                 <div class="side-ask alert alert-warning">
                     <div class="side-system-notice">
@@ -84,21 +82,18 @@
                         公告：SegmentFault将于 2 月 2 日全站切换到新版，点此提前体验</a>
                     </div>
                 </div>
-
                 {% include '_tags_nav.html' %}
                 {% include '_last_hot_nav.html' %}
-
             </div><!-- /.side -->
         </div>
     </div>
 </div>
 
 {% include '_login.html' %}
-
 {% include '_footer_nav.html' %}
 
 <div id="fixedTools" class="hidden-xs hidden-sm">
-    <a id="backtop" class="hidden border-bottom" href="index.html#">回顶部</a>
+    <a id="backtop" class="hidden border-bottom" href="#">回顶部</a>
 </div>
 
 

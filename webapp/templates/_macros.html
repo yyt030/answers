@@ -1,12 +1,14 @@
 {% macro pagination_widget(pagination, endpoint, fragment='') %}
     <ul class="pagination">
-        <li{% if not pagination.has_prev %} class="disabled"{% endif %}>
-            <a href="{% if pagination.has_prev %}
+        {% if pagination.has_prev %}
+            <li>
+                <a href="{% if pagination.has_prev %}
                     {{ url_for(endpoint, page=pagination.prev_num, **kwargs) }}{{ fragment }}
             {% else %}#{% endif %}">
-                &laquo;
-            </a>
-        </li>
+                    上一页
+                </a>
+            </li>
+        {% endif %}
         {% for p in pagination.iter_pages() %}
             {% if p %}
                 {% if p == pagination.page %}
@@ -22,12 +24,14 @@
                 <li class="disabled"><a href="#">&hellip;</a></li>
             {% endif %}
         {% endfor %}
-        <li{% if not pagination.has_next %} class="disabled"{% endif %}>
-            <a href="{% if pagination.has_next %}
+        {% if pagination.has_next %}
+            <li>
+                <a href="{% if pagination.has_next %}
                     {{ url_for(endpoint, page=pagination.next_num, **kwargs) }}{{ fragment }}
                     {% else %}#{% endif %}">
-                &raquo;
-            </a>
-        </li>
+                    下一页
+                </a>
+            </li>
+        {% endif %}
     </ul>
 {% endmacro %}

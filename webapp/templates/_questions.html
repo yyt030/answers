@@ -43,7 +43,7 @@
 <div class="text-center">
     {% if pagination %}
         <div class="pagination">
-            {{ pagination_widget(pagination, '.index') }}
+            {{ pagination_widget(pagination, endpoint='.index') }}
         </div>
     {% endif %}
 </div>

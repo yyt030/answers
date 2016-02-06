@@ -50,3 +50,4 @@ class Tag(db.Model):
 
     questions = db.relationship('Question', secondary=question_tag,
                                 backref=db.backref('tags', lazy='dynamic'), lazy='dynamic')
+    create_time = db.Column(db.DateTime, nullable=False,default=datetime.now)

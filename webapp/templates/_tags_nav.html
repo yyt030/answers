@@ -1,42 +1,11 @@
 <div class="widget-box">
-    <h2 class="h4 widget-box__title">热议标签 <a href="http://segmentfault.com/tags" title="更多">&raquo;</a>
+    <h2 class="h4 widget-box__title">热议标签 <a href="/tags" title="更多">&raquo;</a>
     </h2>
     <ul class="taglist--inline multi">
-        <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089436"
-                                data-original-title="javascript"
-                                href="http://segmentfault.com/t/javascript">javascript</a></li>
-        <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089387"
-                                data-original-title="php" href="http://segmentfault.com/t/php">php</a>
-        </li>
-        <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089534"
-                                data-original-title="python" href="http://segmentfault.com/t/python">python</a>
-        </li>
-        <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089434"
-                                data-original-title="css" href="http://segmentfault.com/t/css">css</a>
-        </li>
-        <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089442"
-                                data-original-title="ios" href="http://segmentfault.com/t/ios">ios</a>
-        </li>
-        <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089658"
-                                data-original-title="android" href="http://segmentfault.com/t/android">android</a>
-        </li>
-        <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089918"
-                                data-original-title="node.js" href="http://segmentfault.com/t/node.js">node.js</a>
-        </li>
-        <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089409"
-                                data-original-title="html5"
-                                href="http://segmentfault.com/t/html5">html5</a></li>
-        <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000090203"
-                                data-original-title="go" href="http://segmentfault.com/t/go">go</a></li>
-        <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089488"
-                                data-original-title="mongodb" href="http://segmentfault.com/t/mongodb">mongodb</a>
-        </li>
-        <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089431"
-                                data-original-title="redis"
-                                href="http://segmentfault.com/t/redis">redis</a></li>
-        <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089556"
-                                data-original-title="程序员"
-                                href="http://segmentfault.com/t/%E7%A8%8B%E5%BA%8F%E5%91%98">程序员</a>
-        </li>
+        {% for tag in tags %}
+            <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="{{ tag.id }}"
+                                    data-original-title="javascript"
+                                    href="/t/{{ tag.id }}">{{ tag.category }}</a></li>
+        {% endfor %}
     </ul>
 </div>

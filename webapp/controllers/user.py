@@ -1,9 +1,10 @@
 # coding: utf8
-from flask import Blueprint, render_template, request, redirect, url_for, jsonify, flash
+from flask import Blueprint, render_template, jsonify, flash, redirect, url_for
 from flask.ext.login import login_user
-from .. import db
+from sqlalchemy import or_
+from ..forms.user import LoginForm, RegisterForm
 from ..models import User
-from ..forms.user import LoginForm
+from .. import db
 
 bp = Blueprint('user', __name__)
 
@@ -18,54 +19,43 @@ def get_user(id):
 def login():
     form = LoginForm()
 
-    status = 1
-    data = ['form']
+    rsp_json = {
+        'status': 1,
+        'data': ['form']
+    }
+
     if form.validate_on_submit():
         print '>>> 2', form.email.data, form.password.data, form.remember_me.data
         user = User.query.filter(User.email == form.email.data).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
-            return jsonify({
-                'status': 0,
-                'data': data
-            })
-
-    data.append({'password': u'用户名或密码错误'})
-    return jsonify({
-        'status': status,
-        'data': data
-    })
+            rsp_json['status'] = 0
+            return jsonify(rsp_json)
+    rsp_json['data'].append({'password': u'用户名或密码错误'})
+    return jsonify(rsp_json)
 
 
 @bp.route('/register', methods=['POST'])
 def register():
-    name = request.form.get('name')
-    mail = request.form.get('mail')
-    password = request.form.get('password')
+    form = RegisterForm()
 
-    status = 0
-    data = {}
-    if mail or name:
-        from sqlalchemy import or_
-        user = User.query.filter(or_(User.email == mail, User.name == name)).first()
+    rsp_json = {
+        'status': 1,
+        'data': ['form']
+    }
+
+    if form.validate_on_submit():
+        user = User.query.filter(User.username == form.username.data).first()
+        print '>>>', user, form.username.data, form.password.data, type(form.username.data)
         if user:
-            status = 1
-            data = {0: 'form', 1: {'mail': u'mail或用户名已存在'}}
-            return jsonify({
-                'status': status,
-                'data': [data],
-                'message': u'注册失败'
-            })
-
-    if password:
-        user = User(email=mail, password=password, name=name)
-        db.session.add(user)
-        db.session.commit()
-
-    return jsonify({
-        'status': status,
-        'data': [data],
-        'message': u'注册成功'
-    })
-
-    return render_template('layout.html')
+            rsp_json['data'].append({'username': u'用户名已注册'})
+            return jsonify(rsp_json)
+        else:
+            user = User(username=form.username.data,
+                        password=form.password.data,
+                        email=form.email.data)
+            db.session.add(user)
+            db.session.commit()
+            rsp_json['status'] = 0
+    rsp_json['data'].append({'email': u'注册失败'})
+    return jsonify(rsp_json)

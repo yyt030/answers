@@ -49,10 +49,10 @@
                 </div>
             {% endfor %}
         {% endcall %}
-    {%- elif field.type == 'SubmitField' -%}
+    {%- elif field.type == 'SubmitField' %}
         {# note: same issue as above - should check widget, not field type #}
-        {{ field(class='btn btn-%s pull-right pl20 pr20' % button_map.get(field.name, 'primary')) }}
-    {%- else -%}
+        {{ field(class='btn btn-%s pull-right pl20 pr20' % button_map.get(field.name, 'primary'), type=field.name) }}
+    {%- else %}
         <div class="form-group {% if field.errors %} has-error{% endif %}">
             {%- if form_type == "inline" %}
                 {{ field.label(class="sr-only")|safe }}
@@ -74,19 +74,19 @@
                     {% call _hz_form_wrap(horizontal_columns, form_type) %}
                         <p class="help-block">{{ field.description|safe }}</p>
                     {% endcall %}
-                {%- endif %}
+                {%- endif -%}
             {%- else -%}
                 {{ field.label(class="control-label")|safe }}
                 {{ field(class="form-control", type=field.name, placeholder=field.description, **kwargs)|safe }}
 
-                {%- if field.errors %}
+                {%- if field.errors -%}
                     {%- for error in field.errors %}
                         <p class="help-block">{{ error }}</p>
-                    {%- endfor %}
-                {%- endif %}
-            {%- endif %}
+                    {%- endfor -%}
+                {%- endif -%}
+            {%- endif -%}
         </div>
-    {% endif %}
+    {%- endif %}
 {% endmacro %}
 
 {# valid form types are "basic", "inline" and "horizontal" #}

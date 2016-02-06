@@ -28,7 +28,6 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
 
     confirmed = db.Column(db.Boolean, default=True)
-    name = db.Column(db.String(64))
     location = db.Column(db.String(64))
     about_me = db.Column(db.Text())
     member_since = db.Column(db.DateTime(), default=datetime.utcnow)
@@ -45,7 +44,7 @@ class User(UserMixin, db.Model):
             if self.email == current_app.config['FLASKY_ADMIN']:
                 self.role = Role.query.filter(Role.permissions == 0xff).first()
             if self.role is None:
-                self.role = Role.query.filter(default=True).first()
+                self.role = Role.query.filter(Role.default == True).first()
 
     @property
     def password(self):

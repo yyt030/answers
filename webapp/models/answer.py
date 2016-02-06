@@ -15,8 +15,7 @@ class Answer(db.Model):
     body = db.Column(db.Text, nullable=False)
     disabled = db.Column(db.Boolean, default=True)
 
-    like_num = db.Column(db.SmallInteger, nullable=False, default=0)
-    hate_num = db.Column(db.SmallInteger, nullable=False, default=0)
+    vote_num = db.Column(db.SmallInteger, nullable=False, default=0)
 
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
 

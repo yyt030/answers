@@ -28,8 +28,7 @@ def init_data():
     #Role.insert_roles()
 
     #Question.generate_fake(100)
-
-    Answer.generate_fake(100)
+    #Answer.generate_fake(100)
 
 
 if __name__ == '__main__':

@@ -1,29 +1,52 @@
 {% macro pagination_widget(pagination, endpoint, fragment='') %}
-<ul class="pagination">
-    <li{% if not pagination.has_prev %} class="disabled"{% endif %}>
-        <a href="{% if pagination.has_prev %}{{ url_for(endpoint, page=pagination.prev_num, **kwargs) }}{{ fragment }}{% else %}#{% endif %}">
-            &laquo;
-        </a>
-    </li>
-    {% for p in pagination.iter_pages() %}
-        {% if p %}
-            {% if p == pagination.page %}
-            <li class="active">
-                <a href="{{ url_for(endpoint, page = p, **kwargs) }}{{ fragment }}">{{ p }}</a>
-            </li>
+    <ul class="pagination">
+        <li{% if not pagination.has_prev %} class="disabled"{% endif %}>
+            <a href="{% if pagination.has_prev %}
+                    {{ url_for(endpoint, page=pagination.prev_num, **kwargs) }}{{ fragment }}
+            {% else %}#{% endif %}">
+                &laquo;
+            </a>
+        </li>
+        {% for p in pagination.iter_pages() %}
+            {% if p %}
+                {% if p == pagination.page %}
+                    <li class="active">
+                        <a href="{{ url_for(endpoint, page = p, **kwargs) }}{{ fragment }}">{{ p }}</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{{ url_for(endpoint, page = p, **kwargs) }}{{ fragment }}">{{ p }}</a>
+                    </li>
+                {% endif %}
             {% else %}
-            <li>
-                <a href="{{ url_for(endpoint, page = p, **kwargs) }}{{ fragment }}">{{ p }}</a>
-            </li>
+                <li class="disabled"><a href="#">&hellip;</a></li>
             {% endif %}
-        {% else %}
-        <li class="disabled"><a href="#">&hellip;</a></li>
-        {% endif %}
-    {% endfor %}
-    <li{% if not pagination.has_next %} class="disabled"{% endif %}>
-        <a href="{% if pagination.has_next %}{{ url_for(endpoint, page=pagination.next_num, **kwargs) }}{{ fragment }}{% else %}#{% endif %}">
-            &raquo;
-        </a>
-    </li>
-</ul>
+        {% endfor %}
+        <li{% if not pagination.has_next %} class="disabled"{% endif %}>
+            <a href="{% if pagination.has_next %}
+                    {{ url_for(endpoint, page=pagination.next_num, **kwargs) }}{{ fragment }}
+                    {% else %}#{% endif %}">
+                &raquo;
+            </a>
+        </li>
+    </ul>
+{% endmacro %}
+
+{#  login form 字段 #}
+{#<label class="control-label">密码</label>#}
+{#<input type="email" class="form-control" name="mail" required placeholder="hello@xxx.com">#}
+{% macro form_field(field,form_type="basic", class="form-control",staic=False) %}
+    {% if field.widget.input_type == 'checkbox' %}
+        <div class="checkbox pull-left">
+            <label>
+                {{ field()|safe }} {{ field.label.text|safe }}
+            </label>
+        </div>
+    {% elif field.type == 'SubmitField' %}
+        {{ field(class="btn btn-primary pull-right pl20 pr20", type=field.name, placeholder=field.description, **kwargs)|safe }}
+        <button type="submit" class="btn btn-primary pull-right pl20 pr20">登录</button>
+    {% else %}
+        {{ field.label(class="control-label")|safe }}
+        {{ field(class=class, type=field.name, placeholder=field.description, **kwargs)|safe }}
+    {% endif %}
 {% endmacro %}

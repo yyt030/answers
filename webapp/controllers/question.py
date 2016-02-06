@@ -15,5 +15,4 @@ def questions():
     answers = Answer.query.all()
     tags = Tag.query.all()
     print '>>>'
-    # return render_template('layout.html')
-    return render_template('index')
+    return render_template('layout.html')

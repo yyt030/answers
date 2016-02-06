@@ -1,8 +1,9 @@
 # coding: utf8
-from flask import Blueprint, render_template, request, redirect, url_for, jsonify
+from flask import Blueprint, render_template, request, redirect, url_for, jsonify, flash
 from flask.ext.login import login_user
 from .. import db
 from ..models import User
+from ..forms.user import LoginForm
 
 bp = Blueprint('user', __name__)
 
@@ -15,32 +16,24 @@ def get_user(id):
 
 @bp.route('/login', methods=['POST'])
 def login():
-    mail = request.form.get('mail')
-    password = request.form.get('password')
-    remember = request.form.get('remember')
+    form = LoginForm()
 
-    status = 0
-    data = None
-    message = None
-    if mail:
-        user = User.query.filter(User.email == mail).first()
-        if not user:
-            status = 1
-            data = ['form', {'mail': u'mail不存在'}]
-    if password:
-        user = User.query.filter(User.email == mail, User.password == password).first()
-        if not user:
-            status = 1
-            data = ['form', {'password': u'用户名或密码不正确'}]
-        else:
-            data = ['form', {'password': u'用户名或密码不正确'}]
-            login_user(user, remember)
-            return redirect(url_for('site.questions'))
+    status = 1
+    data = ['form']
+    if form.validate_on_submit():
+        print '>>> 2', form.email.data, form.password.data, form.remember_me.data
+        user = User.query.filter(User.email == form.email.data).first()
+        if user is not None and user.verify_password(form.password.data):
+            login_user(user, form.remember_me.data)
+            return jsonify({
+                'status': 0,
+                'data': data
+            })
 
+    data.append({'password': u'用户名或密码错误'})
     return jsonify({
         'status': status,
-        'data': data,
-        'message': message
+        'data': data
     })
 
 

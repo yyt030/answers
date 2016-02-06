@@ -31,22 +31,3 @@
         </li>
     </ul>
 {% endmacro %}
-
-{#  login form 字段 #}
-{#<label class="control-label">密码</label>#}
-{#<input type="email" class="form-control" name="mail" required placeholder="hello@xxx.com">#}
-{% macro form_field(field,form_type="basic", class="form-control",staic=False) %}
-    {% if field.widget.input_type == 'checkbox' %}
-        <div class="checkbox pull-left">
-            <label>
-                {{ field()|safe }} {{ field.label.text|safe }}
-            </label>
-        </div>
-    {% elif field.type == 'SubmitField' %}
-        {{ field(class="btn btn-primary pull-right pl20 pr20", type=field.name, placeholder=field.description, **kwargs)|safe }}
-        <button type="submit" class="btn btn-primary pull-right pl20 pr20">登录</button>
-    {% else %}
-        {{ field.label(class="control-label")|safe }}
-        {{ field(class=class, type=field.name, placeholder=field.description, **kwargs)|safe }}
-    {% endif %}
-{% endmacro %}

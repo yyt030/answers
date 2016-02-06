@@ -15,3 +15,12 @@ class LoginForm(Form):
     password = PasswordField(u'密码', validators=[DataRequired()], description=u'密码')
     remember_me = BooleanField(u'记住登录状态')
     submit = SubmitField(u'登录')
+
+
+class RegisterForm(Form):
+    name = StringField(u'用户名', validators=[DataRequired(), Length(1, 64)])
+    email = StringField(u'邮箱', validators=[DataRequired(), Length(1, 64),
+                                           Email()], description=u'hello@xxx.com')
+    password = PasswordField(u'密码', validators=[DataRequired()], description=u'密码')
+    remember_me = BooleanField(u'记住登录状态')
+    submit = SubmitField(u'登录')

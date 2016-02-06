@@ -1,20 +1,14 @@
-{% from '_macros.html' import form_field %}
+{% from '_wtf.html' import form_field %}
 <script id="loginModal" type="text/template">
     <div class="row bg-white login-modal">
         <div class="col-md-4 col-sm-12 col-md-push-7 login-wrap">
             <h1 class="h4 text-muted login-title">用户登录</h1>
             <form action="/user/login" method="POST" role="form" class="mt30">
                 {{ login_form.csrf_token }}
-                <div class="form-group">
-                    {{ form_field(login_form.email) }}
-                </div>
-                <div class="form-group">
-                    {{ form_field(login_form.password) }}
-                </div>
-                <div class="form-group clearfix">
-                    {{ form_field(login_form.remember_me) }}
-                    {{ form_field(login_form.submit) }}
-                </div>
+                {{ form_field(login_form.email) }}
+                {{ form_field(login_form.password) }}
+                {{ form_field(login_form.remember_me) }}
+                {{ form_field(login_form.submit) }}
             </form>
         </div>
         <div class="login-vline hidden-xs hidden-sm"></div>

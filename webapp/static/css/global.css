@@ -11020,7 +11020,7 @@ li > .widget-codetool {
     height: 20px;
     background-repeat: no-repeat;
     background-size: 380px 60px;
-    background-image: url(../img/editor/editor@2x.png);
+    background-image: url(../images/editor@2x.png);
     white-space: nowrap;
     overflow: hidden;
     -moz-box-sizing: content-box;
@@ -11353,7 +11353,7 @@ li > .widget-codetool {
 
 [class*=icon-sn-] {
     display: inline-block;
-    background-image: url(../img/social-icons/icon-sn.png);
+    background-image: url(../images/icon-sn.png);
     background-repeat: no-repeat;
     width: 20px;
     height: 20px;
@@ -12058,7 +12058,7 @@ li > .widget-codetool {
     margin: auto;
     background-position: center;
     background-size: 3.5rem;
-    background-image: url(../img/touch-icon.png)
+    background-image: url(../images/touch-icon.png)
 }
 
 .app-promotion-bar .download-btn {

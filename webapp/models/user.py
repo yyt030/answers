@@ -64,6 +64,20 @@ class User(UserMixin, db.Model):
     def is_administrator(self):
         return self.can(Permission.ADMINISTER)
 
+    @staticmethod
+    def generate_fake(count=10):
+        from random import seed, randint
+        import forgery_py
+
+        seed()
+        for i in xrange(count):
+            user = User(username=forgery_py.name.full_name(),
+                        email=forgery_py.internet.email_address(),
+                        password='111111')
+            db.session.add(user)
+
+        db.session.commit()
+
 
 class AnonymousUser(AnonymousUserMixin):
     def can(self, permissions):

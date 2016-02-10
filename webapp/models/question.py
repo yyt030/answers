@@ -26,14 +26,16 @@ class Question(db.Model):
 
         seed()
         user_count = User.query.count()
+        tag_count = Tag.query.count()
         for i in range(count):
             u = User.query.offset(randint(0, user_count - 1)).first()
+            t = Tag.query.offset(randint(0, tag_count - 1)).first()
             print '>>>', u
-            p = Question(body=forgery_py.lorem_ipsum.sentences(randint(1, 5)),
+            q = Question(body=forgery_py.lorem_ipsum.sentences(randint(1, 5)),
                          create_time=forgery_py.date.date(True),
                          title=forgery_py.name.job_title(),
                          asker=u)
-            db.session.add(p)
+            db.session.add(q)
             db.session.commit()
 
 
@@ -50,4 +52,15 @@ class Tag(db.Model):
 
     questions = db.relationship('Question', secondary=question_tag,
                                 backref=db.backref('tags', lazy='dynamic'), lazy='dynamic')
-    create_time = db.Column(db.DateTime, nullable=False,default=datetime.now)
+    create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
+
+    @staticmethod
+    def generate_fake(count=100):
+        from random import seed, randint
+        import forgery_py
+
+        seed()
+        for i in xrange(count):
+            t = Tag(name=forgery_py.name.full_name(), category=forgery_py.name.title())
+            db.session.add(t)
+        db.session.commit()

@@ -22,13 +22,15 @@ manager.add_command('db', MigrateCommand)
 
 @manager.command
 def init_data():
-    from webapp.models.user import Role
-    from webapp.models.question import Question
+    from webapp.models.user import Role, User
+    from webapp.models.question import Question, Tag
     from webapp.models.answer import Answer
-    #Role.insert_roles()
+    # Role.insert_roles()
 
-    #Question.generate_fake(100)
-    #Answer.generate_fake(100)
+    User.generate_fake(100)
+    Tag.generate_fake(20)
+    Question.generate_fake(1000)
+    Answer.generate_fake(100)
 
 
 if __name__ == '__main__':

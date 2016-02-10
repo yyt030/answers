@@ -11690,7 +11690,7 @@ li > .widget-codetool {
     width: 100%;
     height: 100%;
     border: none;
-    background: url(../img/vote-bg@2x.png) -120px 0 no-repeat;
+    background: url(/static/images/vote-bg@2x.png) -120px 0 no-repeat;
     -moz-background-size: auto 54px;
     -o-background-size: auto 54px;
     -webkit-background-size: auto 54px;

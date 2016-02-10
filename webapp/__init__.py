@@ -30,7 +30,7 @@ def create_app(config_name):
         sslify = SSLify(app)
 
     from .controllers import question, site, user
-    app.register_blueprint(question.bp, url_prefix='/questions')
+    app.register_blueprint(question.bp, url_prefix='/q')
     app.register_blueprint(user.bp, url_prefix='/user')
     app.register_blueprint(site.bp, url_prefix='')
 

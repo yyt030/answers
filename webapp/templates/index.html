@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+    <title>Answers - this is demo</title>
+{% endblock %}
+
+{% block page_content %}
+    <div class="col-xs-12 col-md-9 main">
+        <p class="main-title hidden-xs">
+            {% if session.get('user_id') %}
+                今天，你在开发时遇到了什么问题呢？{{ session.get('user_id') }}
+                <a id="goAsk" href="{{ url_for('.ask') }}" class="btn btn-primary">我要提问</a>
+            {% endif %}
+        </p>
+        <ul class="nav nav-tabs nav-tabs-zen mb10">
+            <li {% if not act %}class="active"{% endif %}><a href="/questions">最新的</a></li>
+            <li {% if act == 'hottest' %}class="active"{% endif %}><a href="/questions/hottest">热门的</a>
+            </li>
+            <li {% if act == 'unanswered' %}class="active"{% endif %}><a
+                    href="/questions/unanswered">未回答</a>
+            </li>
+        </ul>
+        {% include '_question.html' %}
+    </div> <!-- /.main -->
+    <div class="col-xs-12 col-md-3 side mt30">
+        <div class="side-ask alert alert-warning">
+            <div class="side-system-notice">
+                <i class="fa fa-bullhorn pull-left"></i><a class="side-system-notice--title"
+                                                           href="">
+                公告：开放的平台，知识的积累，技能的完善</a>
+            </div>
+        </div>
+        {% include '_tags_nav.html' %}
+        {% include '_last_hot_nav.html' %}
+    </div><!-- /.side -->
+{% endblock %}
+
+{% block page_js %}
+    {{ super() }}
+    <script>
+        (function (w) {
+            w.SF = {
+                staticUrl: "http://static.segmentfault.com/v-56a05f82"
+            };
+            w.SF.token = (function () {
+                var _KwS6NR = ''///*'W9G'*/'W9G'
+                        +//'XQ'
+                        'f37' + '2'//'NPr'
+                        +//'XJ'
+                        '2' +//'f'
+                        'dc' + '9'//'y86'
+                        +//'WFE'
+                        'fe1' + ''///*'v'*/'v'
+                        + ''///*'pz'*/'pz'
+                        + 'gb'//'gb'
+                        + ''///*'W5t'*/'W5t'
+                        + 'dd'//'Zw'
+                        +//'k'
+                        '2' + 'f'//'l'
+                        +//'4u'
+                        '33' + 'c13'//'f9b'
+                        +//'pcq'
+                        'pcq' +//'Un'
+                        'e8e' + ''///*'R'*/'R'
+                        +//'fwr'
+                        'a34' +//'7'
+                        'c4' + '3'//'HZd'
+                        + 'T'//'T'
+                        + 'eb'//'VX'
+                        + 'a'//'Z'
+                        , _4PjqMR = [[11, 13], [20, 23], [29, 30]];
+
+                for (var i = 0; i < _4PjqMR.length; i++) {
+                    _KwS6NR = _KwS6NR.substring(0, _4PjqMR[i][0]) + _KwS6NR.substring(_4PjqMR[i][1]);
+                }
+
+                return _KwS6NR;
+            })();
+            ;
+        })(window);
+
+        var lock = {
+            type: "",
+            text: '',
+            table: {"ban_post": [1, "\u4f60\u5df2\u7ecf\u88ab\u7981\u8a00, \u65e0\u6cd5\u8fdb\u884c\u6b64\u64cd\u4f5c, \u5982\u6709\u7591\u4e49\u8bf7\u63d0\u4ea4\u7533\u8bc9, \u6216\u8005\u53d1\u90ae\u4ef6\u5230pr@segmentfault.com"]}
+        };
+    </script>
+{% endblock %}

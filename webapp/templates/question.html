@@ -58,9 +58,7 @@
 {% include '_header_nav.html' %}
 
 <div class="wrap">
-
     {% include '_topheader.html' %}
-
     <div class="container mt30">
         <div class="row">
             <div class="col-xs-12 col-md-9 main">
@@ -162,7 +160,7 @@
                 <input type="hidden" id="draftId" value="">
                 <input type="hidden" value="1010000002520634" id="questionId">
                 <form action="/question/1010000002520634/answers/add" method="post" class="editor-wrap">
-                    <div class="editor" id="questionText">
+                    <div class="editor editMode" id="questionText">
                     <textarea id="answerEditor" name="text" class="form-control" rows="4"
                               placeholder="撰写答案..."></textarea>
                     </div>
@@ -180,12 +178,10 @@
                         </div>
                     </div>
                 </form>
-
-
             </div>
             <!-- /.main -->
             {% include '_similar_nav.html' %}
-
+            <!-- /.side -->
         </div>
     </div>
 </div>
@@ -195,7 +191,6 @@
 <div id="fixedTools" class="hidden-xs hidden-sm">
     <a id="backtop" class="hidden border-bottom" href="#">回顶部</a>
 </div>
-
 
 
 {% include '_login.html' %}

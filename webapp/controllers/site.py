@@ -68,5 +68,10 @@ def questions(act=None):
 
     print '>>>'
 
-    return render_template('layout.html', login_form=login_form, register_form=register_form,
+    return render_template('index.html', login_form=login_form, register_form=register_form,
                            pagination=pagination, questions=questions, tags=tags, act=act)
+
+
+@bp.route('/ask')
+def ask():
+    return redirect(url_for('.index'))

@@ -14,8 +14,8 @@ def questions(question_id):
     """问题详情"""
     question = Question.query.get_or_404(question_id)
     login_form = LoginForm()
-    register_form=RegisterForm()
+    register_form = RegisterForm()
 
     print '>>>'
 
-    return render_template('question.html', login_form=login_form,register_form=register_form)
+    return render_template('a.html', login_form=login_form, register_form=register_form)

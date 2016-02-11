@@ -1,247 +1,181 @@
-<!DOCTYPE HTML>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
-    <meta name="renderer" content="webkit"/>
-    <meta property="qc:admins" content="15317273575564615446375"/>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-    <meta name="alexaVerifyID" content="LkzCRJ7rPEUwt6fVey2vhxiw1vQ"/>
-    <meta name="apple-itunes-app" content="app-id=958101793, app-argument=">
-    <title>javascript - 微信公众平台, config:invalid signature一直爆这个错误，求教如何解决？ - SegmentFault</title>
+{% extends 'base.html' %}
 
-
-    <meta name="description" content="然后哦 用这个校验和输出的是一致的也就是说 签名应该没问题吧 但是为什么手机上会显示无效呢 那个环节又出错了"/>
-
-    <meta name="keywords"
-          content="java javascript html"/>
-
-    <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="SegmentFault"/>
-    <link rel="shortcut icon" href="/static/images/favicon.ico"/>
-    <link rel="apple-touch-icon" href="/static/images/touch-icon.png">
-
-    <meta name="msapplication-TileColor" content="#009a61"/>
-    <meta name="msapplication-square150x150logo" content="/static/images/touch-icon.png"/>
-
-    <meta name="userId" value="" id="SFUserId"/>
-    <meta name="userRank" value="" id="SFUserRank"/>
-
-    <link rel="alternate" type="application/atom+xml" title="SegmentFault 最新问题" href="/feeds/questions">
-    <link rel="alternate" type="application/atom+xml" title="SegmentFault 最新文章" href="/feeds/blogs">
-
-
-    <link rel="stylesheet" href="/static/css/global.css"/>
-    <link rel="stylesheet" href="/static/css/qa_all.css"/>
-    <link rel="stylesheet" href="/static/css/responsive.css"/>
-
-
-    <!--[if lt IE 9]>
-    <link rel="stylesheet" href="/static/css/ie.css"/>
-    <script src="/static/js/html5shiv.js"></script>
-    <script src="/static/js/respond.js"></script>
-    <![endif]-->
-
-    <script src="/static/js/debug.js"></script>
-
-</head>
-
-<body class="qa-question">
-<!--[if lt IE 9]>
-<div class="alert alert-danger topframe" role="alert">你的浏览器实在<strong>太太太太太太旧了</strong>，放学别走，升级完浏览器再说 <a target="_blank"
-                                                                                                        class="alert-link"
-                                                                                                        href="http://browsehappy.com">立即升级</a>
-</div>
-<![endif]-->
-
-
-{% include '_header_nav.html' %}
-
-<div class="wrap">
-    {% include '_topheader.html' %}
-    <div class="container mt30">
-        <div class="row">
-            <div class="col-xs-12 col-md-9 main">
-                <article class="widget-question__item">
-                    <div class="post-col">
-                        <div class="widget-vote">
-                            <button type="button"
-                                    class="like"
-                                    data-id="1010000002520634"
-                                    data-type="question"
-                                    data-do="like"
-                                    data-toggle="tooltip"
-                                    data-placement="top"
-                                    title="问题对人有帮助，内容完整，我也想知道答案">
-                                <span class="sr-only">问题对人有帮助，内容完整，我也想知道答案</span>
-                            </button>
-                            <span class="count">0</span>
-                            <button
-                                    type="button"
-                                    class="hate"
-                                    data-id="1010000002520634"
-                                    data-type="question"
-                                    data-do="hate"
-                                    data-toggle="tooltip"
-                                    data-placement="bottom"
-                                    title="问题没有实际价值，缺少关键内容，没有改进余地">
-                                <span class="sr-only">问题没有实际价值，缺少关键内容，没有改进余地</span>
-                            </button>
+{% block content %}
+    <div class="wrap">
+        {% include '_topheader.html' %}
+        <div class="container mt30">
+            <div class="row">
+                <div class="col-xs-12 col-md-9 main">
+                    <article class="widget-question__item">
+                        <div class="post-col">
+                            <div class="widget-vote">
+                                <button type="button"
+                                        class="like"
+                                        data-id="1010000002520634"
+                                        data-type="question"
+                                        data-do="like"
+                                        data-toggle="tooltip"
+                                        data-placement="top"
+                                        title="问题对人有帮助，内容完整，我也想知道答案">
+                                    <span class="sr-only">问题对人有帮助，内容完整，我也想知道答案</span>
+                                </button>
+                                <span class="count">0</span>
+                                <button
+                                        type="button"
+                                        class="hate"
+                                        data-id="1010000002520634"
+                                        data-type="question"
+                                        data-do="hate"
+                                        data-toggle="tooltip"
+                                        data-placement="bottom"
+                                        title="问题没有实际价值，缺少关键内容，没有改进余地">
+                                    <span class="sr-only">问题没有实际价值，缺少关键内容，没有改进余地</span>
+                                </button>
+                            </div>
+                            <!-- end .widget-vote -->
                         </div>
-                        <!-- end .widget-vote -->
-                    </div>
 
-                    <div class="post-offset">
-                        <div class="question fmt">
+                        <div class="post-offset">
+                            <div class="question fmt">
 
-                            <p><img data-src="/images/bVkJTt"></p>
+                                <p><img data-src="/images/bVkJTt"></p>
 
-                            <p><img data-src="/images/bVkKeu"><br>
-                                然后哦 用这个校验和输出的是一致的也就是说 签名应该没问题吧 但是为什么手机上会显示无效呢 那个环节又出错了</p>
+                                <p><img data-src="/images/bVkKeu"><br>
+                                    然后哦 用这个校验和输出的是一致的也就是说 签名应该没问题吧 但是为什么手机上会显示无效呢 那个环节又出错了</p>
 
 
-                        </div>
-                        <ul class="taglist--inline mb20">
-                            <li class="tagPopup"><a class="tag" href="/t/java" data-toggle="popover"
-                                                    data-placement="top" data-original-title="java"
-                                                    data-id="1040000000089449"
-                                                    data-img="http://sfault-avatar.b0.upaiyun.com/512/342/51234253-1040000000089449_medium40">java</a>
-                            </li>
-                            <li class="tagPopup"><a class="tag" href="/t/javascript" data-toggle="popover"
-                                                    data-placement="top" data-original-title="javascript"
-                                                    data-id="1040000000089436"
-                                                    data-img="http://sfault-avatar.b0.upaiyun.com/195/823/1958237468-1040000000089436_medium40">javascript</a>
-                            </li>
-                            <li class="tagPopup"><a class="tag" href="/t/html" data-toggle="popover"
-                                                    data-placement="top" data-original-title="html"
-                                                    data-id="1040000000089571"
-                                                    data-img="http://sfault-avatar.b0.upaiyun.com/418/365/4183652815-1040000000089571_medium40">html</a>
-                            </li>
-                        </ul>
-
-
-                        <div class="post-opt">
-                            <ul class="list-inline mb0">
-                                <li><a href="/q/1010000002520634">链接</a></li>
-
-                                <li><a href="javascript:void(0);" class="comments" data-id="1010000002520634"
-                                       data-target="#comment-1010000002520634">1
-                                    评论</a></li>
-
-
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle"
-                                       data-toggle="dropdown">更多<b class="caret"></b></a>
-                                    <ul class="dropdown-menu dropdown-menu-left">
-
-
-                                    </ul>
+                            </div>
+                            <ul class="taglist--inline mb20">
+                                <li class="tagPopup"><a class="tag" href="/t/java" data-toggle="popover"
+                                                        data-placement="top" data-original-title="java"
+                                                        data-id="1040000000089449"
+                                                        data-img="http://sfault-avatar.b0.upaiyun.com/512/342/51234253-1040000000089449_medium40">java</a>
+                                </li>
+                                <li class="tagPopup"><a class="tag" href="/t/javascript" data-toggle="popover"
+                                                        data-placement="top" data-original-title="javascript"
+                                                        data-id="1040000000089436"
+                                                        data-img="http://sfault-avatar.b0.upaiyun.com/195/823/1958237468-1040000000089436_medium40">javascript</a>
+                                </li>
+                                <li class="tagPopup"><a class="tag" href="/t/html" data-toggle="popover"
+                                                        data-placement="top" data-original-title="html"
+                                                        data-id="1040000000089571"
+                                                        data-img="http://sfault-avatar.b0.upaiyun.com/418/365/4183652815-1040000000089571_medium40">html</a>
                                 </li>
                             </ul>
+
+
+                            <div class="post-opt">
+                                <ul class="list-inline mb0">
+                                    <li><a href="/q/1010000002520634">链接</a></li>
+
+                                    <li><a href="javascript:void(0);" class="comments" data-id="1010000002520634"
+                                           data-target="#comment-1010000002520634">1
+                                        评论</a></li>
+
+
+                                    <li class="dropdown">
+                                        <a href="javascript:void(0);" class="dropdown-toggle"
+                                           data-toggle="dropdown">更多<b class="caret"></b></a>
+                                        <ul class="dropdown-menu dropdown-menu-left">
+
+
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="widget-comments hidden" id="comment-1010000002520634"
+                                 data-id="1010000002520634">
+                                <div class="widget-comments__form row">
+
+                                    <div class="col-md-12">
+                                        请先 <a class="commentLogin" href="javascript:void(0);">登录</a> 后评论
+                                    </div>
+
+                                </div><!-- /.widget-comments__form -->
+                            </div><!-- /.widget-comments -->
+
+
                         </div>
-                        <div class="widget-comments hidden" id="comment-1010000002520634" data-id="1010000002520634">
-                            <div class="widget-comments__form row">
+                        <!-- end .post-offset -->
+                    </article>
 
-                                <div class="col-md-12">
-                                    请先 <a class="commentLogin" href="javascript:void(0);">登录</a> 后评论
-                                </div>
+                    {% include '_answers.html' %}
 
-                            </div><!-- /.widget-comments__form -->
-                        </div><!-- /.widget-comments -->
-
-
-                    </div>
-                    <!-- end .post-offset -->
-                </article>
-
-                {% include '_answers.html' %}
-
-                <h4>撰写答案</h4>
-                <input type="hidden" id="draftId" value="">
-                <input type="hidden" value="1010000002520634" id="questionId">
-                <form action="/question/1010000002520634/answers/add" method="post" class="editor-wrap">
-                    <div class="editor editMode" id="questionText">
+                    <h4>撰写答案</h4>
+                    <input type="hidden" id="draftId" value="">
+                    <input type="hidden" value="1010000004427031" id="questionId">
+                    <form action="/question/1010000004427031/answers/add" method="post" class="editor-wrap">
+                        <div class="editor" id="questionText">
                     <textarea id="answerEditor" name="text" class="form-control" rows="4"
                               placeholder="撰写答案..."></textarea>
-                    </div>
-                    <div id="answerSubmit" class="hide mt15 clearfix">
-                        <div class="pull-right">
+                        </div>
+                        <div id="answerSubmit" class="hide mt15 clearfix">
+                            <div class="pull-right">
                     <span id="editorStatus" class="hidden text-muted">
 
                     </span>
-                            <a id="dropIt" href="javascript:void(0);" class="mr10 hidden">
-                                [舍弃]
-                            </a>
-                            <button type="submit" id="answerIt" data-id="1010000002520634"
-                                    class="btn btn-lg btn-primary ml20">提交回答
-                            </button>
+                                <a id="dropIt" href="javascript:void(0);" class="mr10 hidden">
+                                    [舍弃]
+                                </a>
+                                <button type="submit" id="answerIt" data-id="1010000004427031"
+                                        class="btn btn-lg btn-primary ml20">提交回答
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
+                <!-- /.main -->
+                {% include '_similar_nav.html' %}
+                <!-- /.side -->
             </div>
-            <!-- /.main -->
-            {% include '_similar_nav.html' %}
-            <!-- /.side -->
         </div>
     </div>
-</div>
+{% endblock content %}
 
-{% include '_footer_nav.html' %}
+{% block page_js %}
+    {{ super() }}
+    <script>
+        (function (w) {
+            w.SF = {
+                staticUrl: "http://static.segmentfault.com/v-56a05f82"
+            };
+            w.SF.token = (function () {
+                var _gmfiLd = '70b'//'r3i'
+                        + '87'//'Fo'
+                        + '9'//'ZnD'
+                        +//'z'
+                        '6' +//'B'
+                        '31' + 'b4'//'Do'
+                        + 'de'//'9a3'
+                        +//'R7'
+                        '3' +//'IS'
+                        '7fe' + ''///*'3sv'*/'3sv'
+                        + '78'//'y'
+                        + '1f'//'D9K'
+                        + '374'//'wg'
+                        + '388'//'aDQ'
+                        +//'7e'
+                        '7e' +//'Pnr'
+                        'f' + 'de'//'OE'
+                        +//'D'
+                        '5' +//'STM'
+                        '7', _53JM = [[27, 29]];
 
-<div id="fixedTools" class="hidden-xs hidden-sm">
-    <a id="backtop" class="hidden border-bottom" href="#">回顶部</a>
-</div>
+                for (var i = 0; i < _53JM.length; i++) {
+                    _gmfiLd = _gmfiLd.substring(0, _53JM[i][0]) + _gmfiLd.substring(_53JM[i][1]);
+                }
 
+                return _gmfiLd;
+            })();
+            ;
+        })(window);
 
-{% include '_login.html' %}
-
-
-<script>
-    (function (w) {
-        w.SF = {
-            staticUrl: ""
+        var lock = {
+            type: "",
+            text: '',
+            table: {"ban_post": [1, "\u4f60\u5df2\u7ecf\u88ab\u7981\u8a00, \u65e0\u6cd5\u8fdb\u884c\u6b64\u64cd\u4f5c, \u5982\u6709\u7591\u4e49\u8bf7\u63d0\u4ea4\u7533\u8bc9, \u6216\u8005\u53d1\u90ae\u4ef6\u5230pr@segmentfault.com"]}
         };
-        w.SF.token = (function () {
-            var _gmfiLd = '70b'//'r3i'
-                    + '87'//'Fo'
-                    + '9'//'ZnD'
-                    +//'z'
-                    '6' +//'B'
-                    '31' + 'b4'//'Do'
-                    + 'de'//'9a3'
-                    +//'R7'
-                    '3' +//'IS'
-                    '7fe' + ''///*'3sv'*/'3sv'
-                    + '78'//'y'
-                    + '1f'//'D9K'
-                    + '374'//'wg'
-                    + '388'//'aDQ'
-                    +//'7e'
-                    '7e' +//'Pnr'
-                    'f' + 'de'//'OE'
-                    +//'D'
-                    '5' +//'STM'
-                    '7', _53JM = [[27, 29]];
+    </script>
+    <script crossorigin src="{{ url_for('static',filename='js/question.js') }}"></script>
+{% endblock %}
 
-            for (var i = 0; i < _53JM.length; i++) {
-                _gmfiLd = _gmfiLd.substring(0, _53JM[i][0]) + _gmfiLd.substring(_53JM[i][1]);
-            }
-
-            return _gmfiLd;
-        })();
-        ;
-    })(window);
-
-    var lock = {
-        type: "",
-        text: '',
-        table: {"ban_post": [1, "\u4f60\u5df2\u7ecf\u88ab\u7981\u8a00, \u65e0\u6cd5\u8fdb\u884c\u6b64\u64cd\u4f5c, \u5982\u6709\u7591\u4e49\u8bf7\u63d0\u4ea4\u7533\u8bc9, \u6216\u8005\u53d1\u90ae\u4ef6\u5230pr@segmentfault.com"]}
-    };
-</script>
-
-<script crossorigin src="/static/js/assets.js"></script>
-<script crossorigin src="/static/js/question.js"></script>
-
-
-</body>
-</html>

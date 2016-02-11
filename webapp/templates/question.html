@@ -158,7 +158,6 @@
 
                 {% include '_answers.html' %}
 
-
                 <h4>撰写答案</h4>
                 <input type="hidden" id="draftId" value="">
                 <input type="hidden" value="1010000002520634" id="questionId">
@@ -168,10 +167,6 @@
                               placeholder="撰写答案..."></textarea>
                     </div>
                     <div id="answerSubmit" class="hide mt15 clearfix">
-                        <div class="checkbox pull-left">
-                            <label><input type="checkbox" class="" id="shareToWeibo">
-                                同步到新浪微博</label>
-                        </div>
                         <div class="pull-right">
                     <span id="editorStatus" class="hidden text-muted">
 
@@ -195,180 +190,13 @@
     </div>
 </div>
 
-
-<div class="hidden widget-register widget-welcome-question mt20 hidden-xs widget-welcome widget-register-slideUp">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <h2 class="title h4">与我们一起探索更多的未知</h2>
-                <p>专业的开发者技术社区，为用户提供多样化的线上知识交流，丰富的线下活动及给力的工作机会</p>
-            </div>
-            <form action="/api/user/register/fast" method="post">
-                <div class="col-sm-5">
-                    <div class="form-group mb0">
-                        <input type="text" class="form-control" placeholder="邮箱地址" name="mail" required="">
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <button type="submit" class="btn btn-primary btn-block">加入只需一步</button>
-                </div>
-                <div class="col-sm-10 mt10 captcha-part" style="display:none;">
-                    <div class="row">
-                        <div class="col-sm-4 pr0">
-                            <input type="text" class="form-control" name="captcha" placeholder="请输入验证码" disabled=""
-                                   required="">
-                        </div>
-                        <div class="col-sm-4 pr0">
-                            <a href="javascript:void(0)"><img src="" height="35"></a>
-                        </div>
-                    </div>
-                </div>
-            </form>
-            <a class="close" href="javascript:void(0);"><span>×</span></a>
-        </div>
-    </div>
-</div>
-
-<div id="delete-modal" class="modal widget-911">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
-                        class="sr-only">Close</span></button>
-                <h4 class="modal-title radio-del question-close-only">关闭<span class="type-911">问题</span>（请谨慎操作）</h4>
-                <h4 class="modal-title radio-del question-delete-only">删除<span class="type-911">问题</span>（请谨慎操作）</h4>
-                <h4 class="modal-title radio-del answer-delete-only">删除<span class="type-911">回答</span>（请谨慎操作）</h4>
-                <h4 class="modal-title radio-del answer-ignore-only">忽略<span class="type-911">回答</span></h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    <strong class="required radio-del question-close-only">关闭理由：</strong>
-                    <strong class="required radio-del question-delete-only answer-delete-only">删除理由：</strong>
-                    <strong class="required radio-del answer-ignore-only">忽略理由：</strong>
-                </p>
-                <div id="reportDescription">
-                    <div class="radio-del radio all">
-                        <label>
-                            <input type="radio" name="descRadio" value="推广（招聘、广告、SEO 等）方面的内容"/>
-                            推广（招聘、广告、SEO 等）方面的内容
-                        </label>
-                    </div>
-                    <div class="radio-del radio question-close-only">
-                        <label>
-                            <input type="radio" name="descRadio" value="与已有问题重复">
-                            与已有问题重复（请编辑该提问指向已有相同问题）
-                        </label>
-                    </div>
-                    <div class="radio-del radio answer-ignore-only">
-                        <label>
-                            <input type="radio" name="descRadio" value="答非所问，不符合答题要求">
-                            答非所问，不符合答题要求
-                        </label>
-                    </div>
-                    <div class="radio-del radio answer-ignore-only">
-                        <label>
-                            <input type="radio" name="descRadio" value="宜作评论而非答案">
-                            宜作评论而非答案
-                        </label>
-                    </div>
-                    <div class="radio-del radio all">
-                        <label>
-                            <input type="radio" name="descRadio" value="带有人身攻击、辱骂、仇恨等违反条款的内容">
-                            带有人身攻击、辱骂、仇恨等违反条款的内容
-                        </label>
-                    </div>
-                    <div class="radio-del radio question-close-only">
-                        <label>
-                            <input type="radio" name="descRadio" value="无法获得确切结果的问题">
-                            无法获得确切结果的问题
-                        </label>
-                    </div>
-                    <div class="radio-del radio question-close-only">
-                        <label>
-                            <input type="radio" name="descRadio" value="非开发直接相关的问题">
-                            非开发直接相关的问题
-                        </label>
-                    </div>
-                    <div class="radio-del radio question-close-only question-delete-only">
-                        <label>
-                            <input type="radio" name="descRadio" value="非技术提问的讨论型问题">
-                            非技术提问的讨论型问题
-                        </label>
-                    </div>
-
-                    <div class="radio-del radio all btwRadio">
-                        <label>
-                            <input type="radio" name="descRadio" value="">
-                            其他原因（请补充说明）
-                        </label>
-                    </div>
-                    <div class="btw" style="display:none;">
-                        <p class="mt20"><strong>补充说明：</strong></p>
-                        <textarea class="form-control" rows="3" name="description" id="deleteDesc"></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-danger" id="submit-delete">提交</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<div class="modal widget-911" id="911">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button class="close" data-dismiss="modal" type="button">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-                <h4 class="modal-title">举报<span data-model="type"></span></h4>
-            </div>
-            <div class="modal-body">
-                <form id="reportForm">
-                    <!-- 后台返回信息 -->
-                    <p class="alert alert-warning" data-model="returnMsg"></p>
-                    <div data-role="base">
-                        <p>
-                            <strong class="required">我要举报该<span data-model="type"></span>，理由是：</strong>
-                        </p>
-                        <ul class="list-unstyled" data-model="list"></ul>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-default pull-left" type="button" data-role="back" style="display:none">返回重选
-                </button>
-                <button class="btn btn-default" data-dismiss="modal" type="button">取消</button>
-                <button class="btn btn-primary" data-role="submit" type="button">提交</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
 {% include '_footer_nav.html' %}
 
 <div id="fixedTools" class="hidden-xs hidden-sm">
     <a id="backtop" class="hidden border-bottom" href="#">回顶部</a>
-
-    <div class="qrcodeWraper">
-        <a href="/app#qrcode"><span class="glyphicon glyphicon-qrcode"></span></a>
-        <img id="qrcode" class="border" alt="sf-wechat" src="/page/images/app/appQrcode.png">
-
-        <p class="qrcode-text">扫扫下载 App</p>
-    </div>
 </div>
 
 
-<div class="app-promotion-bar">
-    <a href="javascript:;"><i class="fa fa-close close"></i></a>
-    <div class="icon"></div>
-    <h5 class="title h5">SegmentFault</h5>
-    <p class="describe">一起探索更多未知</p>
-    <a class="download-btn btn btn-sm btn-primary" href="/app#qrcode">下载 App</a>
-</div>
 
 {% include '_login.html' %}
 
@@ -418,51 +246,6 @@
 
 <script crossorigin src="/static/js/assets.js"></script>
 <script crossorigin src="/static/js/question.js"></script>
-
-
-<script>
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-918487-8']);
-    _gaq.push(['_trackPageview']);
-    (function (i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date();
-        a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-
-    ga('create', 'UA-918487-8', 'auto', {'userID': 0, 'createdTime': 0, 'now': 1453820647});
-    ga('set', 'dimension1', 'guest');
-    ga('send', 'pageview');
-
-</script>
-
-<script>
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "//hm.baidu.com/hm.js?e23800c454aa573c0ccb16b52665ac26";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-
-<script src="//cbjs.baidu.com/js/m.js"></script>
-<script>
-    if (typeof BAIDU_CLB_fillSlotAsync === 'function') {
-        BAIDU_CLB_fillSlotAsync('981183', 'adid-981183');
-        BAIDU_CLB_fillSlotAsync('981184', 'adid-981184');
-        BAIDU_CLB_fillSlotAsync('981694', 'adid-981694');
-        BAIDU_CLB_fillSlotAsync('981179', 'adid-981179');
-        BAIDU_CLB_fillSlotAsync('1119908', 'adid-1119908');
-    }
-</script>
 
 
 </body>

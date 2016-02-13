@@ -16,6 +16,5 @@ def questions(question_id):
     login_form = LoginForm()
     register_form = RegisterForm()
 
-    print '>>>'
-
-    return render_template('a.html', login_form=login_form, register_form=register_form)
+    return render_template('a.html', login_form=login_form,
+                           register_form=register_form)

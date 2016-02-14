@@ -1,12 +1,11 @@
 # coding: utf8
-from flask import Blueprint, render_template, jsonify, flash, redirect, url_for
+from flask import Blueprint, render_template, jsonify
 from flask.ext.login import login_user
-from sqlalchemy import or_
+from .. import db
 from ..forms.user import LoginForm, RegisterForm
 from ..models.user import User
-from .. import db
 
-bp = Blueprint('user', __name__)
+bp = Blueprint('user_api', __name__)
 
 
 @bp.route('/users/<int:id>')
@@ -17,8 +16,25 @@ def get_user(id):
 
 @bp.route('/login', methods=['POST', 'GET'])
 def login():
+    form = LoginForm()
+    register_form = RegisterForm()
 
-    return render_template('user/login.html')
+    rsp_json = {
+        'status': 1,
+        'data': ['form']
+    }
+
+    if form.validate_on_submit():
+        print '>>> 2', form.email.data, form.password.data, form.remember_me.data
+        user = User.query.filter(User.email == form.email.data).first()
+        if user is not None and user.verify_password(form.password.data):
+            login_user(user, form.remember_me.data)
+            rsp_json['status'] = 0
+            return jsonify(rsp_json)
+        else:
+            rsp_json['data'].append({'password': u'用户名或密码错误'})
+            return jsonify(rsp_json)
+    return render_template('_login.html', login_form=form, register_form=register_form)
 
 
 @bp.route('/register', methods=['POST'])

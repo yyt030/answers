@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='css/global.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static',filename='css/qa_all.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static',filename='css/responsive.css') }}"/>
-
+    {% block page_css -%} {%- endblock %}
     <!--[if lt IE 9]>
     <link rel="stylesheet" href="{{ url_for('static',filename='css/ie.css') }}"/>
     <script src="{{ url_for('static',filename='js/html5shiv.js') }}"></script>

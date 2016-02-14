@@ -3,8 +3,9 @@
 __author__ = 'yueyt'
 
 from flask import Blueprint, render_template, redirect, url_for, request, current_app
-from ..models import User, Question, Answer, Tag
 from ..forms.user import LoginForm, RegisterForm
+from ..models.answer import Answer
+from ..models.question import Question, Tag
 
 bp = Blueprint('site', __name__)
 

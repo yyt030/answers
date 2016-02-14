@@ -104,25 +104,16 @@
                     <h4>撰写答案</h4>
                     <input type="hidden" id="draftId" value="">
                     <input type="hidden" value="1010000004427031" id="questionId">
-                    <form action="/question/1010000004427031/answers/add" method="post" class="editor-wrap">
-                        <div class="editor" id="questionText">
-                    <textarea id="answerEditor" name="text" class="form-control" rows="4"
-                              placeholder="撰写答案..."></textarea>
-                        </div>
-                        <div id="answerSubmit" class="hide mt15 clearfix">
-                            <div class="pull-right">
-                    <span id="editorStatus" class="hidden text-muted">
 
-                    </span>
-                                <a id="dropIt" href="javascript:void(0);" class="mr10 hidden">
-                                    [舍弃]
-                                </a>
-                                <button type="submit" id="answerIt" data-id="1010000004427031"
-                                        class="btn btn-lg btn-primary ml20">提交回答
-                                </button>
-                            </div>
+                    {% include '_editor.html' %}
+
+                    <div id="answerSubmit" class="hide mt15 clearfix">
+                        <div class="pull-right">
+                            <button type="submit" id="answerIt" data-id="1010000004427031"
+                                    class="btn btn-lg btn-primary ml20">提交回答
+                            </button>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <!-- /.main -->
                 {% include '_similar_nav.html' %}
@@ -177,5 +168,81 @@
         };
     </script>
     <script crossorigin src="{{ url_for('static',filename='js/question.js') }}"></script>
+
+
+    <!-- 富文本编辑器 -->
+    <script src="/static/lib/bootstrap-wysiwyg/js/jquery-1.9.0.min.js"></script>
+    <script src="/static/lib/bootstrap-wysiwyg/external/jquery.hotkeys.js"></script>
+    <script src="/static/lib/bootstrap-wysiwyg/js/bootstrap.min.js"></script>
+    <script src="/static/lib/bootstrap-wysiwyg/external/google-code-prettify/prettify.js"></script>
+    <script src="/static/lib/bootstrap-wysiwyg/js/bootstrap-wysiwyg.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#answerIt").click(function () {
+                $.post($("#questionTitle").attr("data-id") + "/answers/add",
+                        {
+                            answer_data: $("#editor").cleanHtml()
+                        },
+                        function (data, status) {
+                            alert("发布成功" + "\n状态：" + status);
+                            window.location.reload(true);
+                        });
+            });
+        })
+        $(function () {
+            function initToolbarBootstrapBindings() {
+                var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
+                            'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
+                            'Times New Roman', 'Verdana'],
+                        fontTarget = $('[title=Font]').siblings('.dropdown-menu');
+                $.each(fonts, function (idx, fontName) {
+                    fontTarget.append($('<li><a data-edit="fontName ' + fontName + '" style="font-family:\'' + fontName + '\'">' + fontName + '</a></li>'));
+                });
+                $('a[title]').tooltip({container: 'body'});
+                $('.dropdown-menu input').click(function () {
+                            return false;
+                        })
+                        .change(function () {
+                            $(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');
+                        })
+                        .keydown('esc', function () {
+                            this.value = '';
+                            $(this).change();
+                        });
+
+                $('[data-role=magic-overlay]').each(function () {
+                    var overlay = $(this), target = $(overlay.data('target'));
+                    overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
+                });
+                if ("onwebkitspeechchange" in document.createElement("input")) {
+                    var editorOffset = $('#editor').offset();
+                    $('#voiceBtn').css('position', 'absolute').offset({
+                        top: editorOffset.top,
+                        left: editorOffset.left + $('#editor').innerWidth() - 35
+                    });
+                } else {
+                    $('#voiceBtn').hide();
+                }
+            };
+            function showErrorAlert(reason, detail) {
+                var msg = '';
+                if (reason === 'unsupported-file-type') {
+                    msg = "Unsupported format " + detail;
+                }
+                else {
+                    console.log("error uploading file", reason, detail);
+                }
+                $('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                        '<strong>File upload error</strong> ' + msg + ' </div>').prependTo('#alerts');
+            };
+            initToolbarBootstrapBindings();
+            $('#editor').wysiwyg({fileUploadError: showErrorAlert});
+            window.prettyPrint && prettyPrint();
+        });
+    </script>
+    <!-- 富文本编辑器 end -->
+
 {% endblock %}
+
 

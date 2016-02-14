@@ -8,8 +8,8 @@
                     <li class="active">问答详情</li>
                 </ol>
 
-                <h1 class="h3 title" id="questionTitle" data-id="1010000002520634"><a
-                        href="/q/1010000002520634">微信公众平台, config:invalid signature一直爆这个错误，求教如何解决？</a></h1>
+                <h1 class="h3 title" id="questionTitle" data-id="{{ question.id }}"><a
+                        href="/q/{{ question.id }}">微信公众平台, config:invalid signature一直爆这个错误，求教如何解决？</a></h1>
 
                 <div class="author">
                     <a href="/u/xmm" class="mr5"><img class="avatar-24 mr10"
@@ -17,21 +17,21 @@
                                                       alt="徐妹妹"><strong>徐妹妹</strong></a>
                     <strong class="text-black mr10">110</strong>
                     2015年01月28日 提问
-                    &middot; <a href="/q/1010000002520634/revision">2015年01月29日 更新</a>
+                    &middot; <a href="/q/{{ question.id }}/revision">2015年01月29日 更新</a>
                 </div>
             </div>
             <div class="col-md-3">
                 <ul class="widget-action--ver list-unstyled">
                     <li>
                         <button type="button" id="sideFollow" class="btn btn-success btn-sm"
-                                data-id="1010000002520634" data-do="follow" data-type="question"
+                                data-id="{{ question.id }}" data-do="follow" data-type="question"
                                 data-toggle="tooltip" data-placement="right" title="关注后将获得更新提醒">关注
                         </button>
                         <strong>34</strong> 关注
                     </li>
                     <li>
                         <button type="button" id="sideBookmark" class="btn btn-default btn-sm"
-                                data-id="1010000002520634" data-type="question">收藏
+                                data-id="{{ question.id }}" data-type="question">收藏
                         </button>
                         <strong id="sideBookmarked">7</strong> 收藏，<strong
                             class="no-stress">38.4k</strong> 浏览

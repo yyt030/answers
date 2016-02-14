@@ -4,9 +4,7 @@ __author__ = 'yueyt'
 
 from flask.ext.wtf import Form
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import DataRequired, InputRequired, Length, Email, Regexp, EqualTo
-from wtforms import ValidationError
-from ..models import User
+from wtforms.validators import DataRequired, InputRequired, Length, Email
 
 
 class LoginForm(Form):

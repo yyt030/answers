@@ -8,7 +8,6 @@ from flask import current_app
 from flask.ext.login import UserMixin, AnonymousUserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from .. import db
-from .. import login_manager
 
 
 class Permission:
@@ -66,7 +65,7 @@ class User(UserMixin, db.Model):
 
     @staticmethod
     def generate_fake(count=10):
-        from random import seed, randint
+        from random import seed
         import forgery_py
 
         seed()
@@ -87,12 +86,11 @@ class AnonymousUser(AnonymousUserMixin):
         return False
 
 
-@login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-login_manager.anonymous_user = AnonymousUser
+# login_manager.anonymous_user = AnonymousUser
 
 
 class Role(db.Model):

@@ -7,7 +7,7 @@ import codecs
 
 def signin_user(user):
     """Signin user"""
-    session.permanent = 1
+    session.puermanent = 1
     session['user_id'] = user.id
 
 

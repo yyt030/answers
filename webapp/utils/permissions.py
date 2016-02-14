@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-from flask import g, render_template
 from functools import wraps
-from flask import abort, redirect, url_for, flash
+
+from flask import abort, redirect, url_for
+from flask import g, render_template
 
 
 def require_visitor(func):

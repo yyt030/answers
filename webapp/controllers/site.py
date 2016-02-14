@@ -24,7 +24,8 @@ def search():
 
 @bp.route('/login', methods=['GET'])
 def login():
-    return redirect(url_for('.index'))
+    print '>>>', 'site.login'
+    return redirect(url_for('user.login'))
 
 
 @bp.route('/tags', methods=['GET'])

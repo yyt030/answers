@@ -17,8 +17,10 @@ def get_user(id):
 
 @bp.route('/login', methods=['POST', 'GET'])
 def login():
-
-    return render_template('user/login.html')
+    login_form = LoginForm()
+    register_form = RegisterForm()
+    return render_template('user/login.html', login_form=login_form,
+                           register_form=register_form, login_type='page')
 
 
 @bp.route('/register', methods=['POST'])

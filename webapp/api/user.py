@@ -1,5 +1,5 @@
 # coding: utf8
-from flask import Blueprint, render_template, jsonify
+from flask import Blueprint, render_template, jsonify, request, redirect, url_for
 from flask.ext.login import login_user
 from .. import db
 from ..forms.user import LoginForm, RegisterForm
@@ -22,18 +22,21 @@ def login():
 
     rsp_json = {
         'status': 1,
-        'data': ['form']
     }
 
     if form.validate_on_submit():
         print '>>> 2', form.email.data, form.password.data, form.remember_me.data
         user = User.query.filter(User.email == form.email.data).first()
         if user is not None and user.verify_password(form.password.data):
+            # 登录成功
             signin_user(user)
+
+            rsp_json['data'] = request.url_root
             rsp_json['status'] = 0
+            rsp_json['message'] = ''
             return jsonify(rsp_json)
         else:
-            rsp_json['data'].append({'password': u'用户名或密码错误'})
+            rsp_json['data'] = ['form', {'password': u'用户名或密码错误'}]
             return jsonify(rsp_json)
     return render_template('_login.html', login_form=form, register_form=register_form)
 

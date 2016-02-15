@@ -5,6 +5,7 @@ from sqlalchemy import or_
 from ..forms.user import LoginForm, RegisterForm
 from ..models.user import User
 from .. import db
+from ..utils.account import signin_user
 
 bp = Blueprint('user', __name__)
 
@@ -19,6 +20,13 @@ def get_user(id):
 def login():
     login_form = LoginForm()
     register_form = RegisterForm()
+    if login_form.validate_on_submit():
+        user = User.query.filter(User.email == login_form.email.data).first()
+        if user is not None and user.verify_password(login_form.password.data):
+            # 登录成功
+            signin_user(user)
+            return redirect(url_for('site.index'))
+        flash(u'用户名或密码错误')
     return render_template('user/login.html', login_form=login_form,
                            register_form=register_form, login_type='page')
 

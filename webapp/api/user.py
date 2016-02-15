@@ -4,6 +4,7 @@ from flask.ext.login import login_user
 from .. import db
 from ..forms.user import LoginForm, RegisterForm
 from ..models.user import User
+from ..utils.account import signin_user
 
 bp = Blueprint('user_api', __name__)
 
@@ -14,7 +15,7 @@ def get_user(id):
     return render_template('index.html')
 
 
-@bp.route('/login', methods=['POST', 'GET'])
+@bp.route('/user/login', methods=['POST', 'GET'])
 def login():
     form = LoginForm()
     register_form = RegisterForm()
@@ -28,7 +29,7 @@ def login():
         print '>>> 2', form.email.data, form.password.data, form.remember_me.data
         user = User.query.filter(User.email == form.email.data).first()
         if user is not None and user.verify_password(form.password.data):
-            login_user(user, form.remember_me.data)
+            signin_user(user)
             rsp_json['status'] = 0
             return jsonify(rsp_json)
         else:
@@ -37,7 +38,7 @@ def login():
     return render_template('_login.html', login_form=form, register_form=register_form)
 
 
-@bp.route('/register', methods=['POST'])
+@bp.route('/user/register', methods=['POST'])
 def register():
     form = RegisterForm()
 

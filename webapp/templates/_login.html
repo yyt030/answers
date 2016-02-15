@@ -12,7 +12,7 @@
         <div class="row bg-white login">
             <div class="col-md-4 col-sm-12 col-md-push-7 login-wrap">
                 <h1 class="h4 text-muted login-title mb30">用户登录</h1>
-                <form action="/user/login" method="POST" role="form" class="mt30">
+                <form action="/api/user/login" method="POST" role="form" class="mt30">
                     {{ login_form.csrf_token }}
                     {{ form_field(login_form.email,required='required') }}
                     {{ form_field(login_form.password,required='required') }}
@@ -23,7 +23,7 @@
             <div class="login-vline hidden-sm hidden-xs"></div>
             <div class="col-md-4 col-md-pull-3 col-sm-12 login-wrap">
                 <h1 class="h4 text-muted login-title mb30">创建新账号</h1>
-                <form action="/user/register" method="POST" role="form" class="mt30">
+                <form action="/api/user/register" method="POST" role="form" class="mt30">
                     {{ register_form.csrf_token }}
                     {{ form_field(register_form.username,required='required') }}
                     {{ form_field(register_form.email,required='required') }}
@@ -43,7 +43,7 @@
         <div class="row bg-white login-modal">
             <div class="col-md-4 col-sm-12 col-md-push-7 login-wrap">
                 <h1 class="h4 text-muted login-title">用户登录</h1>
-                <form action="/user/login" method="POST" role="form" class="mt30">
+                <form action="/api/user/login" method="POST" role="form" class="mt30">
                     {{ login_form.csrf_token }}
                     {{ form_field(login_form.email,required='required') }}
                     {{ form_field(login_form.password,required='required') }}
@@ -54,7 +54,7 @@
             <div class="login-vline hidden-xs hidden-sm"></div>
             <div class="col-md-4 col-md-pull-3 col-sm-12 login-wrap">
                 <h1 class="h4 text-muted login-title">创建新账号</h1>
-                <form action="/user/register" method="POST" role="form" class="mt30">
+                <form action="/api/user/register" method="POST" role="form" class="mt30">
                     {{ register_form.csrf_token }}
                     {{ form_field(register_form.username,required='required') }}
                     {{ form_field(register_form.email,required='required') }}

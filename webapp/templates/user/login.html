@@ -2,3 +2,49 @@
 
 {% block header_nav %}
 {% endblock %}
+
+{% block page_js %}
+    <script>
+        (function (w) {
+            w.SF = {
+                staticUrl: "http://static.segmentfault.com/v-56a05f82"
+            };
+            w.SF.token = (function () {
+                var _e8P4jkE = //'IXh'
+                        '7' +//'e'
+                        'd' +//'n'
+                        'a4' +//'7'
+                        '7' +//'HX'
+                        '84' + '3'//'b'
+                        +//'mlT'
+                        'e1' +//'Lzh'
+                        'c12' + ''///*'SwP'*/'SwP'
+                        + '02'//'G'
+                        + 'b7'//'h'
+                        + '4'//'D1'
+                        + '8'//'q'
+                        + 'a8e'//'9'
+                        +//'h'
+                        '64' +//'lFJ'
+                        'd1d' + 'tC'//'tC'
+                        +//'V4l'
+                        '8b' +//'Rp'
+                        'b8e' + 'f'//'S7'
+                        , _siqVxOv = [[4, 5], [26, 28]];
+
+                for (var i = 0; i < _siqVxOv.length; i++) {
+                    _e8P4jkE = _e8P4jkE.substring(0, _siqVxOv[i][0]) + _e8P4jkE.substring(_siqVxOv[i][1]);
+                }
+
+                return _e8P4jkE;
+            })();
+            ;
+        })(window);
+
+        var lock = {
+            type: "",
+            text: '',
+            table: {"ban_post": [1, "\u4f60\u5df2\u7ecf\u88ab\u7981\u8a00, \u65e0\u6cd5\u8fdb\u884c\u6b64\u64cd\u4f5c, \u5982\u6709\u7591\u4e49\u8bf7\u63d0\u4ea4\u7533\u8bc9, \u6216\u8005\u53d1\u90ae\u4ef6\u5230pr@segmentfault.com"]}
+        };
+    </script>
+{% endblock %}

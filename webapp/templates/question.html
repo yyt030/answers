@@ -11,7 +11,7 @@
                             <div class="widget-vote">
                                 <button type="button"
                                         class="like"
-                                        data-id="1010000002520634"
+                                        data-id="{{ question.id }}"
                                         data-type="question"
                                         data-do="like"
                                         data-toggle="tooltip"
@@ -23,7 +23,7 @@
                                 <button
                                         type="button"
                                         class="hate"
-                                        data-id="1010000002520634"
+                                        data-id="{{ question.id }}"
                                         data-type="question"
                                         data-do="hate"
                                         data-toggle="tooltip"
@@ -37,13 +37,7 @@
 
                         <div class="post-offset">
                             <div class="question fmt">
-
-                                <p><img data-src="/images/bVkJTt"></p>
-
-                                <p><img data-src="/images/bVkKeu"><br>
-                                    然后哦 用这个校验和输出的是一致的也就是说 签名应该没问题吧 但是为什么手机上会显示无效呢 那个环节又出错了</p>
-
-
+                                {{ question.body |safe }}
                             </div>
                             <ul class="taglist--inline mb20">
                                 <li class="tagPopup"><a class="tag" href="/t/java" data-toggle="popover"

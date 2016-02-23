@@ -4,20 +4,18 @@
             <div class="col-md-9">
                 <ol class="breadcrumb">
                     <li><a href="/questions/newest">问答</a></li>
-                    <li><a href="/weixin">微信开放平台问答</a></li>
                     <li class="active">问答详情</li>
                 </ol>
 
                 <h1 class="h3 title" id="questionTitle" data-id="{{ question.id }}"><a
-                        href="/q/{{ question.id }}">微信公众平台, config:invalid signature一直爆这个错误，求教如何解决？</a></h1>
+                        href="/q/{{ question.id }}">{{ question.title }}</a></h1>
 
                 <div class="author">
-                    <a href="/u/xmm" class="mr5"><img class="avatar-24 mr10"
-                                                      src="http://sfault-avatar.b0.upaiyun.com/285/315/2853155316-55151c2341e31_big64"
-                                                      alt="徐妹妹"><strong>徐妹妹</strong></a>
+                    <a href="/u/{{ question.author_id }}" class="mr5">
+                        <strong>{{ question.asker.username }}</strong>
+                    </a>
                     <strong class="text-black mr10">110</strong>
-                    2015年01月28日 提问
-                    &middot; <a href="/q/{{ question.id }}/revision">2015年01月29日 更新</a>
+                    {{ question.create_time }}提问
                 </div>
             </div>
             <div class="col-md-3">

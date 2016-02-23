@@ -1,192 +1,83 @@
 <div class="widget-answers">
     <div class="btn-group pull-right" role="group">
-        <a href="/q/1010000002520634#answers-title" id="sortby-rank"
+        <a href="/q/{{ question.id }}#answers-title" id="sortby-rank"
            class="btn btn-default btn-xs active">默认排序</a>
         <a href="?sort=created#answers-title" id="sortby-created"
            class="btn btn-default btn-xs">时间排序</a>
     </div>
 
-    <h2 class="title h4 mt30 mb20 post-title" id="answers-title">28 个回答</h2>
+    <h2 class="title h4 mt30 mb20 post-title" id="answers-title">{{ question.answers.count() }} 个回答</h2>
 
-
-    <article
-            class="clearfix widget-answers__item accepted"
-            id="a-1020000002531131">
-        <div class="post-col">
-            <div class="widget-vote">
-                <button type="button"
-                        class="like"
-                        data-id="1020000002531131"
-                        data-type="answer"
-                        data-do="like"
-                        data-toggle="tooltip"
-                        data-placement="top"
-                        title="答案对人有帮助，有参考价值">
-                    <span class="sr-only">答案对人有帮助，有参考价值</span>
-                </button>
-                <span class="count">4</span>
-                <button type="button"
-                        class="hate"
-                        data-id="1020000002531131"
-                        data-type="answer"
-                        data-do="hate"
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="答案没帮助，是错误的答案，答非所问">
-                    <span class="sr-only">答案没帮助，是错误的答案，答非所问</span>
-                </button>
-
-            </div>
-            <div class="accepted-flag">采纳</div>
-        </div>
-
-        <div class="post-offset ">
-            <a class="" href="/u/suninformation">
-                <img class="avatar-24"
-                     src="http://sfault-avatar.b0.upaiyun.com/407/819/4078192333-54cfc07039e5f_big64"
-                     alt=""/>
-            </a>
-            <strong><a href="/u/suninformation" class="mr5">有理想的鱼</a> 82
-            </strong>
-
-        <span class="ml10 text-muted">
-            2015年02月03日 回答
-                    </span>
-
-            <div class="answer fmt mt10">
-
-                <p>出现问题的原因是参与签名的URL地址不正确，需要动态获取<strong>当前页面完整的URL地址</strong>（包括?后面的参数，但不能包含#号），如若URL地址为：<a
-                        rel="nofollow"
-                        href="http://www.xxx.xxx/payment/wxpay/jspay?oid=xxxx&amp;attr=xxxx#wechat">http://www.xxx.xxx/payment/wxpay/jspay?oid=xxxx&amp;attr=xxxx#wechat</a>，那么完整的URL地址应该是<strong>截取#号之前的部份</strong>。为什么会出现#号呢？因为你的URL在被分享到朋友圈等微信系统自动会添加一些参数。
-                </p>
-
+    {% for answer in question.answers %}
+        <article
+                class="clearfix widget-answers__item accepted"
+                id="a-{{ question.id }}">
+            <div class="post-col">
+                <div class="widget-vote">
+                    <button type="button"
+                            class="like"
+                            data-id="{{ question.id }}"
+                            data-type="answer"
+                            data-do="like"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="答案对人有帮助，有参考价值">
+                        <span class="sr-only">答案对人有帮助，有参考价值</span>
+                    </button>
+                    <span class="count">{{ answer.vote_num }}</span>
+                    <button type="button"
+                            class="hate"
+                            data-id="{{ question.id }}"
+                            data-type="answer"
+                            data-do="hate"
+                            data-toggle="tooltip"
+                            data-placement="bottom"
+                            title="答案没帮助，是错误的答案，答非所问">
+                        <span class="sr-only">答案没帮助，是错误的答案，答非所问</span>
+                    </button>
+                </div>
+                {#                <div class="accepted-flag">采纳</div>#}
             </div>
 
+            <div class="post-offset ">
+                <a class="" href="/u/suninformation">
+                    <img class="avatar-24"
+                         src=""
+                         alt=""/>
+                </a>
+                <strong><a href="/u/{{ answer.author_id }}" class="mr5">{{ answer.answerer.username }}</a></strong>
+                <span class="ml10 text-muted">{{ answer.create_time }} 回答</span>
+                <div class="answer fmt mt10">
+                    {{ answer.body |safe }}
+                </div>
 
-            <div class="post-opt">
-                <ul class="list-inline mb0">
-
-                    <li><a href="/q/1010000002520634/a-1020000002531131">链接</a></li>
-
-                    <li><a href="javascript:void(0);" class="comments" data-id="1020000002531131"
-                           data-target="#comment-1020000002531131">
-                        评论</a></li>
-
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle"
-                           data-toggle="dropdown">更多<b
-                                class="caret"></b></a>
-                        <ul class="dropdown-menu dropdown-menu-left">
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="widget-comments hidden" id="comment-1020000002531131"
-                 data-id="1020000002531131">
-                <div class="widget-comments__form row">
-
-                    <div class="col-md-12">
-                        请先 <a class="commentLogin" href="javascript:void(0);">登录</a> 后评论
-                    </div>
-
-                </div><!-- /.widget-comments__form -->
+                {#            <div class="post-opt">#}
+                {#                <ul class="list-inline mb0">#}
+                {#                    <li><a href="/q/1010000002520634/a-1020000002531131">链接</a></li>#}
+                {#                    <li><a href="javascript:void(0);" class="comments" data-id="1020000002531131"#}
+                {#                           data-target="#comment-1020000002531131">#}
+                {#                        评论</a></li>#}
+                {#                    <li class="dropdown">#}
+                {#                        <a href="javascript:void(0);" class="dropdown-toggle"#}
+                {#                           data-toggle="dropdown">更多<b#}
+                {#                                class="caret"></b></a>#}
+                {#                        <ul class="dropdown-menu dropdown-menu-left">#}
+                {#                        </ul>#}
+                {#                    </li>#}
+                {#                </ul>#}
+                {#            </div>#}
+                {##}
+                {#            <div class="widget-comments hidden" id="comment-1020000002531131"#}
+                {#                 data-id="1020000002531131">#}
+                {#                <div class="widget-comments__form row">#}
+                {##}
+                {#                    <div class="col-md-12">#}
+                {#                        请先 <a class="commentLogin" href="javascript:void(0);">登录</a> 后评论#}
+                {#                                </div>#}
+                {#            </div><!-- /.widget-comments__form -->#}
             </div><!-- /.widget-comments -->
-
-
-        </div>
-    </article><!-- /article -->
-
-
-    <article
-            class="clearfix widget-answers__item"
-            id="a-1020000004353594">
-        <div class="post-col">
-            <div class="widget-vote">
-                <button type="button"
-                        class="like"
-                        data-id="1020000004353594"
-                        data-type="answer"
-                        data-do="like"
-                        data-toggle="tooltip"
-                        data-placement="top"
-                        title="答案对人有帮助，有参考价值">
-                    <span class="sr-only">答案对人有帮助，有参考价值</span>
-                </button>
-                <span class="count">0</span>
-                <button type="button"
-                        class="hate"
-                        data-id="1020000004353594"
-                        data-type="answer"
-                        data-do="hate"
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="答案没帮助，是错误的答案，答非所问">
-                    <span class="sr-only">答案没帮助，是错误的答案，答非所问</span>
-                </button>
-
-            </div>
-        </div>
-
-        <div class="post-offset ">
-            <a class="" href="/u/pader">
-                <img class="avatar-24" src="/static/images/user-64.png" alt=""/>
-            </a>
-            <strong><a href="/u/pader" class="mr5">pader</a> 0
-            </strong>
-
-        <span class="ml10 text-muted">
-            3 天前 回答
-            &middot; <a href="/q/1010000002520634/a-1020000004353594/revision">3 天前 更新</a>
-                    </span>
-
-            <div class="answer fmt mt10">
-
-                <p>我今天也碰到了这个问题，各种参数与签名均一致，但就是报签名错误。</p>
-                <p>最后你猜怎么着，最后居然发现是因为页面中有一个嵌套了腾讯视频的 iframe ，因为 js 对 iframe 大小进行调整时改变了 src 值导致 iframe
-                    上一个请求被取消并再次加载，然后就导致微信 js 接口报 invalid signature 的错误了。</p>
-                <p>最后去掉了 iframe 自带的 src 属性，等 js 调整好大小后一次性加载，就解决了。</p>
-                <p>奇葩吧，一个 iframe 里嵌套的视频，看上去毫不相关的东西居然影响了微信的 js 接口的签名验证。</p>
-
-            </div>
-
-
-            <div class="post-opt">
-                <ul class="list-inline mb0">
-
-                    <li><a href="/q/1010000002520634/a-1020000004353594">链接</a></li>
-
-                    <li><a href="javascript:void(0);" class="comments" data-id="1020000004353594"
-                           data-target="#comment-1020000004353594">
-                        评论</a></li>
-
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle"
-                           data-toggle="dropdown">更多<b
-                                class="caret"></b></a>
-                        <ul class="dropdown-menu dropdown-menu-left">
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="widget-comments hidden" id="comment-1020000004353594"
-                 data-id="1020000004353594">
-                <div class="widget-comments__form row">
-
-                    <div class="col-md-12">
-                        请先 <a class="commentLogin" href="javascript:void(0);">登录</a> 后评论
-                    </div>
-
-                </div><!-- /.widget-comments__form -->
-            </div><!-- /.widget-comments -->
-
-
-        </div>
-    </article><!-- /article -->
-
-
+        </article>
+    {% endfor %}
     <div class="text-center">
-
     </div>
 </div><!-- /.widget-answers -->

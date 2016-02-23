@@ -11,7 +11,7 @@ class LoginForm(Form):
     email = StringField(u'邮箱', validators=[DataRequired(), Length(1, 64),
                                            Email()], description=u'hello@xxx.com')
     password = PasswordField(u'密码', validators=[DataRequired()], description=u'密码')
-    remember_me = BooleanField(u'记住登录状态')
+    remember_me = BooleanField(u'记住登录状态', default=True)
     submit = SubmitField(u'登录')
 
 

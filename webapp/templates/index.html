@@ -7,8 +7,8 @@
 {% block page_content %}
     <div class="col-xs-12 col-md-9 main">
         <p class="main-title hidden-xs">
-            {% if session.get('user_id') %}
-                今天，你在开发时遇到了什么问题呢？{{ session.get('user_id') }}
+            {{ current_user.username }}{% if current_user %}
+                今天，你在开发时遇到了什么问题呢？
                 <a id="goAsk" href="{{ url_for('.ask') }}" class="btn btn-primary">我要提问</a>
             {% endif %}
         </p>

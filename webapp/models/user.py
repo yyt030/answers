@@ -8,6 +8,7 @@ from flask import current_app
 from flask.ext.login import UserMixin, AnonymousUserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from .. import db
+from .. import login_manager
 
 
 class Permission:
@@ -31,6 +32,7 @@ class User(UserMixin, db.Model):
     about_me = db.Column(db.Text())
     member_since = db.Column(db.DateTime(), default=datetime.utcnow)
     last_seen = db.Column(db.DateTime(), default=datetime.utcnow)
+    active = db.Column(db.Boolean, default=True)
 
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
@@ -63,6 +65,9 @@ class User(UserMixin, db.Model):
     def is_administrator(self):
         return self.can(Permission.ADMINISTER)
 
+    def is_active(self):
+        return self.active
+
     @staticmethod
     def generate_fake(count=10):
         from random import seed
@@ -86,11 +91,12 @@ class AnonymousUser(AnonymousUserMixin):
         return False
 
 
-def load_user(user_id):
+@login_manager.user_loader
+def _load_user(user_id):
     return User.query.get(int(user_id))
 
 
-# login_manager.anonymous_user = AnonymousUser
+login_manager.anonymous_user = AnonymousUser
 
 
 class Role(db.Model):

@@ -3,6 +3,9 @@
 __author__ = 'yueyt'
 
 from flask import Blueprint, render_template, redirect, url_for, request, current_app
+from flask.ext.login import current_user
+from .. import db
+from ..forms.question import QuestionForm
 from ..forms.user import LoginForm, RegisterForm
 from ..models.answer import Answer
 from ..models.question import Question, Tag
@@ -66,13 +69,26 @@ def questions(act=None):
 
     # tags
     tags = Tag.query.order_by(Tag.create_time.desc()).limit(15)
-
-    print '>>>'
-
     return render_template('index.html', login_form=login_form, register_form=register_form,
                            pagination=pagination, questions=questions, tags=tags, act=act)
 
 
-@bp.route('/ask')
+@bp.route('/ask', methods=['GET', 'POST'])
 def ask():
-    return redirect(url_for('.index'))
+    login_form = LoginForm()
+    register_form = RegisterForm()
+    question_form = QuestionForm()
+
+    if question_form.validate_on_submit():
+        question = Question(title=question_form.title.data, body='asdf', author_id=current_user.id)
+        tags = question_form.tags.data
+        # for tag in tags:
+        #     t = Tag(name=tag)
+        #     db.session.add(t)
+
+        db.session.add(question)
+        db.session.commit()
+        return redirect(url_for('site.index'))
+
+    return render_template('ask.html', login_form=login_form, register_form=register_form,
+                           question_form=question_form)

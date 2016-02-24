@@ -3,18 +3,20 @@
 
 {% block content %}
     <div class="wrap publish">
+        <p></p>
         <div class="container">
             <form id="question" method="POST" role="form">
                 {{ question_form.csrf_token }}
                 {{ form_field(question_form.title,required='required') }}
                 {{ form_field(question_form.tags,required='required') }}
                 {% include 'include/_editor.html' %}
+                <p></p>
                 {{ form_field(question_form.submit) }}
             </form>
         </div>
         <!-- /.container -->
     </div>
-{% endblock content %}
+{% endblock %}
 
 {% block page_js %}
     {{ super() }}

@@ -17,7 +17,7 @@
     <script src="{{ url_for('static',filename='js/html5shiv.js') }}"></script>
     <script src="{{ url_for('static',filename='js/respond.js') }}"></script>
     <![endif]-->
-    <script src="{{ url_for('static',filename='js/debug.js') }}"></script>
+    {#    <script src="{{ url_for('static',filename='js/debug.js') }}"></script>#}
 
     {{ moment.include_jquery(local_js='/static/lib/bootstrap-wysiwyg/js/jquery-1.9.0.min.js') }}
     {{ moment.include_moment(local_js=url_for('static',filename='js/moment-with-locales.min.js')) }}

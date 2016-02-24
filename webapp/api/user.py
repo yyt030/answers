@@ -82,7 +82,7 @@ def register():
                 rsp_json['status'] = 0
                 rsp_json['message'] = ''
                 return jsonify(rsp_json)
-        return render_template('_login.html', login_form=login_form, register_form=register_form)
+        return render_template('user/login.html', login_form=login_form, register_form=register_form)
     else:
         # html page submit
         if register_form.validate_on_submit():

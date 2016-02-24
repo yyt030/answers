@@ -39,7 +39,7 @@ def login():
             else:
                 rsp_json['data'] = ['form', {'password': u'用户名或密码错误'}]
                 return jsonify(rsp_json)
-        return render_template('_login.html', login_form=login_form, register_form=register_form)
+        return render_template('user/login.html', login_form=login_form, register_form=register_form)
     else:
         # html page submit
         if login_form.validate_on_submit():

@@ -18,9 +18,9 @@ def inject_permissions():
     return dict(Permission=Permission)
 
 
-@bp.route('/', methods=['GET', 'POST'])
+@bp.route('/', methods=['GET'])
 def index():
-    return redirect(url_for('.questions'))
+    return redirect(url_for('.questions', act='newest'))
 
 
 @bp.route('/search', methods=['GET'])
@@ -45,9 +45,8 @@ def tour():
     return redirect(url_for('.index'))
 
 
-@bp.route('/questions', methods=['GET', 'POST'])
-@bp.route('/questions/<string:act>', methods=['GET', 'POST'])
-def questions(act=None):
+@bp.route('/questions/<string:act>')
+def questions(act='newest'):
     """
     最新的
     热门的
@@ -65,7 +64,7 @@ def questions(act=None):
         from sqlalchemy import exists
         query = query.filter(~exists().where(Question.id == Answer.question_id))
         query = query.order_by(Question.create_time.desc())
-    else:
+    elif act == 'newest':
         query = query.order_by(Question.create_time.desc())
 
     pagination = query.paginate(page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
@@ -74,8 +73,9 @@ def questions(act=None):
 
     # tags
     tags = Tag.query.order_by(Tag.create_time.desc()).limit(15)
+
     return render_template('index.html', login_form=login_form, register_form=register_form,
-                           pagination=pagination, questions=questions, tags=tags, act=act)
+                           pagination=pagination, questions=questions, tags=tags, act=act, page=page)
 
 
 @bp.route('/ask', methods=['GET', 'POST'])

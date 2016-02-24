@@ -40,21 +40,13 @@
                                 {{ question.body |safe }}
                             </div>
                             <ul class="taglist--inline mb20">
-                                <li class="tagPopup"><a class="tag" href="/t/java" data-toggle="popover"
-                                                        data-placement="top" data-original-title="java"
-                                                        data-id="1040000000089449"
-                                                        data-img="http://sfault-avatar.b0.upaiyun.com/512/342/51234253-1040000000089449_medium40">java</a>
-                                </li>
-                                <li class="tagPopup"><a class="tag" href="/t/javascript" data-toggle="popover"
-                                                        data-placement="top" data-original-title="javascript"
-                                                        data-id="1040000000089436"
-                                                        data-img="http://sfault-avatar.b0.upaiyun.com/195/823/1958237468-1040000000089436_medium40">javascript</a>
-                                </li>
-                                <li class="tagPopup"><a class="tag" href="/t/html" data-toggle="popover"
-                                                        data-placement="top" data-original-title="html"
-                                                        data-id="1040000000089571"
-                                                        data-img="http://sfault-avatar.b0.upaiyun.com/418/365/4183652815-1040000000089571_medium40">html</a>
-                                </li>
+                                {% for  tag in question.tags %}
+                                    <li class="tagPopup"><a class="tag" href="/t/{{ tag.id }}" data-toggle="popover"
+                                                            data-placement="top" data-original-title="java"
+                                                            data-id="{{ tag.id }}"
+                                                            data-img="">{{ tag.name }}</a>
+                                    </li>
+                                {% endfor %}
                             </ul>
 
 

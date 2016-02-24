@@ -22,6 +22,7 @@
                         <a href="/u/{{ question.asker.id }}">{{ question.asker.username }}</a>
                         <span class="split"></span>
                         <a href="/q/{{ question.id }}">4 分钟前回答</a>
+                        {{ request.url_base, request.url }}
                     </li>
                 </ul>
                 <h2 class="title"><a href="/q/{{ question.id }}">{{ question.title }}</a>
@@ -43,7 +44,7 @@
 <div class="text-center">
     {% if pagination %}
         <div class="pagination">
-            {{ pagination_widget(pagination, endpoint='.questions') }}
+            {{ pagination_widget(pagination, endpoint='.questions',act=act) }}
         </div>
     {% endif %}
 </div>

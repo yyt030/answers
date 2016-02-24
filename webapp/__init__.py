@@ -30,7 +30,6 @@ def create_app(config_name):
     from .api import user as user_api
 
     app.register_blueprint(question.bp, url_prefix='/q')
-    # app.register_blueprint(user.bp, url_prefix='/user')
     app.register_blueprint(user_api.bp, url_prefix='/api')
     app.register_blueprint(site.bp, url_prefix='')
 

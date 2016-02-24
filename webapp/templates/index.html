@@ -13,12 +13,9 @@
             {% endif %}
         </p>
         <ul class="nav nav-tabs nav-tabs-zen mb10">
-            <li {% if not act %}class="active"{% endif %}><a href="/questions">最新的</a></li>
-            <li {% if act == 'hottest' %}class="active"{% endif %}><a href="/questions/hottest">热门的</a>
-            </li>
-            <li {% if act == 'unanswered' %}class="active"{% endif %}><a
-                    href="/questions/unanswered">未回答</a>
-            </li>
+            <li {% if not act or act == 'newest' %}class="active"{% endif %}><a href="/questions/newest">最新的</a></li>
+            <li {% if act == 'hottest' %}class="active"{% endif %}><a href="/questions/hottest">热门的</a></li>
+            <li {% if act == 'unanswered' %}class="active"{% endif %}><a href="/questions/unanswered">未回答</a></li>
         </ul>
         {% include 'include/_question.html' %}
     </div> <!-- /.main -->
@@ -87,4 +84,6 @@
     </script>
 
     <script crossorigin src="{{ url_for('static',filename='js/index.js') }}"></script>
+    {{ moment.include_moment(local_js='') }}
+    {{ moment.locale('zh_CN') }}
 {% endblock %}

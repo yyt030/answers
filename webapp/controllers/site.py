@@ -7,8 +7,7 @@ from flask.ext.login import current_user
 from .. import db
 from ..forms.question import QuestionForm
 from ..forms.user import LoginForm, RegisterForm
-from ..models.answer import Answer
-from ..models.question import Question, Tag
+from ..models.question import Question, Tag, Answer
 from ..models.user import Permission
 
 bp = Blueprint('site', __name__)
@@ -88,7 +87,7 @@ def ask():
     if question_form.validate_on_submit():
         question = Question(title=question_form.title.data, body='asdf', author_id=current_user.id)
         tags = Tag(name=question_form.tags.data)
-        question.tags.add(tags)
+        question.tags.append(tags)
         # for tag in tags:
         #     t = Tag(name=tag)
         #     db.session.add(t)

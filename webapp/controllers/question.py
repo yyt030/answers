@@ -5,9 +5,7 @@ __author__ = 'yueyt'
 from flask import Blueprint, render_template, request
 from flask.ext.login import current_user
 from ..forms.user import LoginForm, RegisterForm
-from ..models.question import Question
-from ..models.answer import Answer
-from ..utils.permissions import require_user
+from ..models.question import Question, Answer
 
 from .. import db
 

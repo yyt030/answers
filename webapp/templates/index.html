@@ -17,7 +17,7 @@
             <li {% if act == 'hottest' %}class="active"{% endif %}><a href="/questions/hottest">热门的</a></li>
             <li {% if act == 'unanswered' %}class="active"{% endif %}><a href="/questions/unanswered">未回答</a></li>
         </ul>
-        {% include 'include/_question.html' %}
+        {% include 'include/_questions.html' %}
     </div> <!-- /.main -->
     <div class="col-xs-12 col-md-3 side mt30">
         <div class="side-ask alert alert-warning">
@@ -82,8 +82,5 @@
             table: {"ban_post": [1, "\u4f60\u5df2\u7ecf\u88ab\u7981\u8a00, \u65e0\u6cd5\u8fdb\u884c\u6b64\u64cd\u4f5c, \u5982\u6709\u7591\u4e49\u8bf7\u63d0\u4ea4\u7533\u8bc9, \u6216\u8005\u53d1\u90ae\u4ef6\u5230pr@segmentfault.com"]}
         };
     </script>
-
     <script crossorigin src="{{ url_for('static',filename='js/index.js') }}"></script>
-    {{ moment.include_moment(local_js='') }}
-    {{ moment.locale('zh_CN') }}
 {% endblock %}

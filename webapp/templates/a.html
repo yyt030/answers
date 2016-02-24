@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>aaaa</title>
+
+</head>
+<body>
+<p> AAA
+    {{ moment(current_timestamp).fromNow() }}
+    BBB
+</p>
+
+{{ moment.include_jquery(local_js='/static/js/jquery-2.1.0.min.js') }}
+{{ moment.include_moment(local_js=url_for('static',filename='js/moment-with-locales.min.js')) }}
+
+</body>
+</html>

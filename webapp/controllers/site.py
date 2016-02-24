@@ -75,7 +75,8 @@ def questions(act='newest'):
     tags = Tag.query.order_by(Tag.create_time.desc()).limit(15)
 
     return render_template('index.html', login_form=login_form, register_form=register_form,
-                           pagination=pagination, questions=questions, tags=tags, act=act, page=page)
+                           pagination=pagination, questions=questions,
+                           tags=tags, act=act, page=page)
 
 
 @bp.route('/ask', methods=['GET', 'POST'])

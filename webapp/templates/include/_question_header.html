@@ -14,8 +14,8 @@
                     <a href="/u/{{ question.author_id }}" class="mr5">
                         <strong>{{ question.asker.username }}</strong>
                     </a>
-                    <strong class="text-black mr10">110</strong>
-                    {{ question.create_time }}提问
+                    <strong class="text-black mr10"></strong>
+                    {{ moment(question.create_time).fromNow(refresh=True) }}提问
                 </div>
             </div>
             <div class="col-md-3">

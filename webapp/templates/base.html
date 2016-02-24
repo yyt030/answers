@@ -18,6 +18,10 @@
     <script src="{{ url_for('static',filename='js/respond.js') }}"></script>
     <![endif]-->
     <script src="{{ url_for('static',filename='js/debug.js') }}"></script>
+
+    {{ moment.include_jquery(local_js='/static/lib/bootstrap-wysiwyg/js/jquery-1.9.0.min.js') }}
+    {{ moment.include_moment(local_js=url_for('static',filename='js/moment-with-locales.min.js')) }}
+    {{ moment.lang('zh_CN') }}
 </head>
 
 <body class="qa-index">
@@ -48,6 +52,7 @@
 <div id="fixedTools" class="hidden-xs hidden-sm">
     <a id="backtop" class="hidden border-bottom" href="#">回顶部</a>
 </div>
+
 
 {% block page_js -%}
     <script crossorigin src="{{ url_for('static',filename='js/assets.js') }}"></script>

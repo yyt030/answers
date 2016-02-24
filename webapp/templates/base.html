@@ -28,7 +28,7 @@
     </div>
     <![endif]-->
 {% block header_nav -%}
-    {% include '_header_nav.html' %}
+    {% include 'include/_header_nav.html' %}
 {%- endblock header_nav %}
 
 {% block content -%}
@@ -41,9 +41,9 @@
     </div>
 {%- endblock content %}
 
-{% include '_login.html' %}
+{% include 'include/_login.html' %}
 
-{% include '_footer_nav.html' %}
+{% include 'include/_footer_nav.html' %}
 
 <div id="fixedTools" class="hidden-xs hidden-sm">
     <a id="backtop" class="hidden border-bottom" href="#">回顶部</a>

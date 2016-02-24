@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="wrap">
-        {% include '_topheader.html' %}
+        {% include 'include/_topheader.html' %}
         <div class="container mt30">
             <div class="row">
                 <div class="col-xs-12 col-md-9 main">
@@ -93,11 +93,11 @@
                         <!-- end .post-offset -->
                     </article>
 
-                    {% include '_answers.html' %}
+                    {% include 'include/_answers.html' %}
 
                     {% if current_user.can(Permission.WRITE_ARTICLES) %}
                         <h4>撰写答案</h4>
-                        {% include '_editor.html' %}
+                        {% include 'include/_editor.html' %}
                         <div id="answerSubmit" class="mt15 clearfix">
                             <div class="pull-right">
                                 <button type="submit" id="answerIt" data-id="1010000004427031"
@@ -110,7 +110,7 @@
                     {% endif %}
                 </div>
                 <!-- /.main -->
-                {% include '_similar_nav.html' %}
+                {% include 'include/_similar_nav.html' %}
                 <!-- /.side -->
             </div>
         </div>

@@ -3,7 +3,7 @@
 __author__ = 'yueyt'
 
 from flask import Blueprint, render_template, redirect, url_for, request, current_app
-from flask.ext.login import current_user
+from flask.ext.login import current_user,login_required
 from .. import db
 from ..forms.question import QuestionForm
 from ..forms.user import LoginForm, RegisterForm
@@ -80,6 +80,7 @@ def questions(act='newest'):
 
 
 @bp.route('/ask', methods=['GET', 'POST'])
+@login_required
 def ask():
     login_form = LoginForm()
     register_form = RegisterForm()

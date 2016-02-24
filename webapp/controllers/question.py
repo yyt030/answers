@@ -3,7 +3,7 @@
 __author__ = 'yueyt'
 
 from flask import Blueprint, render_template, request
-from flask.ext.login import current_user
+from flask.ext.login import current_user, login_required
 from ..forms.user import LoginForm, RegisterForm
 from ..models.question import Question, Answer
 
@@ -24,7 +24,7 @@ def questions(question_id):
 
 
 @bp.route('/<int:question_id>/answers/add', methods=['GET', 'POST'])
-# @require_user
+@login_required
 def answers_add(question_id):
     """问题详情"""
     question = Question.query.get_or_404(question_id)

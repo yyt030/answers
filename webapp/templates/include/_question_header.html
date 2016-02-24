@@ -15,7 +15,7 @@
                         <strong>{{ question.asker.username }}</strong>
                     </a>
                     <strong class="text-black mr10"></strong>
-                    {{ moment(question.create_time).fromNow(refresh=True) }}提问
+                    {{ moment(question.create_time,local=True).fromNow(refresh=True) }}提问
                 </div>
             </div>
             <div class="col-md-3">

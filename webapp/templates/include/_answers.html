@@ -46,7 +46,7 @@
                          alt=""/>
                 </a>
                 <strong><a href="/u/{{ answer.author_id }}" class="mr5">{{ answer.answerer.username }}</a></strong>
-                <span class="ml10 text-muted">{{ moment(answer.create_time).fromNow(refresh=True) }} 回答</span>
+                <span class="ml10 text-muted">{{ moment(answer.create_time,local=True).fromNow(refresh=True) }} 回答</span>
                 <div class="answer fmt mt10">
                     {{ answer.body |safe }}
                 </div>

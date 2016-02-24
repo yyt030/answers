@@ -2,7 +2,7 @@
 # coding: utf8
 __author__ = 'yueyt'
 
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for
 from flask.ext.login import current_user, login_required
 from ..forms.user import LoginForm, RegisterForm
 from ..models.question import Question, Answer
@@ -12,9 +12,12 @@ from .. import db
 bp = Blueprint('question', __name__)
 
 
+@bp.route('/')
 @bp.route('/<int:question_id>')
-def questions(question_id):
+def questions(question_id=None):
     """问题详情"""
+    if not question_id:
+        return redirect(url_for('site.index'))
     question = Question.query.get_or_404(question_id)
     login_form = LoginForm()
     register_form = RegisterForm()

@@ -3,7 +3,7 @@
 __author__ = 'yueyt'
 
 from flask import Blueprint, render_template, redirect, url_for, request, current_app
-from flask.ext.login import current_user,login_required
+from flask.ext.login import current_user, login_required
 from .. import db
 from ..forms.question import QuestionForm
 from ..forms.user import LoginForm, RegisterForm
@@ -18,7 +18,7 @@ def inject_permissions():
     return dict(Permission=Permission)
 
 
-@bp.route('/', methods=['GET'])
+@bp.route('/')
 def index():
     return redirect(url_for('.questions', act='newest'))
 
@@ -45,6 +45,7 @@ def tour():
     return redirect(url_for('.index'))
 
 
+@bp.route('/questions')
 @bp.route('/questions/<string:act>')
 def questions(act='newest'):
     """

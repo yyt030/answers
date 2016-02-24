@@ -83,7 +83,7 @@
         };
     </script>
 
-    {#    <script crossorigin src="{{ url_for('static',filename='js/index.js') }}"></script>#}
+    <script crossorigin src="{{ url_for('static',filename='js/index.js') }}"></script>
     {{ moment.include_moment(local_js='') }}
     {{ moment.locale('zh_CN') }}
 {% endblock %}

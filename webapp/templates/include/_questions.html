@@ -21,7 +21,7 @@
                     <li>
                         <a href="/u/{{ question.asker.id }}">{{ question.asker.username }}</a>
                         <span class="split"></span>
-                        <a href="/q/{{ question.id }}">{{ moment(question.create_time,local=True).fromNow(refresh=True) }}回答 </a>
+                        <a href="/q/{{ question.id }}">{{ moment(question.create_time,local=True).fromNow(refresh=True) }}提问</a>
                     </li>
                 </ul>
                 <h2 class="title"><a href="/q/{{ question.id }}">{{ question.title }}</a>

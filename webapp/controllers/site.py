@@ -86,9 +86,10 @@ def ask():
     login_form = LoginForm()
     register_form = RegisterForm()
     question_form = QuestionForm()
-
-    if question_form.validate_on_submit():
-        question = Question(title=question_form.title.data, body='asdf', author_id=current_user.id)
+    
+    if request.method == 'POST' and question_form.validate_on_submit():
+        print '>>>2'
+        question = Question(title=question_form.title.data, body=request.form.get('body'), author_id=current_user.id)
         tags = Tag(name=question_form.tags.data)
         question.tags.append(tags)
         # for tag in tags:

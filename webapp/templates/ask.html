@@ -5,14 +5,12 @@
     <div class="wrap publish">
         <p></p>
         <div class="container">
-            <form id="question" method="POST" role="form">
-                {{ question_form.csrf_token }}
-                {{ form_field(question_form.title,required='required') }}
-                {{ form_field(question_form.tags,required='required') }}
-                {% include 'include/_editor.html' %}
-                <p></p>
-                {{ form_field(question_form.submit) }}
-            </form>
+            {{ question_form.csrf_token }}
+            {{ form_field(question_form.title,required='required') }}
+            {{ form_field(question_form.tags,required='required') }}
+            {% include 'include/_editor.html' %}
+            <p></p>
+            {{ form_field(question_form.submit) }}
         </div>
         <!-- /.container -->
     </div>
@@ -30,14 +28,17 @@
 
     <script>
         $(document).ready(function () {
-            $("#answerIt").click(function () {
-                $.post($("#questionTitle").attr("data-id") + "/answers/add",
+            $("#submit").click(function () {
+                $.post("/ask",
                         {
-                            answer_data: $("#editor").cleanHtml()
+                            csrf_token: $('#csrf_token').val(),
+                            title: $('#title').val(),
+                            tags: $('#tags').val(),
+                            body: $("#editor").cleanHtml()
                         },
                         function (data, status) {
                             alert("发布成功" + "\n状态：" + status);
-                            window.location.reload(true);
+                            window.location = '/';
                         });
             });
         })

@@ -2,6 +2,7 @@
 # coding: utf8
 __author__ = 'yueyt'
 
+import re
 from flask import Blueprint, render_template, redirect, url_for, request, current_app
 from flask.ext.login import current_user, login_required
 from .. import db
@@ -20,8 +21,7 @@ def inject_permissions():
 
 @bp.route('/')
 def index():
-    # return redirect(url_for('.questions', act='newest'))
-    return render_template('a.html')
+    return redirect(url_for('.questions', act='newest'))
 
 
 @bp.route('/search', methods=['GET'])
@@ -74,7 +74,6 @@ def questions(act='newest'):
     questions = pagination.items
 
     # tags
-    from sqlalchemy import func
 
     tags = db.session.query(Tag).join(Tag, Question.tags) \
         .group_by(Tag.name).order_by(Question.view_num.desc()).limit(15)
@@ -93,11 +92,13 @@ def ask():
 
     if request.method == 'POST' and question_form.validate_on_submit():
         question = Question(title=question_form.title.data, body=request.form.get('body'), author_id=current_user.id)
-        tags = Tag(name=question_form.tags.data)
-        question.tags.append(tags)
-        # for tag in tags:
-        #     t = Tag(name=tag)
-        #     db.session.add(t)
+
+        tag_list = re.split(r'[,;]', question_form.tags.data)
+        for t in tag_list:
+            tag = Tag.query.filter(Tag.name == t).first()
+            if not tag:
+                tag = Tag(name=t)
+            question.tags.append(tag)
 
         db.session.add(question)
         db.session.commit()

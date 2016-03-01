@@ -20,7 +20,8 @@ def inject_permissions():
 
 @bp.route('/')
 def index():
-    return redirect(url_for('.questions', act='newest'))
+    # return redirect(url_for('.questions', act='newest'))
+    return render_template('a.html')
 
 
 @bp.route('/search', methods=['GET'])
@@ -73,7 +74,10 @@ def questions(act='newest'):
     questions = pagination.items
 
     # tags
-    tags = Tag.query.order_by(Tag.create_time.desc()).limit(15)
+    from sqlalchemy import func
+
+    tags = db.session.query(Tag).join(Tag, Question.tags) \
+        .group_by(Tag.name).order_by(Question.view_num.desc()).limit(15)
 
     return render_template('index.html', login_form=login_form, register_form=register_form,
                            pagination=pagination, questions=questions,
@@ -86,9 +90,8 @@ def ask():
     login_form = LoginForm()
     register_form = RegisterForm()
     question_form = QuestionForm()
-    
+
     if request.method == 'POST' and question_form.validate_on_submit():
-        print '>>>2'
         question = Question(title=question_form.title.data, body=request.form.get('body'), author_id=current_user.id)
         tags = Tag(name=question_form.tags.data)
         question.tags.append(tags)

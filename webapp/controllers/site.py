@@ -95,6 +95,7 @@ def ask():
 
         tag_list = re.split(r'[,;]', question_form.tags.data)
         for t in tag_list:
+            t = t.replace(r' ', '')
             tag = Tag.query.filter(Tag.name == t).first()
             if not tag:
                 tag = Tag(name=t)

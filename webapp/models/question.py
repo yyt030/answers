@@ -4,8 +4,8 @@ __author__ = 'yueyt'
 
 from datetime import datetime
 
-from .. import db
 from .user import User
+from .. import db
 
 
 class Question(db.Model):
@@ -56,7 +56,7 @@ class Tag(db.Model):
 
     @staticmethod
     def generate_fake(count=100):
-        from random import seed, randint
+        from random import seed
         import forgery_py
 
         seed()

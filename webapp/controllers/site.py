@@ -5,6 +5,7 @@ __author__ = 'yueyt'
 import re
 from flask import Blueprint, render_template, redirect, url_for, request, current_app
 from flask.ext.login import current_user, login_required
+from sqlalchemy import func
 from .. import db
 from ..forms.question import QuestionForm
 from ..forms.user import LoginForm, RegisterForm
@@ -73,14 +74,17 @@ def questions(act='newest'):
                                 error_out=False)
     questions = pagination.items
 
-    # tags
-
+    # 热议标签
     tags = db.session.query(Tag).join(Tag, Question.tags) \
-        .group_by(Tag.name).order_by(Question.view_num.desc()).limit(15)
+        .group_by(Tag.name).order_by(Question.view_num.desc()).limit(10)
+    # 最近热门
+    last_hot_questions = db.session.query(Question).join(Answer) \
+        .group_by(Question.title).order_by(Answer.create_time.desc(),
+                                           func.count(Answer.id).desc()).limit(10)
 
     return render_template('index.html', login_form=login_form, register_form=register_form,
                            pagination=pagination, questions=questions,
-                           tags=tags, act=act, page=page)
+                           tags=tags, act=act, page=page, last_hot_questions=last_hot_questions)
 
 
 @bp.route('/ask', methods=['GET', 'POST'])
@@ -89,10 +93,8 @@ def ask():
     login_form = LoginForm()
     register_form = RegisterForm()
     question_form = QuestionForm()
-
     if request.method == 'POST' and question_form.validate_on_submit():
         question = Question(title=question_form.title.data, body=request.form.get('body'), author_id=current_user.id)
-
         tag_list = re.split(r'[,;]', question_form.tags.data)
         for t in tag_list:
             t = t.replace(r' ', '')

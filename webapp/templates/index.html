@@ -8,7 +8,7 @@
     <div class="col-xs-12 col-md-9 main">
         <p class="main-title hidden-xs">
             {% if current_user.can(Permission.WRITE_ARTICLES) %}
-                今天，你在开发时遇到了什么问题呢？
+                遇到问题，尽管提问？
                 <a id="goAsk1" href="{{ url_for('.ask') }}" class="btn btn-primary">我要提问</a>
             {% endif %}
         </p>
@@ -24,7 +24,7 @@
             <div class="side-system-notice">
                 <i class="fa fa-bullhorn pull-left"></i><a class="side-system-notice--title"
                                                            href="">
-                公告：开放的平台，知识的积累，技能的完善</a>
+                公告：answer版本v1.0上线</a>
             </div>
         </div>
         {% include 'include/_tags_nav.html' %}

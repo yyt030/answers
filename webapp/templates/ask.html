@@ -80,34 +80,20 @@
             window.prettyPrint && prettyPrint();
         });
 
+    </script>
+    <!-- 富文本编辑器 end -->
 
+    <script>
         $(document).ready(function ($) {
-            $("#question").submit(function (event) {
-                //event.preventDefault();
-
-                $.ajax({
-                    url: "/ask",
-                    data: $('#question').serialize() + '&body=' + $('#editor').cleanHtml(),
-                    type: "POST",
-                    dataType: "json",
-                    success: function (json) {
-                        $("<h1>").text(json.title).appendTo("body");
-                        $("<div class=\"content\">").html(json.html).appendTo("body");
-                    },
-                    error: function (xhr, status, errorThrown) {
-                        alert("Sorry, there was a problem!");
-                        console.log("Error: " + errorThrown);
-                        console.log("Status: " + status);
-                        console.dir(xhr);
-                    },
-                    complete: function (xhr, status) {
-                        alert("The request is complete!");
-                    }
-                });
+            $("#question").submit(function () {
+                var input = $("<input>")
+                        .attr("type", "hidden")
+                        .attr("name", "body").val($("#editor").cleanHtml());
+                $(this).append($(input));
+                return true;
             });
         })
     </script>
-    <!-- 富文本编辑器 end -->
 
 {% endblock %}
 

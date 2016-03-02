@@ -8,7 +8,7 @@ from wtforms.validators import DataRequired, InputRequired, Length, Email
 
 
 class QuestionForm(Form):
-    title = StringField(u'标题', validators=[InputRequired(), Length(10, 64)],
+    title = StringField(u'标题', validators=[InputRequired(), Length(1, 64)],
                         description=u'一句话说清问题，用问号结尾')
     tags = StringField(u'标签', validators=[InputRequired(), Length(10, 64)],
                        description=u'至少1个，最多5个，如：php 可使用逗号,分号;分隔')

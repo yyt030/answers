@@ -5,12 +5,14 @@
     <div class="wrap publish">
         <p></p>
         <div class="container">
-            {{ question_form.csrf_token }}
-            {{ form_field(question_form.title) }}
-            {{ form_field(question_form.tags,required='required') }}
-            {% include 'include/_editor.html' %}
-            <p></p>
-            {{ form_field(question_form.submit) }}
+            <form id="question" method="POST" role="form">
+                {{ question_form.csrf_token }}
+                {{ form_field(question_form.title,required='required') }}
+                {{ form_field(question_form.tags,required='required') }}
+                {% include 'include/_editor.html' %}
+                <p></p>
+                {{ form_field(question_form.submit) }}
+            </form>
         </div>
         <!-- /.container -->
     </div>
@@ -27,21 +29,6 @@
     <script src="/static/lib/bootstrap-wysiwyg/js/bootstrap-wysiwyg.js"></script>
 
     <script>
-        $(document).ready(function () {
-            $("#submit").click(function () {
-                $.post("/ask",
-                        {
-                            csrf_token: $('#csrf_token').val(),
-                            title: $('#title').val(),
-                            tags: $('#tags').val(),
-                            body: $("#editor").cleanHtml()
-                        },
-                        function (data, status) {
-                            alert("发布成功" + "\n状态：" + status);
-                            window.location = '/';
-                        });
-            });
-        })
         $(function () {
             function initToolbarBootstrapBindings() {
                 var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
@@ -92,6 +79,33 @@
             $('#editor').wysiwyg({fileUploadError: showErrorAlert});
             window.prettyPrint && prettyPrint();
         });
+
+
+        $(document).ready(function ($) {
+            $("#question").submit(function (event) {
+                //event.preventDefault();
+
+                $.ajax({
+                    url: "/ask",
+                    data: $('#question').serialize() + '&body=' + $('#editor').cleanHtml(),
+                    type: "POST",
+                    dataType: "json",
+                    success: function (json) {
+                        $("<h1>").text(json.title).appendTo("body");
+                        $("<div class=\"content\">").html(json.html).appendTo("body");
+                    },
+                    error: function (xhr, status, errorThrown) {
+                        alert("Sorry, there was a problem!");
+                        console.log("Error: " + errorThrown);
+                        console.log("Status: " + status);
+                        console.dir(xhr);
+                    },
+                    complete: function (xhr, status) {
+                        alert("The request is complete!");
+                    }
+                });
+            });
+        })
     </script>
     <!-- 富文本编辑器 end -->
 

@@ -6,7 +6,7 @@ import re
 from flask import Blueprint, render_template, redirect, url_for, request, current_app
 from flask.ext.login import current_user, login_required
 from sqlalchemy import func
-from .. import db
+from .. import db, cache
 from ..forms.question import QuestionForm
 from ..forms.user import LoginForm, RegisterForm
 from ..models.question import Question, Tag, Answer
@@ -71,6 +71,7 @@ def vote():
 
 @bp.route('/questions')
 @bp.route('/questions/<string:act>')
+@cache.cached()
 def questions(act='newest'):
     """
     最新的

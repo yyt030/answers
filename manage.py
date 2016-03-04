@@ -9,7 +9,7 @@ if os.path.exists('.env'):
         if len(var) == 2:
             os.environ[var[0]] = var[1]
 
-from webapp import create_app, db
+from webapp import create_app, db, cache
 from flask.ext.script import Manager
 from flask.ext.migrate import Migrate, MigrateCommand
 
@@ -23,8 +23,7 @@ manager.add_command('db', MigrateCommand)
 @manager.command
 def init_data():
     from webapp.models.user import Role, User
-    from webapp.models.question import Question, Tag
-    from webapp.models.answer import Answer
+    from webapp.models.question import Question, Tag, Answer
     # Role.insert_roles()
 
     User.generate_fake(100)
@@ -32,6 +31,12 @@ def init_data():
     Question.generate_fake(1000)
     Answer.generate_fake(100)
 
+
+@manager.command
+def clear_cache():
+    cache.init_app(app)
+    with app.app_context():
+        cache.clear()
 
 if __name__ == '__main__':
     manager.run()

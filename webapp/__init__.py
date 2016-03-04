@@ -6,10 +6,12 @@ from flask.ext.bootstrap import Bootstrap
 from flask.ext.login import LoginManager
 from flask.ext.moment import Moment
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.cache import Cache
 
 moment = Moment()
 db = SQLAlchemy()
 bootstrap = Bootstrap()
+cache = Cache(config={'CACHE_TYPE': 'simple'})
 
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
@@ -25,6 +27,7 @@ def create_app(config_name):
     bootstrap.init_app(app)
     moment.init_app(app)
     login_manager.init_app(app)
+    cache.init_app(app)
 
     from .controllers import question, site, user
     from .api import user as user_api

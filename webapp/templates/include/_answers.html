@@ -16,7 +16,7 @@
                 <div class="widget-vote">
                     <button type="button"
                             class="like"
-                            data-id="{{ question.id }}"
+                            data-id="{{ answer.id }}"
                             data-type="answer"
                             data-do="like"
                             data-toggle="tooltip"
@@ -24,10 +24,10 @@
                             title="答案对人有帮助，有参考价值">
                         <span class="sr-only">答案对人有帮助，有参考价值</span>
                     </button>
-                    <span class="count">{{ answer.vote_num }}</span>
+                    <span class="count" id="count">{{ answer.vote_num }}</span>
                     <button type="button"
                             class="hate"
-                            data-id="{{ question.id }}"
+                            data-id="{{ answer.id }}"
                             data-type="answer"
                             data-do="hate"
                             data-toggle="tooltip"

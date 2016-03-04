@@ -47,6 +47,28 @@ def tour():
     return redirect(url_for('.index'))
 
 
+@bp.route('/vote', methods=['POST'])
+def vote():
+    data_type = request.form.get('data_type', '')
+    data_id = request.form.get('data_id', '')
+    data_number = request.form.get('data_number', 0, type=int)
+    print '>>>', data_type, data_number, data_id
+
+    if data_type == 'question':
+        question = Question.query.get_or_404(data_id)
+        if question:
+            question.vote_num += data_number
+            db.session.add(question)
+            db.session.commit()
+    elif data_type == 'answer':
+        answer = Answer.query.get_or_404(data_id)
+        if answer:
+            answer.vote_num += data_number
+            db.session.add(answer)
+            db.session.commit()
+    return ''
+
+
 @bp.route('/questions')
 @bp.route('/questions/<string:act>')
 def questions(act='newest'):

@@ -22,6 +22,10 @@ def questions(question_id=None):
     login_form = LoginForm()
     register_form = RegisterForm()
 
+    question.view_num += 1
+    db.session.add(question)
+    db.session.commit()
+
     return render_template('question.html', question=question, login_form=login_form,
                            register_form=register_form)
 

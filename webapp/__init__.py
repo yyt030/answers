@@ -11,7 +11,7 @@ from flask.ext.cache import Cache
 moment = Moment()
 db = SQLAlchemy()
 bootstrap = Bootstrap()
-cache = Cache(config={'CACHE_TYPE': 'redis'})
+cache = Cache(config={'CACHE_TYPE': 'simple'})
 
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'

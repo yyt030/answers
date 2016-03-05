@@ -69,7 +69,6 @@ def vote():
 
 @bp.route('/questions')
 @bp.route('/questions/<string:act>')
-@cache.cached()
 def questions(act='newest'):
     """
     最新的

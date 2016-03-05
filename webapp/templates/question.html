@@ -181,20 +181,20 @@
                 var data_type = $(this).attr('data-type');//question & answer
                 var data_do = $(this).attr('data-do');//like & hate
 
-                var count = $('#count');
-                var old_number = parseInt(count.text());
+
                 var parent = $(this);
 
                 if (data_do == 'like') {
+                    var count = $(this).next();
+                    var old_number = parseInt(count.text());
                     data_number = 1;
-                    $('.like').append(data_number).fadeIn(2000);
                 } else {
                     data_number = -1;
-                    $('.like').append(data_number).fadeIn(2000);
+                    var count = $(this).prev();
+                    var old_number = parseInt(count.text());
                 }
 
                 var dataString = 'data_type=' + data_type + '&data_id=' + data_id + '&data_number=' + data_number;
-                count.text(old_number + data_number);
 
                 $.ajax({
                     type: "POST",
@@ -202,7 +202,7 @@
                     data: dataString,
                     cache: false,
                     success: function (html) {
-                        parent.html(html);
+                        count.text(old_number + (data_number));
                     }
                 });
                 return false;

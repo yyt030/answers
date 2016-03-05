@@ -14,7 +14,7 @@ bp = Blueprint('question', __name__)
 
 @bp.route('/')
 @bp.route('/<int:question_id>')
-@cache.cached()
+#@cache.cached()
 def questions(question_id=None):
     """问题详情"""
     if not question_id:

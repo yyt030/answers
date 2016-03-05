@@ -52,8 +52,6 @@ def vote():
     data_type = request.form.get('data_type', '')
     data_id = request.form.get('data_id', '')
     data_number = request.form.get('data_number', 0, type=int)
-    print '>>>', data_type, data_number, data_id
-
     if data_type == 'question':
         question = Question.query.get_or_404(data_id)
         if question:
@@ -85,7 +83,7 @@ def questions(act='newest'):
     page = request.args.get('page', 1, type=int)
 
     if act == 'hottest':
-        query = query.order_by(Question.view_num.desc())
+        query = query.order_by(Question.vote_num.desc(), Question.view_num.desc())
     elif act == 'unanswered':
         from sqlalchemy import exists
         query = query.filter(~exists().where(Question.id == Answer.question_id))

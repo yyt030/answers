@@ -2,68 +2,14 @@
     <div class="widget-box no-border">
         <h2 class="h4 widget-box__title">相似问题</h2>
         <ul class="widget-links list-unstyled">
-            <li class="widget-links__item"><a title="用JavaScript SDK 提示 请求报文格式错误。(400：token not specified)"
-                                              href="/q/1010000000537698">用JavaScript SDK 提示
-                请求报文格式错误。(400：token not specified)</a>
-                <small class="text-muted">
-                    2 回答
-                </small>
-            </li>
-            <li class="widget-links__item"><a title="运行高德地图时报一下错误？"
-                                              href="/q/1010000002909080">运行高德地图时报一下错误？</a>
-            </li>
-            <li class="widget-links__item"><a title="javascript  函数的参数是对象，动态生成错误"
-                                              href="/q/1010000002959956">javascript 函数的参数是对象，动态生成错误</a>
-                <small class="text-muted">
-                    1 回答
-                    | 已解决
-                </small>
-            </li>
-            <li class="widget-links__item"><a title="angular.js无法正常注入" href="/q/1010000000631847">angular.js无法正常注入</a>
-                <small class="text-muted">
-                    3 回答
-                    | 已解决
-                </small>
-            </li>
-            <li class="widget-links__item"><a title="请教一个Require.js 的问题，模块依赖没有处理好"
-                                              href="/q/1010000002596040">请教一个Require.js 的问题，模块依赖没有处理好</a>
-                <small class="text-muted">
-                    2 回答
-                    | 已解决
-                </small>
-            </li>
-            <li class="widget-links__item"><a title="java代码上传图片到七牛服务器失败"
-                                              href="/q/1010000000701542">java代码上传图片到七牛服务器失败</a>
-                <small class="text-muted">
-                    1 回答
-                    | 已解决
-                </small>
-            </li>
-            <li class="widget-links__item"><a title="sf2中 javascript是 标签" href="/q/1010000000319718">sf2中
-                javascript是 标签</a>
-                <small class="text-muted">
-                    1 回答
-                    | 已解决
-                </small>
-            </li>
-            <li class="widget-links__item"><a title="微信公众号 JS SDK config 签名错误，求助"
-                                              href="/q/1010000002732136">微信公众号 JS SDK config 签名错误，求助</a>
-                <small class="text-muted">
-                    5 回答
-                    | 已解决
-                </small>
-            </li>
-            <li class="widget-links__item"><a title="启动不了 tomcat" href="/q/1010000002686386">启动不了 tomcat</a>
-                <small class="text-muted">
-                    4 回答
-                </small>
-            </li>
-            <li class="widget-links__item"><a title="java web 编写servlet问题" href="/q/1010000003848504">java
-                web 编写servlet问题</a>
-                <small class="text-muted">
-                    1 回答
-                </small>
-            </li>
+            {% for question in similar_question %}
+                <li class="widget-links__item"><a title="{{ question.title }}"
+                                                  href="/q/{{ question.id }}">{{ question.title }}</a>
+                    <small class="text-muted">
+                        {{ question.answers.count() }} 回答
+                    </small>
+                </li>
+            {% endfor %}
         </ul>
     </div>
 

@@ -5,7 +5,7 @@ __author__ = 'yueyt'
 from flask import Blueprint, render_template, request, redirect, url_for
 from flask.ext.login import current_user, login_required
 from ..forms.user import LoginForm, RegisterForm
-from ..models.question import Question, Answer
+from ..models.question import Question, Answer, Tag
 
 from .. import db, cache
 
@@ -14,7 +14,7 @@ bp = Blueprint('question', __name__)
 
 @bp.route('/')
 @bp.route('/<int:question_id>')
-#@cache.cached()
+# @cache.cached()
 def questions(question_id=None):
     """问题详情"""
     if not question_id:
@@ -23,12 +23,23 @@ def questions(question_id=None):
     login_form = LoginForm()
     register_form = RegisterForm()
 
+    # 增加问题的浏览量
     question.view_num += 1
     db.session.add(question)
     db.session.commit()
 
+    # 查询相似问题 similar
+    sim_id_list = []
+    for i in question.tags.all():
+        sim_id_list.append(i.id)
+    if sim_id_list:
+        similar_question = Question.query.filter(
+                Question.tags.any(Tag.id.in_(sim_id_list)), Question.id != question.id).limit(10)
+        if not similar_question:
+            similar_question = Question.query.limit(10)
+
     return render_template('question.html', question=question, login_form=login_form,
-                           register_form=register_form)
+                           register_form=register_form, similar_question=similar_question)
 
 
 @bp.route('/<int:question_id>/answers/add', methods=['GET', 'POST'])

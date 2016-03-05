@@ -29,14 +29,13 @@ def questions(question_id=None):
     db.session.commit()
 
     # 查询相似问题 similar
+    similar_question = Question.query.limit(10)
     sim_id_list = []
     for i in question.tags.all():
         sim_id_list.append(i.id)
     if sim_id_list:
         similar_question = Question.query.filter(
                 Question.tags.any(Tag.id.in_(sim_id_list)), Question.id != question.id).limit(10)
-        if not similar_question:
-            similar_question = Question.query.limit(10)
 
     return render_template('question.html', question=question, login_form=login_form,
                            register_form=register_form, similar_question=similar_question)

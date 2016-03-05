@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% from 'include/_macros.html' import pagination_widget %}
+
+{% block page_title %}
+    <title>Answers - this is demo</title>
+{% endblock %}
+{% block page_css %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/search_all.css') }}"/>
+{% endblock %}
+
+{% block page_content %}
+    <div class="container mt20">
+        <div class="row">
+            <div class="col-md-9 main search-result">
+                <h3 class="h5 mt0">找到约 <strong>{{ count }}</strong> 条结果</h3>
+
+                {% for question in questions %}
+                    <section class="widget-question">
+                        <h2 class="h4">
+                            <span class="label label-success pull-left mr5">未解决</span>
+                            <a href="/q/{{ question.id }}"
+                               　target="_blank">{{ question.title }}</a>
+                        </h2>
+                        <p class="excerpt"><strong class="key">test</strong>{{ question.body }}</p>
+                    </section>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        {% if pagination %}
+            <div class="pagination">
+                {{ pagination_widget(pagination, endpoint='.search',q=request.args.get('q')) }}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block page_js %}
+    {{ super() }}
+    <script crossorigin src="{{ url_for('static',filename='js/index.js') }}"></script>
+{% endblock %}

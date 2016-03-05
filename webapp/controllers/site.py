@@ -25,11 +25,27 @@ def index():
     return redirect(url_for('.questions', act='newest'))
 
 
-@bp.route('/search', methods=['GET'])
+@bp.route('/search')
 def search():
-    q = request.args.get('q')
+    login_form = LoginForm()
+    register_form = RegisterForm()
+    query = Question.query
 
-    return redirect(url_for('.index', q=q))
+    search = request.args.get('q', '')
+
+    if not search:
+        return redirect(url_for('.index'))
+    else:
+        query = query.filter((Question.title.contains(search) | (Question.body.contains(search))))
+
+    page = request.args.get('page', 1, type=int)
+    pagination = query.paginate(page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+                                error_out=False)
+    count = query.count()
+    questions = pagination.items
+
+    return render_template('search.html', login_form=login_form, register_form=register_form,
+                           pagination=pagination, questions=questions, page=page, count=count)
 
 
 @bp.route('/login', methods=['GET'])

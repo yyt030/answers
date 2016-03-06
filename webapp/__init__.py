@@ -29,10 +29,11 @@ def create_app(config_name):
     login_manager.init_app(app)
     cache.init_app(app)
 
-    from .controllers import question, site, user
+    from .controllers import question, site, user, tag
     from .api import user as user_api
 
     app.register_blueprint(question.bp, url_prefix='/q')
+    app.register_blueprint(tag.bp, url_prefix='/t')
     app.register_blueprint(user_api.bp, url_prefix='/api')
     app.register_blueprint(site.bp, url_prefix='')
 

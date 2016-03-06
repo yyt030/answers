@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% from 'include/_macros.html' import pagination_widget %}
+
+{% block page_content %}
+    <div class="col-xs-12 col-md-9 main">
+        {% if questions %}
+            {% include 'include/_questions.html' %}
+            <div class="text-center">
+                {% if pagination %}
+                    <div class="pagination">
+                        {{ pagination_widget(pagination, endpoint='tag.index',tag_id=tag_id) }}
+                    </div>
+                {% endif %}
+            </div>
+        {% else %}
+            <p></p>
+            <p>Oops, 没有找到相关信息，<a href="/">回首页看看</a></p>
+        {% endif %}
+    </div> <!-- /.main -->
+{% endblock %}

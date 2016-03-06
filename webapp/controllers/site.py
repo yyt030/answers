@@ -55,7 +55,13 @@ def login():
 
 @bp.route('/tags', methods=['GET'])
 def tags():
-    return redirect(url_for('.index'))
+    login_form = LoginForm()
+    register_form = RegisterForm()
+
+    tags = Tag.query.all()
+    tag_categorys = db.session.query(func.distinct(Tag.category)).all()
+    return render_template('tags.html', login_form=login_form, register_form=register_form,
+                           tags=tags, tag_categorys=tag_categorys)
 
 
 @bp.route('/tour')

@@ -54,8 +54,10 @@ question_tag = db.Table('question_tag',
 
 
 class Tag(db.Model):
+    __table_args__ = (db.UniqueConstraint('name', 'category', name='u_idx_name_01'),)
+
     id = db.Column(db.Integer, primary_key=True, nullable=False)
-    name = db.Column(db.String(20), index=True, unique=True, nullable=False)
+    name = db.Column(db.String(20), index=True, nullable=False)
     category = db.Column(db.String(20))
 
     questions = db.relationship('Question', secondary=question_tag,

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{#{% from 'include/_macros.html' import pagination_widget %}#}
+
+{% block page_css %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/tag_all.css') }}"/>
+{% endblock %}
+
+{% block page_content %}
+    <div class="wrap">
+        <div class="container">
+            <h1 class="h3 mt30">标签</h1>
+            <p>标签不仅能组织和归类你的内容，还能关联相似的内容。正确的使用标签将让你的问题被更多人发现和解决。</p>
+            <h2 class="h4 mt30">
+                常用标签
+                {#                <small class="ml5"><a href="/tags/all">全部</a></small>#}
+            </h2>
+            <div class="row tag-list mt20">
+                {% for tag_category in tag_categorys %}
+                    <section class="tag-list__item col-md-3">
+                        <div class="tag-list__itemWraper">
+                            <h3 class="h5 tag-list__itemheader">{{ tag_category[0] }}</h3>
+                            <ul class="tag-list__itembody taglist--inline multi">
+                                {% for tag in tags %}
+                                    {% if tag.category ==  tag_category[0] %}
+                                        <li class="tagPopup">
+                                            <a href="/t/{{ tag.id }}" class="tag" data-toggle="popover"
+                                               data-id="{{ tag.id }}"
+                                               data-original-title="android">{{ tag.name }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </section>
+                {% endfor %}
+            </div><!-- /.stream-list -->
+        </div>
+    </div>
+{% endblock %}

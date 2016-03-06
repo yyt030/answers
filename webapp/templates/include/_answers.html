@@ -48,7 +48,7 @@
                 <strong><a href="/u/{{ answer.author_id }}" class="mr5">{{ answer.answerer.username }}</a></strong>
                 <span class="ml10 text-muted">{{ moment(answer.create_time,local=True).fromNow(refresh=True) }} 回答</span>
                 <div class="answer fmt mt10">
-                    {{ answer.body |safe }}
+                    {{ answer.body_html |safe }}
                 </div>
 
                 {#            <div class="post-opt">#}

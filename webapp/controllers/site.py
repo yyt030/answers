@@ -44,6 +44,10 @@ def search():
     count = query.count()
     questions = pagination.items
 
+    from bs4 import BeautifulSoup
+
+    for q in questions:
+        print '>>>', BeautifulSoup(q.body_html, 'html5lib').get_text()
     return render_template('search.html', login_form=login_form, register_form=register_form,
                            pagination=pagination, questions=questions, page=page, count=count)
 
@@ -130,7 +134,7 @@ def ask():
     register_form = RegisterForm()
     question_form = QuestionForm()
     if request.method == 'POST' and question_form.validate_on_submit():
-        question = Question(title=question_form.title.data, body=request.form.get('body'), author_id=current_user.id)
+        question = Question(title=question_form.title.data, body_html=request.form.get('body'), author_id=current_user.id)
         tag_list = re.split(r'[,;]', question_form.tags.data)
         for t in tag_list:
             t = t.replace(r' ', '')

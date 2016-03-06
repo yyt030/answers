@@ -37,7 +37,7 @@
 
                         <div class="post-offset">
                             <div class="question fmt">
-                                {{ question.body |safe }}
+                                {{ question.body_html |safe }}
                             </div>
                             <ul class="taglist--inline mb20">
                                 {% for  tag in question.tags %}

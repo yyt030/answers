@@ -51,7 +51,7 @@ def answers_add(question_id):
     answer_data = request.form.get('answer_data')
     if answer_data:
         answer = Answer(question_id=question_id, author_id=current_user.id,
-                        title=answer_data[1:100], body=answer_data)
+                        title=answer_data[1:100], body_html=answer_data)
         db.session.add(answer)
         db.session.commit()
 

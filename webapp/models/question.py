@@ -11,7 +11,7 @@ from .. import db
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     title = db.Column(db.String(100), index=True, nullable=False)
-    body = db.Column(db.Text, nullable=False)
+    body_html = db.Column(db.Text, nullable=False)
     vote_num = db.Column(db.SmallInteger, nullable=False, default=0)
     view_num = db.Column(db.SmallInteger, nullable=False, default=0)
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
@@ -31,7 +31,7 @@ class Question(db.Model):
             u = User.query.offset(randint(0, user_count - 1)).first()
             t = Tag.query.offset(randint(0, tag_count - 1)).first()
             print '>>>', u
-            q = Question(body=forgery_py.lorem_ipsum.sentences(randint(1, 5)),
+            q = Question(body_html=forgery_py.lorem_ipsum.sentences(randint(1, 5)),
                          create_time=forgery_py.date.date(True),
                          title=forgery_py.name.job_title(),
                          asker=u)
@@ -69,7 +69,7 @@ class Tag(db.Model):
 class Answer(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     title = db.Column(db.String(100), index=True, nullable=False)
-    body = db.Column(db.Text, nullable=False)
+    body_html = db.Column(db.Text, nullable=False)
     disabled = db.Column(db.Boolean, default=True)
 
     vote_num = db.Column(db.SmallInteger, nullable=False, default=0)
@@ -90,7 +90,7 @@ class Answer(db.Model):
         for i in range(count):
             u = User.query.offset(randint(0, user_count - 1)).first()
             q = Question.query.offset(randint(0, user_count - 1)).first()
-            p = Answer(body=forgery_py.lorem_ipsum.sentences(randint(1, 5)),
+            p = Answer(body_html=forgery_py.lorem_ipsum.sentences(randint(1, 5)),
                        create_time=forgery_py.date.date(True),
                        title=forgery_py.name.job_title(),
                        like_num=randint(1, 10), hate_num=randint(1, 10),

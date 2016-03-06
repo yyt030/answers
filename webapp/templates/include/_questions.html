@@ -1,4 +1,3 @@
-{% from 'include/_macros.html' import pagination_widget %}
 <div class="stream-list question-stream">
     {% for question in questions %}
         <section class="stream-list__item">
@@ -35,15 +34,6 @@
                 </ul>
             </div>
         </section>
-
     {% endfor %}
-
 </div><!-- /.stream-list -->
 
-<div class="text-center">
-    {% if pagination %}
-        <div class="pagination">
-            {{ pagination_widget(pagination, endpoint='.questions',act=act) }}
-        </div>
-    {% endif %}
-</div>

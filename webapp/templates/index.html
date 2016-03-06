@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% from 'include/_macros.html' import pagination_widget %}
 
 {% block page_title %}
     <title>Answers - this is demo</title>
@@ -18,6 +19,13 @@
             <li {% if act == 'unanswered' %}class="active"{% endif %}><a href="/questions/unanswered">未回答</a></li>
         </ul>
         {% include 'include/_questions.html' %}
+        <div class="text-center">
+            {% if pagination %}
+                <div class="pagination">
+                    {{ pagination_widget(pagination, endpoint='.questions',act=act) }}
+                </div>
+            {% endif %}
+        </div>
     </div> <!-- /.main -->
     <div class="col-xs-12 col-md-3 side mt30">
         <div class="side-ask alert alert-warning">

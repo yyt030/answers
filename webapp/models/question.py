@@ -4,6 +4,7 @@ __author__ = 'yueyt'
 
 from datetime import datetime
 
+from bs4 import BeautifulSoup
 from .user import User
 from .. import db
 
@@ -11,6 +12,7 @@ from .. import db
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     title = db.Column(db.String(100), index=True, nullable=False)
+    body = db.Column(db.Text)
     body_html = db.Column(db.Text, nullable=False)
     vote_num = db.Column(db.SmallInteger, nullable=False, default=0)
     view_num = db.Column(db.SmallInteger, nullable=False, default=0)
@@ -38,6 +40,12 @@ class Question(db.Model):
             db.session.add(q)
             db.session.commit()
 
+    @staticmethod
+    def on_changed_body(target, value, oldvalue, initiator):
+        target.body = BeautifulSoup(value, 'html5lib').get_text()
+
+
+db.event.listen(Question.body_html, 'set', Question.on_changed_body)
 
 # 问题 和 标签　的many to many 关系
 question_tag = db.Table('question_tag',
@@ -69,6 +77,7 @@ class Tag(db.Model):
 class Answer(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     title = db.Column(db.String(100), index=True, nullable=False)
+    body = db.Column(db.Text)
     body_html = db.Column(db.Text, nullable=False)
     disabled = db.Column(db.Boolean, default=True)
 
@@ -97,3 +106,10 @@ class Answer(db.Model):
                        question_id=q.id, author_id=u.id)
             db.session.add(p)
             db.session.commit()
+
+    @staticmethod
+    def on_changed_body(target, value, oldvalue, initiator):
+        target.body = BeautifulSoup(value, 'html5lib').get_text()
+
+
+db.event.listen(Answer.body_html, 'set', Answer.on_changed_body)

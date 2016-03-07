@@ -1,8 +1,11 @@
 alembic==0.8.4
+backports-abc==0.4
+backports.ssl-match-hostname==3.5.0.1
 beautifulsoup4==4.4.1
 bleach==1.4.2
 blinker==1.4
 bs4==0.0.1
+certifi==2016.2.28
 dominate==2.1.16
 Flask==0.10.1
 Flask-Bootstrap==3.3.5.7
@@ -18,6 +21,8 @@ Flask-Script==2.0.5
 Flask-SQLAlchemy==2.1
 Flask-WTF==0.12
 ForgeryPy==0.1
+gevent==1.1.0
+greenlet==0.4.9
 html5lib==0.9999999
 itsdangerous==0.24
 Jinja2==2.8
@@ -28,8 +33,10 @@ MySQL-python==1.2.5
 python-editor==0.5
 redis==2.10.5
 rediscache==0.0.1
+singledispatch==3.4.0.3
 six==1.10.0
 SQLAlchemy==1.0.11
+tornado==4.3
 visitor==0.1.2
 Werkzeug==0.11.4
 wheel==0.26.0

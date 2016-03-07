@@ -35,6 +35,7 @@ def create_app(config_name):
     app.register_blueprint(question.bp, url_prefix='/q')
     app.register_blueprint(tag.bp, url_prefix='/t')
     app.register_blueprint(user_api.bp, url_prefix='/api')
+    app.register_blueprint(user.bp, url_prefix='/u')
     app.register_blueprint(site.bp, url_prefix='')
 
     return app

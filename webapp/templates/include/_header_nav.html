@@ -14,7 +14,7 @@
 
         <h1 class="logo"><a class="sf" href="{{ url_for('site.index') }}">Answers</a></h1>
 
-        <a href="http://segmentfault.com/user/login" class="visible-xs-block pull-right m-ask m-toptools"><span
+        <a href="/api/user/login" class="visible-xs-block pull-right m-ask m-toptools"><span
                 class="glyphicon glyphicon-log-in"></span></a>
 
         <form action="/search" class="header-search pull-left hidden-sm hidden-xs">
@@ -26,18 +26,18 @@
                    value=""/>
         </form>
 
-        <ul class="menu list-inline pull-left hidden-xs">git
+        <ul class="menu list-inline pull-left hidden-xs">
             <li class="menu__item"><a href="/questions">问答</a></li>
             <li class="menu__item"><a href="/tags">标签</a></li>
 
-            <li class="menu__item dropdown hoverDropdown">
-                <a data-toggle="dropdown" href="/sites" class="more dropdownBtn">
-                    &middot;&middot;&middot;<span class="sr-only">更多</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="/tags">标签</a></li>
-                </ul>
-            </li>
+            {#            <li class="menu__item dropdown hoverDropdown">#}
+            {#                <a data-toggle="dropdown" href="/" class="more dropdownBtn">#}
+            {#                    &middot;&middot;&middot;<span class="sr-only">更多</span>#}
+            {#                </a>#}
+            {#                <ul class="dropdown-menu">#}
+            {#                    <li><a href="/tags">标签</a></li>#}
+            {#                </ul>#}
+            {#            </li>#}
         </ul>
 
         <ul class="opts pull-right list-inline hidden-xs">

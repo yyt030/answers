@@ -21,6 +21,7 @@ def inject_permissions():
 
 
 @bp.route('/')
+@bp.route('/sites')
 def index():
     return redirect(url_for('.questions', act='newest'))
 

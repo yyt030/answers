@@ -22,7 +22,7 @@ manager.add_command('db', MigrateCommand)
 
 @manager.command
 def init_data():
-    from webapp.models.user import Role, User
+    from webapp.models.user import User
     from webapp.models.question import Question, Tag, Answer
     # Role.insert_roles()
 
@@ -37,6 +37,15 @@ def clear_cache():
     cache.init_app(app)
     with app.app_context():
         cache.clear()
+
+
+@manager.command
+def rungevent():
+    from gevent.wsgi import WSGIServer
+
+    http_server = WSGIServer(('', 5000), app)
+    http_server.serve_forever()
+
 
 if __name__ == '__main__':
     manager.run()

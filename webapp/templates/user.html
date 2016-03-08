@@ -11,14 +11,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-2">
-                        <a class="text-left" href="/u/yyt030"><img
+                        <a class="text-left" href="/u/{{ user.id }}"><img
                                 class="avatar-128 profile__heading--avatar"
-                                src="https://sf-static.b0.upaiyun.com/v-56dea86f/global/img/user-256.png"
-                                alt="yyt030"/>
+                                src="{{ url_for('static',filename='images/user-256.png') }}"
+                                alt="{{ user.username }}"/>
                         </a>
                     </div>
                     <div class="col-md-7">
-                        <h2 class="profile__heading--name">yyt030</h2>
+                        <h2 class="profile__heading--name">{{ user.username }}</h2>
                         <div class="profile__heading--desc js-show">
                             我喜欢Archlinux
                         </div>
@@ -33,21 +33,21 @@
                         </div>
                         <div class="qa-rank">
                             <div class="col-md-4 col-xs-4">
-                                <a href="/u/yyt030/rank">
+                                <a href="/u/{{ user.id }}/rank">
                                     <h4>10</h4>
                                 </a>
                                 <span>声望值</span>
 
                             </div>
                             <div class="col-md-4 col-xs-4">
-                                <a href="/u/yyt030/rank">
+                                <a href="/u/{{ user.id }}/rank">
                                     <h4>40</h4>
                                 </a>
                                 <span>被赞数</span>
 
                             </div>
                             <div class="col-md-4 col-xs-4">
-                                <a href="/u/yyt030/rank">
+                                <a href="/u/{{ user.id }}/rank">
                                     <h4>32</h4>
                                 </a>
                                 <span>粉丝</span>
@@ -65,15 +65,15 @@
                     <div class="col-md-2">
                         <ul class="nav nav-pills nav-stacked profile__nav">
                             <li>
-                                <a href="/u/yyt030/answers">
+                                <a href="/u/{{ user.id }}/answers">
                                     <span>他的回答</span>
-                                    <span class="count">2</span>
+                                    <span class="count">{{ user.answers.count() }}</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="/u/yyt030/answers">
+                                <a href="/u/{{ user.id }}/answers">
                                     <span>他的提问</span>
-                                    <span class="count">4</span>
+                                    <span class="count">{{ user.questions.count() }}</span>
                                 </a>
                             </li>
                         </ul>

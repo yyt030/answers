@@ -83,7 +83,7 @@ class User(UserMixin, db.Model):
         db.session.commit()
 
     def __repr__(self):
-        return '<User %r>' % self.name
+        return '<User %r>' % self.username
 
 
 class AnonymousUser(AnonymousUserMixin):

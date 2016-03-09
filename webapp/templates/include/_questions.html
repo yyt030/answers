@@ -20,14 +20,14 @@
                     <li>
                         <a href="/u/{{ question.asker.id }}">{{ question.asker.username }}</a>
                         <span class="split"></span>
-                        <a href="/q/{{ question.id }}">{{ moment(question.create_time,local=True).fromNow(refresh=True) }}提问</a>
+                        {{ moment(question.create_time,local=True).fromNow(refresh=True) }}提问
                     </li>
                 </ul>
                 <h2 class="title"><a href="/q/{{ question.id }}">{{ question.title }}</a>
                 </h2>
                 <ul class="taglist--inline ib">
                     {% for tag in question.tags %}
-                        <li class="tagPopup"><a class="tag tag-sm" href="/t/{{ tag.name }}"
+                        <li class="tagPopup"><a class="tag tag-sm" href="/t/{{ tag.id }}"
                                                 data-toggle="popover" data-original-title="javascript"
                                                 data-id="{{ tag.id }}">{{ tag.name }}</a></li>
                     {% endfor %}

@@ -3,7 +3,7 @@
 __author__ = 'yueyt'
 
 import re
-from flask import Blueprint, render_template, redirect, url_for, request, current_app
+from flask import Blueprint, render_template, redirect, url_for, request, current_app, send_from_directory
 from flask.ext.login import current_user, login_required
 from sqlalchemy import func
 from .. import db, cache
@@ -24,6 +24,12 @@ def inject_permissions():
 @bp.route('/sites')
 def index():
     return redirect(url_for('.questions', act='newest'))
+
+
+@bp.route('/download/<path:filename>', methods=['GET'])
+def download_file(filename):
+    return send_from_directory(directory=current_app.config['DOWNLOAD_DEFAULT_DEST'],
+                               filename=filename)
 
 
 @bp.route('/search')

@@ -27,6 +27,7 @@ class Config:
     BOOTSTRAP_SERVE_LOCAL = True
 
     CACHE_DEFAULT_TIMEOUT = 60
+    DOWNLOAD_DEFAULT_DEST = os.path.join(basedir, 'webapp/download')
 
     @staticmethod
     def init_app(app):

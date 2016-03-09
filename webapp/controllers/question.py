@@ -53,6 +53,5 @@ def answers_add(question_id):
                         title=answer_data[1:100], body_html=answer_data)
         db.session.add(answer)
         db.session.commit()
-
     return render_template('question.html', question=question, login_form=login_form,
                            register_form=register_form)

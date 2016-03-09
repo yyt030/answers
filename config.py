@@ -26,6 +26,8 @@ class Config:
 
     BOOTSTRAP_SERVE_LOCAL = True
 
+    CACHE_DEFAULT_TIMEOUT = 60
+
     @staticmethod
     def init_app(app):
         pass

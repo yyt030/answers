@@ -23,7 +23,6 @@ def inject_permissions():
 @bp.route('/')
 @bp.route('/sites')
 def index():
-
     return redirect(url_for('.questions', act='newest'))
 
 
@@ -56,6 +55,7 @@ def login():
 
 
 @bp.route('/tags', methods=['GET'])
+@cache.cached()
 def tags():
     login_form = LoginForm()
     register_form = RegisterForm()

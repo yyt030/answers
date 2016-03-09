@@ -62,9 +62,14 @@ def runtornado():
 
     options.parse_command_line()
     http_server = HTTPServer(WSGIContainer(app))
-    http_server.listen(options.port)
-    print "visit at", "http://127.0.0.1:%s" % options.port
-    IOLoop.instance().start()
+
+    # http_server.listen(options.port)
+    # print "visit at", "http://127.0.0.1:%s" % options.port
+    # IOLoop.instance().start()
+
+    http_server.bind(options.port)
+    http_server.start(5)  # Forks multiple sub-processes
+    IOLoop.current().start()
 
 
 if __name__ == '__main__':

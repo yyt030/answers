@@ -40,17 +40,28 @@
             {#            </li>#}
         </ul>
 
-        <ul class="opts pull-right list-inline hidden-xs">
-            <li class="opts__item message has-unread">
-                <a target="_blank" href="/tour">
-                    <span class="sr-only">消息</span>
-                    <span id="messageCount" class="glyphicon glyphicon-envelope"></span>
-                </a>
-            </li>
-            <li class="opts__item">
-                <a href="/api/user/login" class="SFLogin em ml10"
-                   onClick="_gaq.push(['_trackEvent', 'Button', 'Click', 'Login']);">注册 &middot; 登录</a>
-            </li>
-        </ul>
+        {% if current_user.is_authenticated %}
+            <ul class="menu list-inline pull-right hidden-xs">
+                <li class="opts__item message has-unread">
+                    <a href="/tour">
+                        <span class="sr-only">消息</span>
+                        <span id="messageCount" class="glyphicon glyphicon-envelope"></span>
+                    </a>
+                </li>
+                <li class="menu__item">
+                    <a href="{{ url_for('user.index', id=current_user.id) }}">
+                        我的首页
+                    </a>
+                </li>
+            </ul>
+        {% else %}
+            <ul class="opts pull-right list-inline hidden-xs">
+                <li class="opts__item">
+                    <a href="/api/user/login" class="SFLogin em ml10"
+                       onClick="_gaq.push(['_trackEvent', 'Button', 'Click', 'Login']);">注册 &middot; 登录</a>
+                </li>
+            </ul>
+        {% endif %}
+
     </nav>
 </div>

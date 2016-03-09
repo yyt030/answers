@@ -28,7 +28,7 @@
 <!--[if lt IE 9]>
     <div class="alert alert-danger topframe" role="alert">
     你的浏览器实在<strong>太太太太太太旧了</strong>，下班别走，升级完浏览器再说
-    <a target="_blank" class="alert-link" href="http://{{ request.url }}/download">立即升级</a>
+    <a target="_blank" class="alert-link" href="{{ request.url_root +'download' }}">来升级页面看看</a>
     </div>
     <![endif]-->
 {% block header_nav -%}

@@ -26,8 +26,13 @@ def index():
     return redirect(url_for('.questions', act='newest'))
 
 
-@bp.route('/download/<path:filename>', methods=['GET'])
-def download_file(filename):
+@bp.route('/download')
+@bp.route('/download/<path:filename>')
+def download(filename=None):
+    print '>>>', filename
+    if not filename:
+        return render_template('download.html')
+    print '>>>', current_app.config['DOWNLOAD_DEFAULT_DEST']
     return send_from_directory(directory=current_app.config['DOWNLOAD_DEFAULT_DEST'],
                                filename=filename)
 

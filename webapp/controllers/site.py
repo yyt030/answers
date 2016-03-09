@@ -3,7 +3,7 @@
 __author__ = 'yueyt'
 
 import re
-from flask import Blueprint, render_template, redirect, url_for, request, current_app, send_from_directory
+from flask import Blueprint, render_template, redirect, url_for, request, current_app, send_from_directory, abort
 from flask.ext.login import current_user, login_required
 from sqlalchemy import func
 from .. import db, cache
@@ -29,10 +29,8 @@ def index():
 @bp.route('/download')
 @bp.route('/download/<path:filename>')
 def download(filename=None):
-    print '>>>', filename
     if not filename:
         return render_template('download.html')
-    print '>>>', current_app.config['DOWNLOAD_DEFAULT_DEST']
     return send_from_directory(directory=current_app.config['DOWNLOAD_DEFAULT_DEST'],
                                filename=filename)
 
@@ -124,6 +122,8 @@ def questions(act='newest'):
         query = query.order_by(Question.create_time.desc())
     elif act == 'newest':
         query = query.order_by(Question.create_time.desc())
+    else:
+        return abort(404)
 
     pagination = query.paginate(page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
                                 error_out=False)

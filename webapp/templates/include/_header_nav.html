@@ -53,6 +53,11 @@
                         我的首页
                     </a>
                 </li>
+                <li class="menu__item">
+                    <a href="{{ url_for('user_api.logout') }}">
+                        退出
+                    </a>
+                </li>
             </ul>
         {% else %}
             <ul class="opts pull-right list-inline hidden-xs">

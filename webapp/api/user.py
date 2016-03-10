@@ -1,11 +1,10 @@
 # coding: utf8
 from flask import Blueprint, render_template, jsonify, request, flash, redirect, url_for
-from flask.ext.login import login_user
+from flask.ext.login import login_user, logout_user, login_required
+from sqlalchemy import or_
 from .. import db
 from ..forms.user import LoginForm, RegisterForm
 from ..models.user import User
-
-from sqlalchemy import or_
 
 bp = Blueprint('user_api', __name__)
 
@@ -102,3 +101,11 @@ def register():
                 flash(u'注册成功')
         return render_template('user/login.html', login_form=login_form,
                                register_form=register_form, login_type='page')
+
+
+@bp.route('/user/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('You have been logged out.')
+    return redirect(url_for('site.index'))

@@ -37,8 +37,6 @@ def download(filename=None):
 
 @bp.route('/search')
 def search():
-    login_form = LoginForm()
-    register_form = RegisterForm()
     query = Question.query
 
     search = request.args.get('q', '')
@@ -54,8 +52,8 @@ def search():
     count = query.count()
     questions = pagination.items
 
-    return render_template('search.html', login_form=login_form, register_form=register_form,
-                           pagination=pagination, questions=questions, page=page, count=count)
+    return render_template('search.html', pagination=pagination, questions=questions,
+                           page=page, count=count)
 
 
 @bp.route('/login', methods=['GET'])
@@ -66,13 +64,9 @@ def login():
 @bp.route('/tags', methods=['GET'])
 @cache.cached()
 def tags():
-    login_form = LoginForm()
-    register_form = RegisterForm()
-
     tags = Tag.query.all()
     tag_categorys = db.session.query(func.distinct(Tag.category)).all()
-    return render_template('tags.html', login_form=login_form, register_form=register_form,
-                           tags=tags, tag_categorys=tag_categorys)
+    return render_template('tags.html', tags=tags, tag_categorys=tag_categorys)
 
 
 @bp.route('/tour')
@@ -108,8 +102,6 @@ def questions(act='newest'):
     热门的
     未回答的
     """
-    login_form = LoginForm()
-    register_form = RegisterForm()
     query = Question.query
 
     page = request.args.get('page', 1, type=int)
@@ -137,16 +129,13 @@ def questions(act='newest'):
         .group_by(Question.title).order_by(Answer.create_time.desc(),
                                            func.count(Answer.id).desc()).limit(10)
 
-    return render_template('index.html', login_form=login_form, register_form=register_form,
-                           pagination=pagination, questions=questions,
+    return render_template('index.html', pagination=pagination, questions=questions,
                            tags=tags, act=act, page=page, last_hot_questions=last_hot_questions)
 
 
 @bp.route('/ask', methods=['GET', 'POST'])
 @login_required
 def ask():
-    login_form = LoginForm()
-    register_form = RegisterForm()
     question_form = QuestionForm()
     if request.method == 'POST' and question_form.validate_on_submit():
         question = Question(title=question_form.title.data, body_html=request.form.get('body'),
@@ -163,5 +152,4 @@ def ask():
         db.session.commit()
         return redirect(url_for('site.index'))
 
-    return render_template('ask.html', login_form=login_form, register_form=register_form,
-                           question_form=question_form)
+    return render_template('ask.html', question_form=question_form)

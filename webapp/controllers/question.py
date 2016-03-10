@@ -20,8 +20,6 @@ def questions(question_id=None):
     if not question_id:
         return redirect(url_for('site.index'))
     question = Question.query.get_or_404(question_id)
-    login_form = LoginForm()
-    register_form = RegisterForm()
 
     # 增加问题的浏览量
     question.view_num += 1
@@ -37,8 +35,7 @@ def questions(question_id=None):
         similar_question = Question.query.filter(
                 Question.tags.any(Tag.id.in_(sim_id_list)), Question.id != question.id).limit(10)
 
-    return render_template('question.html', question=question, login_form=login_form,
-                           register_form=register_form, similar_question=similar_question)
+    return render_template('question.html', question=question, similar_question=similar_question)
 
 
 @bp.route('/<int:question_id>/answers/add', methods=['GET', 'POST'])
@@ -46,13 +43,10 @@ def questions(question_id=None):
 def answers_add(question_id):
     """问题详情"""
     question = Question.query.get_or_404(question_id)
-    login_form = LoginForm()
-    register_form = RegisterForm()
     answer_data = request.form.get('answer_data')
     if answer_data:
         answer = Answer(question_id=question_id, author_id=current_user.id,
                         title=answer_data[1:100], body_html=answer_data)
         db.session.add(answer)
         db.session.commit()
-    return render_template('question.html', question=question, login_form=login_form,
-                           register_form=register_form)
+    return render_template('question.html', question=question)

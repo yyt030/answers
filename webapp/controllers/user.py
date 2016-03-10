@@ -8,7 +8,5 @@ bp = Blueprint('user', __name__)
 
 @bp.route('/<int:id>')
 def index(id=None):
-    login_form = LoginForm()
-    register_form = RegisterForm()
     user = User.query.get_or_404(id)
-    return render_template('user.html', login_form=login_form, register_form=register_form,user=user)
+    return render_template('user.html', user=user)

@@ -11,8 +11,6 @@ bp = Blueprint('tag', __name__)
 
 @bp.route('/<int:tag_id>')
 def index(tag_id=None):
-    login_form = LoginForm()
-    register_form = RegisterForm()
 
     page = request.args.get('page', 1, type=int)
     query = Question.query.filter(Question.tags.any(Tag.id == tag_id))
@@ -20,6 +18,5 @@ def index(tag_id=None):
                                 error_out=False)
     questions = pagination.items
 
-    return render_template('tag.html', pagination=pagination, login_form=login_form,
-                           register_form=register_form, questions=questions,
+    return render_template('tag.html', pagination=pagination, questions=questions,
                            page=page, tag_id=tag_id)

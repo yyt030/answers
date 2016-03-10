@@ -26,6 +26,7 @@ def questions(question_id=None):
     # 增加问题的浏览量
     question.view_num += 1
     db.session.add(question)
+    db.session.commit()
 
     # 查询相似问题 similar
     similar_question = Question.query.limit(10)

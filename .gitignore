@@ -2,4 +2,4 @@ venv
 *.pyc
 .idea
 migrations
-download/*
+download

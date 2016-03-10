@@ -1,7 +1,7 @@
 # coding: utf8
 
 from config import config
-from flask import Flask, render_template
+from flask import Flask, render_template,g
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.cache import Cache
 from flask.ext.login import LoginManager
@@ -41,6 +41,11 @@ def create_app(config_name):
 
     register_error_handle(app)
 
+    @app.before_request
+    def before_request():
+        g.login_form = LoginForm()
+        g.register_form = RegisterForm()
+
     return app
 
 
@@ -49,21 +54,12 @@ def register_error_handle(app):
 
     @app.errorhandler(403)
     def page_403(error):
-        login_form = LoginForm()
-        register_form = RegisterForm()
-        return render_template('403.html', login_form=login_form,
-                               register_form=register_form), 403
+        return render_template('403.html'), 403
 
     @app.errorhandler(404)
     def page_404(error):
-        login_form = LoginForm()
-        register_form = RegisterForm()
-        return render_template('404.html', login_form=login_form,
-                               register_form=register_form), 404
+        return render_template('404.html'), 404
 
     @app.errorhandler(500)
     def page_500(error):
-        login_form = LoginForm()
-        register_form = RegisterForm()
-        return render_template('500.html', login_form=login_form,
-                               register_form=register_form), 500
+        return render_template('500.html'), 500

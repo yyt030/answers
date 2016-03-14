@@ -64,71 +64,62 @@
                 <div class="row">
                     <div class="col-md-2">
                         <ul class="nav nav-pills nav-stacked profile__nav">
-                            <li class="active">
+                            <li {% if type == 'answers' %} class="active" {% endif %}>
                                 <a href="/u/{{ user.id }}/answers">
                                     <span>他的回答</span>
                                     <span class="count">{{ user.answers.count() }}</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="/u/{{ user.id }}/answers">
+                            <li {% if type == 'questions' %} class="active" {% endif %} >
+                                <a href="/u/{{ user.id }}/questions">
                                     <span>他的提问</span>
                                     <span class="count">{{ user.questions.count() }}</span>
                                 </a>
                             </li>
                         </ul>
                     </div>
-                    <div class="col-md-10 profile-mine"><h4 class="profile-mine__heading"><span>他的回答</span></h4>
+                    <div class="col-md-10 profile-mine"><h4 class="profile-mine__heading">
+                    <span>
+                        {% if type == 'answers' %}他的回答{% elif type == 'questions' %}他的提问{% endif %}
+                    </span>
+                    </h4>
                         <ul class="profile-mine__content record-list">
-                            {% for answer in user.answers %}
-                                <li class="">
-                                    <div class="row">
-                                        <div class="col-md-2"><span class="badge green">+110</span><span
-                                                class="profile-mine__content--text">回答</span></div>
-                                        <div class="col-md-8"><a href="/q/1010000004424824/a-1020000004427621">Python 连接
-                                            as400/db2的方法</a></div>
-                                        <div class="col-md-2"><span
-                                                class="profile-mine__content--date">{{ answer.create_time }}</span>
+                            {% if type == 'answers' %}
+                                {% for answer in user.answers %}
+                                    <li class="">
+                                        <div class="row">
+                                            <div class="col-md-2"><span class="badge green">{{ answer.vote_num }}</span><span
+                                                    class="profile-mine__content--text">赞赏</span></div>
+                                            <div class="col-md-8">
+                                                <a href="/q/{{ answer.question.id }}">
+                                                    {{ answer.title }}
+                                                </a>
+                                            </div>
+                                            <div class="col-md-2"><span
+                                                    class="profile-mine__content--date">{{ answer.create_time }}</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                            {% endfor %}
-                            <li class="">
-                                <div class="row">
-                                    <div class="col-md-2"><span class="badge green">+1</span><span
-                                            class="profile-mine__content--text">回答</span></div>
-                                    <div class="col-md-8"><a href="/q/1010000004425810/a-1020000004427609">python-从sqlalchemy查询出来的列表如何处理？</a>
-                                    </div>
-                                    <div class="col-md-2"><span class="profile-mine__content--date">2月11日</span></div>
-                                </div>
-                            </li>
-                            <li class="">
-                                <div class="row">
-                                    <div class="col-md-2"><span class="badge green">+1</span><span
-                                            class="profile-mine__content--text">问题被回答</span></div>
-                                    <div class="col-md-8"><a href="/q/1010000004002042">什么是python的偏函数?</a></div>
-                                    <div class="col-md-2"><span class="profile-mine__content--date">2015年11月25日</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="">
-                                <div class="row">
-                                    <div class="col-md-2"><span class="badge green">+1</span><span
-                                            class="profile-mine__content--text">问题被回答</span></div>
-                                    <div class="col-md-8"><a href="/q/1010000004002042">什么是python的偏函数?</a></div>
-                                    <div class="col-md-2"><span class="profile-mine__content--date">2015年11月16日</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="">
-                                <div class="row">
-                                    <div class="col-md-2"><span class="badge green">+1</span><span
-                                            class="profile-mine__content--text">提问</span></div>
-                                    <div class="col-md-8"><a href="/q/1010000004002042">什么是python的偏函数?</a></div>
-                                    <div class="col-md-2"><span class="profile-mine__content--date">2015年11月16日</span>
-                                    </div>
-                                </div>
-                            </li>
+                                    </li>
+                                {% endfor %}
+                            {% elif type == 'questions' %}
+                                {% for question in user.questions %}
+                                    <li class="">
+                                        <div class="row">
+                                            <div class="col-md-2"><span
+                                                    class="badge green">+{{ question.answers.count() }}</span><span
+                                                    class="profile-mine__content--text">回答</span></div>
+                                            <div class="col-md-8">
+                                                <a href="/q/{{ question.id }}">
+                                                    {{ question.title }}
+                                                </a>
+                                            </div>
+                                            <div class="col-md-2"><span
+                                                    class="profile-mine__content--date">{{ question.create_time }}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            {% endif %}
                         </ul>
                         <div class="text-center"></div>
                     </div>
@@ -137,88 +128,3 @@
         </div>
     </div>
 {% endblock %}
-
-<script>
-    (function (w) {
-        w.SF = {
-            staticUrl: "https://sf-static.b0.upaiyun.com/v-56dea86f"
-        };
-        w.SF.token = (function () {
-            var _VL65gE = 'c79'//'4Rj'
-                    + 'G'//'G'
-                    + /* 'h'//'h' */'' + 'd80'//'Vlk'
-                    +//'s8'
-                    's8' + '0'//'qv'
-                    + 'E'//'E'
-                    + '2e'//'vO4'
-                    + '011'//'DV'
-                    + '5'//'Dqh'
-                    + '8a'//'d'
-                    +//'FY'
-                    'd' +//'vaa'
-                    '38' +//'MV'
-                    'd3f' + '6'//'s'
-                    +//'g8'
-                    '2e' + ''///*'xud'*/'xud'
-                    + '15'//'M'
-                    + '455'//'WX'
-                    + '91b'//'Zx'
-                    , _etq = [[3, 4], [6, 8], [7, 8]];
-
-            for (var i = 0; i < _etq.length; i++) {
-                _VL65gE = _VL65gE.substring(0, _etq[i][0]) + _VL65gE.substring(_etq[i][1]);
-            }
-
-            return _VL65gE;
-        })();
-        ;
-    })(window);
-
-    var lock = {
-        type: "",
-        text: '',
-        table: {"ban_post": [1, "\u4f60\u5df2\u7ecf\u88ab\u7981\u8a00, \u65e0\u6cd5\u8fdb\u884c\u6b64\u64cd\u4f5c, \u5982\u6709\u7591\u4e49\u8bf7\u63d0\u4ea4\u7533\u8bc9, \u6216\u8005\u53d1\u90ae\u4ef6\u5230pr@segmentfault.com"]}
-    };
-</script>
-
-<script crossorigin src="https://sf-static.b0.upaiyun.com/v-56dea86f/3rd/assets.js"></script>
-<script crossorigin src="https://sf-static.b0.upaiyun.com/v-56dea86f/user/js/index.js"></script>
-
-<script async src="//sponsor.segmentfault.com/asyncjs.php"></script>
-
-<script>
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-918487-8']);
-    _gaq.push(['_trackPageview']);
-    (function (i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date();
-        a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-
-    ga('create', 'UA-918487-8', 'auto', {'userID': 0, 'createdTime': 0, 'now': 1457445707});
-    ga('set', 'dimension1', 'guest');
-    ga('send', 'pageview');
-
-</script>
-
-<script>
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "//hm.baidu.com/hm.js?e23800c454aa573c0ccb16b52665ac26";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-
-
-</body>
-</html>

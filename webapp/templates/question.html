@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% from 'include/_macros.html' import pagination_widget %}
 
 {% block content %}
     <div class="wrap">
@@ -86,7 +87,13 @@
                     </article>
 
                     {% include 'include/_answers.html' %}
-
+                    <div class="text-center">
+                        {% if pagination %}
+                            <div class="pagination">
+                                {{ pagination_widget(pagination, endpoint='.questions',question_id=question.id) }}
+                            </div>
+                        {% endif %}
+                    </div>
                     {% if current_user.can(Permission.WRITE_ARTICLES) %}
                         <h4>撰写答案</h4>
                         {% include 'include/_editor.html' %}
@@ -111,48 +118,7 @@
 
 {% block page_js %}
     {{ super() }}
-    <script>
-        (function (w) {
-            w.SF = {
-                staticUrl: "http://static.segmentfault.com/v-56a05f82"
-            };
-            w.SF.token = (function () {
-                var _gmfiLd = '70b'//'r3i'
-                        + '87'//'Fo'
-                        + '9'//'ZnD'
-                        +//'z'
-                        '6' +//'B'
-                        '31' + 'b4'//'Do'
-                        + 'de'//'9a3'
-                        +//'R7'
-                        '3' +//'IS'
-                        '7fe' + ''///*'3sv'*/'3sv'
-                        + '78'//'y'
-                        + '1f'//'D9K'
-                        + '374'//'wg'
-                        + '388'//'aDQ'
-                        +//'7e'
-                        '7e' +//'Pnr'
-                        'f' + 'de'//'OE'
-                        +//'D'
-                        '5' +//'STM'
-                        '7', _53JM = [[27, 29]];
 
-                for (var i = 0; i < _53JM.length; i++) {
-                    _gmfiLd = _gmfiLd.substring(0, _53JM[i][0]) + _gmfiLd.substring(_53JM[i][1]);
-                }
-
-                return _gmfiLd;
-            })();
-            ;
-        })(window);
-
-        var lock = {
-            type: "",
-            text: '',
-            table: {"ban_post": [1, "\u4f60\u5df2\u7ecf\u88ab\u7981\u8a00, \u65e0\u6cd5\u8fdb\u884c\u6b64\u64cd\u4f5c, \u5982\u6709\u7591\u4e49\u8bf7\u63d0\u4ea4\u7533\u8bc9, \u6216\u8005\u53d1\u90ae\u4ef6\u5230pr@segmentfault.com"]}
-        };
-    </script>
     <script crossorigin src="{{ url_for('static',filename='js/index.js') }}"></script>
     <script crossorigin src="{{ url_for('static',filename='js/question.js') }}"></script>
 

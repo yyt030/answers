@@ -2,7 +2,7 @@
 # coding: utf8
 __author__ = 'yueyt'
 
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, current_app
 from flask.ext.login import current_user, login_required
 from ..forms.user import LoginForm, RegisterForm
 from ..models.question import Question, Answer, Tag
@@ -21,6 +21,14 @@ def questions(question_id=None):
         return redirect(url_for('site.index'))
     question = Question.query.get_or_404(question_id)
 
+    # 问题下回答的分页
+    page = request.args.get('page', 1, type=int)
+    answers_query = Answer.query.filter(Answer.question_id == question_id).order_by(Answer.create_time.desc())
+
+    pagination = answers_query.paginate(page, per_page=current_app.config['FLASKY_COMMENTS_PER_PAGE'],
+                                        error_out=False)
+    answers = pagination.items
+
     # 增加问题的浏览量
     question.view_num += 1
     db.session.add(question)
@@ -35,7 +43,8 @@ def questions(question_id=None):
         similar_question = Question.query.filter(
                 Question.tags.any(Tag.id.in_(sim_id_list)), Question.id != question.id).limit(10)
 
-    return render_template('question.html', question=question, similar_question=similar_question)
+    return render_template('question.html', question=question, similar_question=similar_question,
+                           answers=answers, pagination=pagination, page=page)
 
 
 @bp.route('/<int:question_id>/answers/add', methods=['GET', 'POST'])

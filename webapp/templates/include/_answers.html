@@ -8,7 +8,7 @@
 
     <h2 class="title h4 mt30 mb20 post-title" id="answers-title">{{ question.answers.count() }} 个回答</h2>
 
-    {% for answer in question.answers %}
+    {% for answer in answers %}
         <article
                 class="clearfix widget-answers__item accepted"
                 id="a-{{ question.id }}">

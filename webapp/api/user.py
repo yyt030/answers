@@ -106,4 +106,5 @@ def register():
 @bp.route('/user/logout')
 @login_required
 def logout():
+    logout_user()
     return redirect(url_for('site.index'))

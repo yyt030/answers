@@ -72,7 +72,7 @@ def register():
             else:
                 # 注册成功
                 user = User(username=register_form.username.data,
-                            password=register_form.password.data,
+                            password=register_form.password.data, about_me=u'我就是我，不一样的烟火！！！',
                             email=register_form.email.data)
                 db.session.add(user)
                 db.session.commit()
@@ -94,7 +94,7 @@ def register():
             else:
                 # 注册成功
                 user = User(username=register_form.username.data,
-                            password=register_form.password.data,
+                            password=register_form.password.data, about_me=u'我就是我，不一样的烟火！！！',
                             email=register_form.email.data)
                 db.session.add(user)
                 db.session.commit()

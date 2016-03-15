@@ -68,6 +68,19 @@ class User(UserMixin, db.Model):
     def is_active(self):
         return self.active
 
+    # 用户的被赞数目= (问题＋回答)的被赞数
+    def get_vote_num(self):
+        from sqlalchemy import func
+        from .question import Question, Answer
+        all_vote_num = 0
+        if self.answers.count():
+            all_vote_num += db.session.query(func.sum(Answer.vote_num)). \
+                filter(Answer.author_id == self.id).scalar()
+        if self.questions.count():
+            all_vote_num += db.session.query(func.sum(Question.vote_num)). \
+                filter(Question.author_id == self.id).scalar()
+        return all_vote_num
+
     @staticmethod
     def generate_fake(count=10):
         from random import seed

@@ -40,20 +40,19 @@ def search():
     query = Question.query
 
     search = request.args.get('q', '')
-
     if not search:
         return redirect(url_for('.index'))
     else:
-        query = query.filter((Question.title.contains(search) | (Question.body.contains(search))))
+        query = query.whoosh_search(search)
 
     page = request.args.get('page', 1, type=int)
-    pagination = query.paginate(page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
-                                error_out=False)
-    count = query.count()
-    questions = pagination.items
+    # pagination = query.paginate(page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+    #                             error_out=False)
 
-    return render_template('search.html', pagination=pagination, questions=questions,
-                           page=page, count=count)
+    questions = query.all()
+
+    return render_template('search.html', questions=questions,
+                           count=1)
 
 
 @bp.route('/login', methods=['GET'])

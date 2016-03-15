@@ -10,6 +10,7 @@ from .. import db
 
 
 class Question(db.Model):
+    __searchable__ = ['title', 'body']
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     title = db.Column(db.String(100), index=True, nullable=False)
     body = db.Column(db.Text)
@@ -44,6 +45,9 @@ class Question(db.Model):
     def on_changed_body(target, value, oldvalue, initiator):
         target.body = BeautifulSoup(value, 'html5lib').get_text()
 
+    def __repr__(self):
+        return '<Question %r>' % self.title
+
 
 db.event.listen(Question.body_html, 'set', Question.on_changed_body)
 
@@ -55,6 +59,7 @@ question_tag = db.Table('question_tag',
 
 class Tag(db.Model):
     __table_args__ = (db.UniqueConstraint('name', 'category', name='u_idx_name_01'),)
+    __searchable__ = ['name', 'category']
 
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     name = db.Column(db.String(20), index=True, nullable=False)
@@ -71,12 +76,19 @@ class Tag(db.Model):
 
         seed()
         for i in xrange(count):
-            t = Tag(name=forgery_py.name.full_name(), category=forgery_py.name.title())
-            db.session.add(t)
+            try:
+                t = Tag(name=forgery_py.name.full_name(), category=forgery_py.name.title())
+                db.session.add(t)
+            except:
+                pass
         db.session.commit()
+
+    def __repr__(self):
+        return '<Tag %r>' % self.name
 
 
 class Answer(db.Model):
+    __searchable__ = ['title', 'body']
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     title = db.Column(db.String(100), index=True, nullable=False)
     body = db.Column(db.Text)
@@ -112,6 +124,9 @@ class Answer(db.Model):
     @staticmethod
     def on_changed_body(target, value, oldvalue, initiator):
         target.body = BeautifulSoup(value, 'html5lib').get_text()
+
+    def __repr__(self):
+        return '<Answer %r>' % self.title
 
 
 db.event.listen(Answer.body_html, 'set', Answer.on_changed_body)

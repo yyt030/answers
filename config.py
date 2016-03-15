@@ -29,6 +29,8 @@ class Config:
     CACHE_DEFAULT_TIMEOUT = 60
     DOWNLOAD_DEFAULT_DEST = os.path.join(basedir, 'download')
 
+    WHOOSH_BASE = os.path.join(basedir, 'search.db')
+
     @staticmethod
     def init_app(app):
         pass

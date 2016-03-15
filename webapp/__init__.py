@@ -1,7 +1,7 @@
 # coding: utf8
 
 from config import config
-from flask import Flask, render_template,g
+from flask import Flask, render_template, g
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.cache import Cache
 from flask.ext.login import LoginManager
@@ -39,7 +39,15 @@ def create_app(config_name):
     app.register_blueprint(user.bp, url_prefix='/u')
     app.register_blueprint(site.bp, url_prefix='')
 
+    # 注册错误展示页面
     register_error_handle(app)
+
+    # 注册搜索引擎
+    import flask.ext.whooshalchemy as whooshalchemy
+    from .models.question import Question, Answer, Tag
+    whooshalchemy.whoosh_index(app, Question)
+    whooshalchemy.whoosh_index(app, Answer)
+    whooshalchemy.whoosh_index(app, Tag)
 
     @app.before_request
     def before_request():

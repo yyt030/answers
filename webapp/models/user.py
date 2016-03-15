@@ -6,7 +6,9 @@ from datetime import datetime
 
 from flask import current_app
 from flask.ext.login import UserMixin, AnonymousUserMixin
+from sqlalchemy import func
 from werkzeug.security import generate_password_hash, check_password_hash
+from .. import cache
 from .. import db
 from .. import login_manager
 
@@ -69,8 +71,8 @@ class User(UserMixin, db.Model):
         return self.active
 
     # 用户的被赞数目= (问题＋回答)的被赞数
+    @cache.memoize()
     def get_vote_num(self):
-        from sqlalchemy import func
         from .question import Question, Answer
         all_vote_num = 0
         if self.answers.count():
@@ -88,7 +90,7 @@ class User(UserMixin, db.Model):
 
         seed()
         for i in xrange(count):
-            user = User(username=forgery_py.name.full_name(),
+            user = User(username=forgery_py.name.full_name() + str(i),
                         email=forgery_py.internet.email_address(),
                         password='111111')
             db.session.add(user)

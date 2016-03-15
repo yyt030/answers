@@ -13,7 +13,6 @@
         <div class="row">
             <div class="col-md-9 main search-result">
                 <h3 class="h5 mt0">找到约 <strong>{{ count }}</strong> 条结果</h3>
-
                 {% for question in questions %}
                     <section class="widget-question">
                         <h2 class="h4">
@@ -21,7 +20,7 @@
                             <a href="/q/{{ question.id }}"
                                　target="_blank">{{ question.title }}</a>
                         </h2>
-                        <p class="excerpt"><strong class="key">test</strong>{{ question.body }}</p>
+                        <p class="excerpt">{{ question.body }}</p>
                     </section>
                 {% endfor %}
             </div>

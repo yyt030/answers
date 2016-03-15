@@ -37,22 +37,18 @@ def download(filename=None):
 
 @bp.route('/search')
 def search():
-    query = Question.query
-
+    query = None;
     search = request.args.get('q', '')
     if not search:
         return redirect(url_for('.index'))
     else:
-        query = query.whoosh_search(search)
+        query = Question.query.whoosh_search(search, or_=True,
+                                             limit=current_app.config['FLASKY_POSTS_PER_PAGE']).order_by(
+                Question.create_time.desc())
+    count = len(query.all())
 
-    page = request.args.get('page', 1, type=int)
-    # pagination = query.paginate(page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
-    #                             error_out=False)
-
-    questions = query.all()
-
-    return render_template('search.html', questions=questions,
-                           count=1)
+    questions = query
+    return render_template('search.html', questions=questions, count=count)
 
 
 @bp.route('/login', methods=['GET'])

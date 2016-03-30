@@ -8,7 +8,6 @@ from flask.ext.login import current_user, login_required
 from sqlalchemy import func
 from .. import db, cache
 from ..forms.question import QuestionForm
-from ..forms.user import LoginForm, RegisterForm
 from ..models.question import Question, Tag, Answer
 from ..models.user import Permission
 

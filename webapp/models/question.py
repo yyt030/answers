@@ -5,12 +5,15 @@ __author__ = 'yueyt'
 from datetime import datetime
 
 from bs4 import BeautifulSoup
+from jieba.analyse import ChineseAnalyzer
 from .user import User
 from .. import db
 
 
 class Question(db.Model):
     __searchable__ = ['title', 'body']
+    __analyzer__ = ChineseAnalyzer()
+
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     title = db.Column(db.String(100), index=True, nullable=False)
     body = db.Column(db.Text)
@@ -60,6 +63,7 @@ question_tag = db.Table('question_tag',
 class Tag(db.Model):
     __table_args__ = (db.UniqueConstraint('name', 'category', name='u_idx_name_01'),)
     __searchable__ = ['name', 'category']
+    __analyzer__ = ChineseAnalyzer()
 
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     name = db.Column(db.String(20), index=True, nullable=False)

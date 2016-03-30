@@ -43,7 +43,7 @@ def create_app(config_name):
     register_error_handle(app)
 
     # 注册搜索引擎
-    import flask.ext.whooshalchemy as whooshalchemy
+    import flask.ext.whooshalchemyplus as whooshalchemy
     from .models.question import Question, Answer, Tag
     whooshalchemy.whoosh_index(app, Question)
     whooshalchemy.whoosh_index(app, Answer)

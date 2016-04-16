@@ -4,10 +4,10 @@ __author__ = 'yueyt'
 
 from flask import Blueprint, render_template, request, redirect, url_for, current_app
 from flask.ext.login import current_user, login_required
-from ..forms.user import LoginForm, RegisterForm
-from ..models.question import Question, Answer, Tag
 
 from .. import db, cache
+from ..forms.user import LoginForm, RegisterForm
+from ..models.question import Question, Answer, Tag
 
 bp = Blueprint('question', __name__)
 

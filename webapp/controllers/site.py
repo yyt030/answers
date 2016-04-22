@@ -2,6 +2,10 @@
 # coding: utf8
 __author__ = 'yueyt'
 
+import datetime
+import random
+
+import os
 import re
 from flask import Blueprint, render_template, redirect, url_for, request, current_app, send_from_directory, abort
 from flask.ext.login import current_user, login_required
@@ -43,7 +47,7 @@ def search():
     else:
         query = Question.query.whoosh_search(search, or_=True,
                                              limit=current_app.config['FLASKY_POSTS_PER_PAGE']).order_by(
-                Question.create_time.desc())
+            Question.create_time.desc())
     count = len(query.all())
 
     questions = query
@@ -132,7 +136,25 @@ def questions(act='newest'):
 def ask():
     question_form = QuestionForm()
     if request.method == 'POST' and question_form.validate_on_submit():
-        question = Question(title=question_form.title.data, body_html=request.form.get('body'),
+        question_data = request.form.get('body')
+        if question_data:
+            save_image_dir = r'/static/images/qa_images'
+            current_time = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
+            reg = re.compile(r'<img src=.*?>')
+            image_list = reg.findall(question_data)
+            if image_list:
+                filenames = ['{}-{:03}.png'.format(current_time, random.randint(0, 1000))
+                             for i in xrange(len(image_list))]
+                # 保存图像
+                for i, filename in enumerate(filenames):
+                    image_base64_data = ((image_list[i].split('"'))[1].split(','))[1]
+                    with open(os.path.join(current_app.config['SAVE_IMAGE_DEST'], filename), 'wb') as f:
+                        f.write(image_base64_data.decode('base64'))
+
+                # 将image data 替换为文件路径
+                question_data = reg.sub('<img src="{}/{}">'.format(save_image_dir, *filenames), question_data)
+
+        question = Question(title=question_form.title.data, body_html=question_data,
                             author_id=current_user.id)
         tag_list = re.split(r'[,;]', question_form.tags.data)
         for t in tag_list:

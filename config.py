@@ -29,6 +29,8 @@ class Config:
     CACHE_DEFAULT_TIMEOUT = 60
     DOWNLOAD_DEFAULT_DEST = os.path.join(basedir, 'download')
 
+    SAVE_IMAGE_DEST = os.path.join(basedir, 'webapp/static/images/qa_images')
+
     WHOOSH_BASE = os.path.join(basedir, 'search.db')
 
     @staticmethod
@@ -72,12 +74,12 @@ class ProductionConfig(Config):
             if getattr(cls, 'MAIL_USE_TLS', None):
                 secure = ()
         mail_handler = SMTPHandler(
-                mailhost=(cls.MAIL_SERVER, cls.MAIL_PORT),
-                fromaddr=cls.FLASKY_MAIL_SENDER,
-                toaddrs=[cls.FLASKY_ADMIN],
-                subject=cls.FLASKY_MAIL_SUBJECT_PREFIX + ' Application Error',
-                credentials=credentials,
-                secure=secure)
+            mailhost=(cls.MAIL_SERVER, cls.MAIL_PORT),
+            fromaddr=cls.FLASKY_MAIL_SENDER,
+            toaddrs=[cls.FLASKY_ADMIN],
+            subject=cls.FLASKY_MAIL_SUBJECT_PREFIX + ' Application Error',
+            credentials=credentials,
+            secure=secure)
         mail_handler.setLevel(logging.ERROR)
         app.logger.addHandler(mail_handler)
 

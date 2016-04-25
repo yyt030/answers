@@ -69,7 +69,6 @@ def answers_add(question_id):
             if not os.path.exists(current_app.config['SAVE_IMAGE_DEST']):
                 os.mkdir(current_app.config['SAVE_IMAGE_DEST'])
             for i, filename in enumerate(filenames):
-                print '>>>', answer_data
                 image_base64_data = ((image_list[i].split('"'))[1].split(','))[1]
                 with open(os.path.join(current_app.config['SAVE_IMAGE_DEST'], filename), 'wb') as f:
                     f.write(image_base64_data.decode('base64'))

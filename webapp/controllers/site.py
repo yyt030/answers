@@ -154,7 +154,7 @@ def ask():
                     with open(os.path.join(current_app.config['SAVE_IMAGE_DEST'], filename), 'wb') as f:
                         f.write(image_base64_data.decode('base64'))
                     # 将image data 替换为文件路径
-                    question_data = reg.sub('<img src="%s/%s">' % (save_image_dir, filename), question_data)
+                    question_data = reg.sub('<img src="%s/%s">' % (save_image_dir, filename), question_data, count=1)
 
         question = Question(title=question_form.title.data, body_html=question_data,
                             author_id=current_user.id)

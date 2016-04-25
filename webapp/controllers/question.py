@@ -60,19 +60,22 @@ def answers_add(question_id):
     if answer_data:
         save_image_dir = r'/static/images/qa_images'
         current_time = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
-        reg = re.compile(r'<img src=.*?>')
+        reg = re.compile(r'<img src="data:image/jpeg;base64.*?>')
         image_list = reg.findall(answer_data)
         if image_list:
-            filenames = ['{}-{:03}.png'.format(current_time, random.randint(0, 1000))
+            filenames = ['%s-%03d.png' % (current_time, random.randint(0, 1000))
                          for i in xrange(len(image_list))]
             # 保存图像
+            if not os.path.exists(current_app.config['SAVE_IMAGE_DEST']):
+                os.mkdir(current_app.config['SAVE_IMAGE_DEST'])
             for i, filename in enumerate(filenames):
+                print '>>>', answer_data
                 image_base64_data = ((image_list[i].split('"'))[1].split(','))[1]
                 with open(os.path.join(current_app.config['SAVE_IMAGE_DEST'], filename), 'wb') as f:
                     f.write(image_base64_data.decode('base64'))
 
-            # 将image data 替换为文件路径
-            answer_data = reg.sub('<img src="{}/{}">'.format(save_image_dir, *filenames), answer_data)
+                # 将image data 替换为文件路径
+                answer_data = reg.sub('<img src="%s/%s">' % (save_image_dir, filename), answer_data, count=1)
 
         answer = Answer(question_id=question_id, author_id=current_user.id,
                         title=answer_data[1:100], body_html=answer_data)

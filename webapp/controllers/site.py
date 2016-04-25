@@ -140,19 +140,21 @@ def ask():
         if question_data:
             save_image_dir = r'/static/images/qa_images'
             current_time = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
-            reg = re.compile(r'<img src=.*?>')
+            reg = re.compile(r'<img src="data:image/jpeg;base64.*?>')
             image_list = reg.findall(question_data)
             if image_list:
-                filenames = ['{}-{:03}.png'.format(current_time, random.randint(0, 1000))
+                filenames = ['%s-%03d.png' % (current_time, random.randint(0, 1000))
                              for i in xrange(len(image_list))]
                 # 保存图像
+                if not os.path.exists(current_app.config['SAVE_IMAGE_DEST']):
+                    os.mkdir(current_app.config['SAVE_IMAGE_DEST'])
+
                 for i, filename in enumerate(filenames):
                     image_base64_data = ((image_list[i].split('"'))[1].split(','))[1]
                     with open(os.path.join(current_app.config['SAVE_IMAGE_DEST'], filename), 'wb') as f:
                         f.write(image_base64_data.decode('base64'))
-
-                # 将image data 替换为文件路径
-                question_data = reg.sub('<img src="{}/{}">'.format(save_image_dir, *filenames), question_data)
+                    # 将image data 替换为文件路径
+                    question_data = reg.sub('<img src="%s/%s">' % (save_image_dir, filename), question_data)
 
         question = Question(title=question_form.title.data, body_html=question_data,
                             author_id=current_user.id)
